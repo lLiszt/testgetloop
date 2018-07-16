@@ -24,7 +24,7 @@ function reply(reply_token, msg) {
         {
             type: 'text',
             text: msg
-        }
+        },
         {
             type: 'text',
             text: msg
