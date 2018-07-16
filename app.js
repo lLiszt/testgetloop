@@ -20,10 +20,18 @@ function reply(reply_token, msg) {
     }
     let body = JSON.stringify({
         replyToken: reply_token,
-        messages: [{
+        messages: [
+        {
             type: 'text',
             text: msg
-        }]
+        }
+        {
+            type: 'text',
+            text: msg
+        }
+
+
+        ]
     })
     request.post({
         url: 'https://api.line.me/v2/bot/message/reply',
@@ -31,5 +39,7 @@ function reply(reply_token, msg) {
         body: body
     }, (err, res, body) => {
         console.log('status = ' + res.statusCode);
-    });
+        
+
+     
 }
