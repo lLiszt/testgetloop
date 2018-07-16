@@ -26,7 +26,7 @@ function reply(reply_token, msg) {
         messages: [
         {
             type: 'text',
-            text: msg+' testttt '+name
+            text: msg+name
         }
 
 
