@@ -30,7 +30,7 @@
     </category>
      <category>
         <pattern>A</pattern>
-        <template><?xml version="1.0" encoding="UTF-8" ?>
+        <template>
     <type>carousel</type>
     <contents>
         <type>bubble</type>
@@ -189,6 +189,7 @@
                 </action>
             </contents>
         </body>
-    </contents></template>
+    </contents>
+</template>
     </category>
 </aiml>
