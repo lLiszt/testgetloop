@@ -19,6 +19,7 @@ const aimlParser = new AIMLParser({ name:'HelloBot' })
 
 
 aimlParser.load(['./test-aiml.xml'])
+load-json-file.load(['./test.json'])
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
