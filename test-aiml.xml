@@ -30,6 +30,6 @@
     </category>
      <category>
         <pattern>A</pattern>
-        <template> <a href="./test.json">A</a> </template>
+        <template>A</template>
     </category>
 </aiml>
