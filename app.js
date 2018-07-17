@@ -15,9 +15,8 @@ app.use(bodyParser.json())
 app.post('/webhook', (req, res) => {
     let reply_token = req.body.events[0].replyToken
     let msg = req.body.events[0].message.text
-    let user = req.body.events[0].source.userId
     aimlParser.getResult(msg, (answer, wildCardArray, input) => {
-        reply(reply_token, answer , user)
+        reply(reply_token, answer )
     })
 
     res.sendStatus(200)
