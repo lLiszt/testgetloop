@@ -19,17 +19,17 @@ const aimlParser = new AIMLParser({ name:'HelloBot' })
 
 
 aimlParser.load(['./test-aiml.xml'])
-load-json-file.load(['./test.json'])
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(load-json-file.json())
 app.post('/webhook', (req, res) => {
 
     let reply_token = req.body.events[0].replyToken
     let msg = req.body.events[0].message.text
     let ljf = req.body.events[0].message.text
     aimlParser.getResult(msg, (answer, wildCardArray, input) => {
-        reply(reply_token, answer , ljf )
+        reply(reply_token, answer )
     })
 
     res.sendStatus(200)
@@ -38,7 +38,7 @@ app.post('/webhook', (req, res) => {
 
 app.listen(port)
 
-function reply(reply_token, msg, ljf) {
+function reply(reply_token, msg) {
 
     let headers = {
 
@@ -47,7 +47,7 @@ function reply(reply_token, msg, ljf) {
         'Authorization': 'Bearer {ffoSQHv7DNQl8fCqtoCR7aZlf+wHzJcNd7K9crw+nIcZcTepvAZ3933vuwEwSnUxg41iHupe5eZHvPkYDGxLJEcwZUlA/+kS6bWbL0OtbsYC1b6/NfVnXX09z4uUhzHvza4UrjWsRx8nAsA1vsLHPAdB04t89/1O/w1cDnyilFU=}'
 
     }
-   var var A = require('./test.json');
+   var var testing = require('./test.json');
 
     let body = JSON.stringify({
 
@@ -68,7 +68,7 @@ function reply(reply_token, msg, ljf) {
 
             'text',
 
-            text: A
+            text: testing
 
             
 
