@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <category>
+        <pattern>ดีจ้า</pattern>
+        <template>สวัสดีครับ</template>
+    </category>
+    <category>
+        <pattern>หวัดดี*</pattern>
+        <template>สวัสดีครับ</template>
+    </category>
+    <category>
+        <pattern>สวัสดี*</pattern>
+        <template>สวัสดีครับ</template>
+    </category>
+    <category>
+        <pattern>*วัสดี*</pattern>
+        <template>สวัสดีครับ</template>
+    </category>
+    <category>
+        <pattern>I LIKE *</pattern>
+        <template>I like <star/> too :)</template>
+    </category>
+    <category>
+        <pattern>list approve</pattern>
+        <template>.... show file wait for approve ....</template>
+    </category>
+    <category>
+        <pattern>list all</pattern>
+        <template>.... show file all ....</template>
+    </category>
+     <category>
+        <pattern>A</pattern>
+        <template>A</template>
+    </category>
+</aiml>
