@@ -11,6 +11,10 @@ const AIMLParser = require('aimlparser')
 const app = express()
 const port = process.env.PORT || 4000
 const aimlParser = new AIMLParser({ name:'HelloBot' })
+const loadJsonFile = require('load-json-file');
+ 
+
+
 
 aimlParser.load(['./test-aiml.xml'])
 
@@ -39,6 +43,7 @@ function reply(reply_token, msg) {
         'Authorization': 'Bearer {ffoSQHv7DNQl8fCqtoCR7aZlf+wHzJcNd7K9crw+nIcZcTepvAZ3933vuwEwSnUxg41iHupe5eZHvPkYDGxLJEcwZUlA/+kS6bWbL0OtbsYC1b6/NfVnXX09z4uUhzHvza4UrjWsRx8nAsA1vsLHPAdB04t89/1O/w1cDnyilFU=}'
 
     }
+   var menu = 'loadJsonFile('test.json').then(json => {console.log(json);});'
 
     let body = JSON.stringify({
 
@@ -46,13 +51,28 @@ function reply(reply_token, msg) {
 
         messages: [{
 
-            type: 'text',
+            type: 
+
+            'text',
 
             text: msg
 
         }]
+        messages: [{
 
-    })
+            type: 
+
+            'text',
+
+            text: menu
+    //=> {foo: true}
+            
+
+        }]
+
+    }
+    )
+
 
     request.post({
 
