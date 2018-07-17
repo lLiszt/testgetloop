@@ -10,9 +10,9 @@ const AIMLParser = require('aimlparser')
 
 const app = express()
 const port = process.env.PORT || 4000
+const aimlParser = new AIMLParser({ name:'HelloBot' })
 
-
-
+aimlParser.load(['./test-aiml.xml'])
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -20,7 +20,9 @@ app.post('/webhook', (req, res) => {
 
     let reply_token = req.body.events[0].replyToken
     let msg = req.body.events[0].message.text
-  
+    aimlParser.getResult(msg, (answer, wildCardArray, input) => {
+        reply(reply_token, answer )
+    })
 
     res.sendStatus(200)
 
@@ -46,40 +48,8 @@ function reply(reply_token, msg) {
 
             type: 'text',
 
-            text: {
-  "type": "template",
-  "altText": "this is a carousel template",
-  "template": {
-    "type": "carousel",
-    "actions": [],
-    "columns": [
-      {
-        "thumbnailImageUrl": "SPECIFY_YOUR_IMAGE_URL",
-        "title": "Title",
-        "text": "Text",
-        "actions": [
-          {
-            "type": "message",
-            "label": "Action 1",
-            "text": "Action 1"
-          }
-        ]
-      },
-      {
-        "thumbnailImageUrl": "SPECIFY_YOUR_IMAGE_URL",
-        "title": "Title",
-        "text": "Text",
-        "actions": [
-          {
-            "type": "message",
-            "label": "Action 1",
-            "text": "Action 1"
-          }
-        ]
-      }
-    ]
-  }
-}
+            text: msg
+
         }]
 
     })
