@@ -5,13 +5,15 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
+const load-json-file = require('load-json-file')
 const AIMLParser = require('aimlparser')
+
 
 
 const app = express()
 const port = process.env.PORT || 4000
 const aimlParser = new AIMLParser({ name:'HelloBot' })
-const loadJsonFile = require('load-json-file');
+
  
 
 
@@ -43,7 +45,7 @@ function reply(reply_token, msg) {
         'Authorization': 'Bearer {ffoSQHv7DNQl8fCqtoCR7aZlf+wHzJcNd7K9crw+nIcZcTepvAZ3933vuwEwSnUxg41iHupe5eZHvPkYDGxLJEcwZUlA/+kS6bWbL0OtbsYC1b6/NfVnXX09z4uUhzHvza4UrjWsRx8nAsA1vsLHPAdB04t89/1O/w1cDnyilFU=}'
 
     }
-   var menu = 'loadJsonFile('test.json').then(json => {console.log(json);});'
+   var var A = require('./test.json');
 
     let body = JSON.stringify({
 
@@ -64,8 +66,8 @@ function reply(reply_token, msg) {
 
             'text',
 
-            text: menu
-    //=> {foo: true}
+            text: A
+
             
 
         }]
