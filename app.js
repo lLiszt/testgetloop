@@ -29,7 +29,7 @@ app.post('/webhook', (req, res) => {
     let msg = req.body.events[0].message.text
     let ljf = req.body.events[0].message.text
     aimlParser.getResult(msg, (answer, wildCardArray, input) => {
-        reply(reply_token, answer  )
+        reply(reply_token, answer , ljf )
     })
 
     res.sendStatus(200)
