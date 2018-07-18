@@ -67,9 +67,9 @@ function reply(reply_token, msg) {
 
             type: 
 
-            'JSON',
+            'template',
 
-            text: test
+            template: test
 
         }]
       
