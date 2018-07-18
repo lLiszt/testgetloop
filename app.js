@@ -22,7 +22,7 @@ aimlParser.load(['./test-aiml.xml'])
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use(load-json-file.json())
+
 app.post('/webhook', (req, res) => {
 
     let reply_token = req.body.events[0].replyToken
