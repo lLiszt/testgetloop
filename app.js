@@ -76,7 +76,7 @@ function reply(reply_token, msg) {
     )
 
     function handleText(message, reply_token, source) {
-  const buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
+  const  = `${baseURL}/static/buttons/1040.jpg`;
 
   switch (message.text) {
     case 'profile':
@@ -91,7 +91,7 @@ function reply(reply_token, msg) {
           altText: 'Buttons alt text',
           template: {
             type: 'buttons',
-            thumbnailImageUrl: buttonsImageURL,
+            thumbnailImageUrl: ,
             title: 'My button sample',
             text: 'Hello, my button',
             actions: [
@@ -129,7 +129,7 @@ function reply(reply_token, msg) {
             type: 'carousel',
             columns: [
               {
-                thumbnailImageUrl: buttonsImageURL,
+                thumbnailImageUrl: ,
                 title: 'hoge',
                 text: 'fuga',
                 actions: [
@@ -138,7 +138,7 @@ function reply(reply_token, msg) {
                 ],
               },
               {
-                thumbnailImageUrl: buttonsImageURL,
+                thumbnailImageUrl: ,
                 title: 'hoge',
                 text: 'fuga',
                 actions: [
@@ -160,19 +160,19 @@ function reply(reply_token, msg) {
             type: 'image_carousel',
             columns: [
               {
-                imageUrl: buttonsImageURL,
+                imageUrl: ,
                 action: { label: 'Go to LINE', type: 'uri', uri: 'https://line.me' },
               },
               {
-                imageUrl: buttonsImageURL,
+                imageUrl: ,
                 action: { label: 'Say hello1', type: 'postback', data: 'hello こんにちは' },
               },
               {
-                imageUrl: buttonsImageURL,
+                imageUrl: ,
                 action: { label: 'Say message', type: 'message', text: 'Rice=米' },
               },
               {
-                imageUrl: buttonsImageURL,
+                imageUrl: ,
                 action: {
                   label: 'datetime',
                   type: 'datetimepicker',
