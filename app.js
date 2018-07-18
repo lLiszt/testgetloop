@@ -9,7 +9,7 @@ const AIMLParser = require('aimlparser')
 const path = require('path');
 const cp = require('child_process');
 const fs = require('fs');
-const line = require('@line/bot-sdk');
+
 
 
 
@@ -27,8 +27,7 @@ aimlParser.load(['./test-aiml.xml'])
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use('/static', express.static('static'));
-app.use('/downloaded', express.static('downloaded'));
+
 
 app.post('/webhook', (req, res) => {
 
@@ -68,15 +67,6 @@ function reply(reply_token, msg) {
             'text',
 
             text: msg
-
-        }],
-         messages : [{
-
-            type: 
-
-            'template',
-
-            template: test
 
         }]
       
