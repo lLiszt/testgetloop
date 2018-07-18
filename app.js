@@ -47,7 +47,7 @@ function reply(reply_token, msg) {
         'Authorization': 'Bearer {ffoSQHv7DNQl8fCqtoCR7aZlf+wHzJcNd7K9crw+nIcZcTepvAZ3933vuwEwSnUxg41iHupe5eZHvPkYDGxLJEcwZUlA/+kS6bWbL0OtbsYC1b6/NfVnXX09z4uUhzHvza4UrjWsRx8nAsA1vsLHPAdB04t89/1O/w1cDnyilFU=}'
 
     }
-   var var testing = require('./test.json');
+   var  testing = require('./test.json');
 
     let body = JSON.stringify({
 
@@ -66,7 +66,7 @@ function reply(reply_token, msg) {
 
             type: 
 
-            'text',
+            'template',
 
             text: testing
 
