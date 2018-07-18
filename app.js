@@ -63,7 +63,7 @@ function reply(reply_token, msg) {
             text: msg
 
         }],
-         messages: [{
+         template : [{
 
             type: 
 
