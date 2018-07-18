@@ -54,7 +54,15 @@ function reply(reply_token, msg) {
 
         replyToken: reply_token,
 
-       
+        messages: [{
+
+            type: 
+
+            'text',
+
+            text: msg
+
+        }],
          messages : [{
 
             type: 
