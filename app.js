@@ -13,7 +13,7 @@ const AIMLParser = require('aimlparser')
 const app = express()
 const port = process.env.PORT || 4000
 const aimlParser = new AIMLParser({ name:'HelloBot' })
-const Carousel = new Carousel(slides)
+
  
 
 
