@@ -32,7 +32,7 @@ app.use('/downloaded', express.static('downloaded'));
 
 app.post('/webhook', (req, res) => {
 
-    let reply_token = req.body.events[0].replyToken
+    let reply_token = req.body.events[0].reply_token
     let msg = req.body.events[0].message.text
     let ljf = req.body.events[0].message.text
     aimlParser.getResult(msg, (answer, wildCardArray, input) => {
@@ -59,7 +59,7 @@ function reply(reply_token, msg) {
 
     let body = JSON.stringify({
 
-        replyToken: reply_token,
+        reply_token: reply_token,
 
         messages: [{
 
@@ -75,17 +75,17 @@ function reply(reply_token, msg) {
     }
     )
 
-    function handleText(message, replyToken, source) {
+    function handleText(message, reply_token, source) {
   const buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
 
   switch (message.text) {
     case 'profile':
       if {
-        return replyText(replyToken, 'Bot can\'t use profile API without user ID');
+        return replyText(reply_token, 'Bot can\'t use profile API without user ID');
       }
     case 'buttons':
       return client.replyMessage(
-        replyToken,
+        reply_token,
         {
           type: 'template',
           altText: 'Buttons alt text',
@@ -105,7 +105,7 @@ function reply(reply_token, msg) {
       );
     case 'confirm':
       return client.replyMessage(
-        replyToken,
+        reply_token,
         {
           type: 'template',
           altText: 'Confirm alt text',
@@ -121,7 +121,7 @@ function reply(reply_token, msg) {
       )
     case 'carousel':
       return client.replyMessage(
-        replyToken,
+        reply_token,
         {
           type: 'template',
           altText: 'Carousel alt text',
@@ -152,7 +152,7 @@ function reply(reply_token, msg) {
       );
     case 'image carousel':
       return client.replyMessage(
-        replyToken,
+        reply_token,
         {
           type: 'template',
           altText: 'Image carousel alt text',
@@ -186,7 +186,7 @@ function reply(reply_token, msg) {
       );
     case 'datetime':
       return client.replyMessage(
-        replyToken,
+        reply_token,
         {
           type: 'template',
           altText: 'Datetime pickers alt text',
@@ -203,7 +203,7 @@ function reply(reply_token, msg) {
       );
     case 'imagemap':
       return client.replyMessage(
-        replyToken,
+        reply_token,
         {
           type: 'imagemap',
           baseUrl: `${baseURL}/static/rich`,
@@ -220,21 +220,21 @@ function reply(reply_token, msg) {
     case 'bye':
       switch (source.type) {
         case 'user':
-          return replyText(replyToken, 'Bot can\'t leave from 1:1 chat');
+          return replyText(reply_token, 'Bot can\'t leave from 1:1 chat');
         case 'group':
-          return replyText(replyToken, 'Leaving group')
+          return replyText(reply_token, 'Leaving group')
             .then(() => client.leaveGroup(source.groupId));
         case 'room':
-          return replyText(replyToken, 'Leaving room')
+          return replyText(reply_token, 'Leaving room')
             .then(() => client.leaveRoom(source.roomId));
       }
     default:
-      console.log(`Echo message to ${replyToken}: ${message.text}`);
-      return replyText(replyToken, message.text);
+      console.log(`Echo message to ${reply_token}: ${message.text}`);
+      return replyText(reply_token, message.text);
   }
 }
 
-function handleImage(message, replyToken) {
+function handleImage(message, reply_token) {
   const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.jpg`);
   const previewPath = path.join(__dirname, 'downloaded', `${message.id}-preview.jpg`);
 
@@ -245,7 +245,7 @@ function handleImage(message, replyToken) {
       cp.execSync(`convert -resize 240x jpeg:${downloadPath} jpeg:${previewPath}`);
 
       return client.replyMessage(
-        replyToken,
+        reply_token,
         {
           type: 'image',
           originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
@@ -255,7 +255,7 @@ function handleImage(message, replyToken) {
     });
 }
 
-function handleVideo(message, replyToken) {
+function handleVideo(message, reply_token) {
   const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.mp4`);
   const previewPath = path.join(__dirname, 'downloaded', `${message.id}-preview.jpg`);
 
@@ -266,7 +266,7 @@ function handleVideo(message, replyToken) {
       cp.execSync(`convert mp4:${downloadPath}[0] jpeg:${previewPath}`);
 
       return client.replyMessage(
-        replyToken,
+        reply_token,
         {
           type: 'video',
           originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
@@ -276,7 +276,7 @@ function handleVideo(message, replyToken) {
     });
 }
 
-function handleAudio(message, replyToken) {
+function handleAudio(message, reply_token) {
   const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.m4a`);
 
   return downloadContent(message.id, downloadPath)
@@ -288,7 +288,7 @@ function handleAudio(message, replyToken) {
         .catch((error) => { audioDuration = 1; })
         .finally(() => {
           return client.replyMessage(
-            replyToken,
+            reply_token,
             {
               type: 'audio',
               originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
