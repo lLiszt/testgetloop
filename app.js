@@ -48,7 +48,7 @@ function reply(reply_token, msg) {
 
     }
    
-   var test = JSON.parse(fs.readFileSync("./test.json", "utf8"));
+  
 
     let body = JSON.stringify({
 
