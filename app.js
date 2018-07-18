@@ -60,19 +60,7 @@ app.listen(port)
   
 
   switch (message.text) {
-    case 'profile':
-      if (source.userId) {
-        return client.getProfile(source.userId)
-          .then((profile) => replyText(
-            replyToken,
-            [
-              `Display name: ${profile.displayName}`,
-              `Status message: ${profile.statusMessage}`,
-            ]
-          ));
-      } else {
-        return replyText(replyToken, 'Bot can\'t use profile API without user ID');
-      }
+   
     case 'buttons':
       return client.replyMessage(
         replyToken,
