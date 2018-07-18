@@ -5,7 +5,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
-
+const Carousel = require('carousel')
 const AIMLParser = require('aimlparser')
 
 
@@ -13,7 +13,7 @@ const AIMLParser = require('aimlparser')
 const app = express()
 const port = process.env.PORT || 4000
 const aimlParser = new AIMLParser({ name:'HelloBot' })
-
+const Carousel = new Carousel(slides)
  
 
 
