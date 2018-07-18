@@ -74,7 +74,22 @@ function reply(reply_token, msg) {
 
     }
     )
-
+const message: TemplateMessage = {
+  type: "template",
+  altText: "cannot display template message",
+  template: {
+    type: "carousel",
+    columns: [ {
+      text: "col1",
+      title: "Column 1",
+      actions: [ {
+        type: "message",
+        label: "send message",
+        text: "hi, there",
+      } ],
+    } ],
+  },
+}
 
     request.post({
 
