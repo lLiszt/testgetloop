@@ -12,7 +12,13 @@ const AIMLParser = require('aimlparser')
 
 const app = express()
 const port = process.env.PORT || 4000
+const aimlParser = new AIMLParser({ name:'HelloBot' })
 
+ 
+
+
+
+aimlParser.load(['./test-aiml.xml'])
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -48,15 +54,7 @@ function reply(reply_token, msg) {
 
         replyToken: reply_token,
 
-        messages: [{
-
-            type: 
-
-            'text',
-
-            text: msg
-
-        }],
+       
          messages : [{
 
             type: 
