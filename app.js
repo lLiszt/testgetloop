@@ -48,7 +48,7 @@ function reply(reply_token, msg) {
 
     }
    
-    var test = require("./test.JSON");
+    var test = require("./test.json");
 
     let body = JSON.stringify({
 
