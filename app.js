@@ -5,8 +5,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
-const Carousel = require('carousel')
 const AIMLParser = require('aimlparser')
+
 
 
 
@@ -48,7 +48,7 @@ function reply(reply_token, msg) {
 
     }
    
-  
+    var test = require("./test.JSON");
 
     let body = JSON.stringify({
 
@@ -61,6 +61,15 @@ function reply(reply_token, msg) {
             'text',
 
             text: msg
+
+        }],
+         messages: [{
+
+            type: 
+
+            'JSON',
+
+            text: test
 
         }]
       
