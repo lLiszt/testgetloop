@@ -5,7 +5,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
-const AIMLParser = require('aimlparser')
+
 const path = require('path');
 const cp = require('child_process');
 const fs = require('fs');
@@ -23,7 +23,7 @@ const aimlParser = new AIMLParser({ name:'HelloBot' })
 
 
 
-aimlParser.load(['./test-aiml.xml'])
+
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
