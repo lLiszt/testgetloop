@@ -36,7 +36,7 @@ app.post('/webhook', (req, res) => {
     let msg = req.body.events[0].message.text
     let ljf = req.body.events[0].message.text
     aimlParser.getResult(msg, (answer, wildCardArray, input) => {
-        reply(replyToken, answer )
+        reply(reply_token, answer )
     })
 
     res.sendStatus(200)
@@ -45,7 +45,7 @@ app.post('/webhook', (req, res) => {
 
 app.listen(port)
 
-function reply(message, replyToken, source, msg) {
+function reply(reply_token, msg) {
 
     let headers = {
 
@@ -53,7 +53,29 @@ function reply(message, replyToken, source, msg) {
 
         'Authorization': 'Bearer {ffoSQHv7DNQl8fCqtoCR7aZlf+wHzJcNd7K9crw+nIcZcTepvAZ3933vuwEwSnUxg41iHupe5eZHvPkYDGxLJEcwZUlA/+kS6bWbL0OtbsYC1b6/NfVnXX09z4uUhzHvza4UrjWsRx8nAsA1vsLHPAdB04t89/1O/w1cDnyilFU=}'
 
-function handleText(message, replyToken, source) {
+    }
+   
+    var test = require("./test.json");
+
+    let body = JSON.stringify({
+
+        replyToken: reply_token,
+
+        messages: [{
+
+            type: 
+
+            'text',
+
+            text: msg
+
+        }]
+      
+
+    }
+    )
+
+    function handleText(message, replyToken, source) {
   const buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
 
   switch (message.text) {
@@ -277,39 +299,8 @@ function handleAudio(message, replyToken) {
     });
 }
 
-function downloadContent(messageId, downloadPath) {
-  return client.getMessageContent(messageId)
-    .then((stream) => new Promise((resolve, reject) => {
-      const writable = fs.createWriteStream(downloadPath);
-      stream.pipe(writable);
-      stream.on('end', () => resolve(downloadPath));
-      stream.on('error', reject);
-    }));
-}
 
-function handleLocation(message, replyToken) {
-  return client.replyMessage(
-    replyToken,
-    {
-      type: 'location',
-      title: message.title,
-      address: message.address,
-      latitude: message.latitude,
-      longitude: message.longitude,
-    }
-  );
-}
 
-function handleSticker(message, replyToken) {
-  return client.replyMessage(
-    replyToken,
-    {
-      type: 'sticker',
-      packageId: message.packageId,
-      stickerId: message.stickerId,
-    }
-  );
-}
     request.post({
 
         url: 'https://api.line.me/v2/bot/message/reply',
