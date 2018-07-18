@@ -1,129 +1,64 @@
-'use strict';
+// Echo reply
+"use strict";
 
-const line = require('@line/bot-sdk');
-const express = require('express');
-const fs = require('fs');
+
+const express = require('express')
+const bodyParser = require('body-parser')
+const request = require('request')
+const AIMLParser = require('aimlparser')
 const path = require('path');
 const cp = require('child_process');
-
-// create LINE SDK config from env variables
-const config = {
-  channelAccessToken: process.env.ffoSQHv7DNQl8fCqtoCR7aZlf+wHzJcNd7K9crw+nIcZcTepvAZ3933vuwEwSnUxg41iHupe5eZHvPkYDGxLJEcwZUlA/+kS6bWbL0OtbsYC1b6/NfVnXX09z4uUhzHvza4UrjWsRx8nAsA1vsLHPAdB04t89/1O/w1cDnyilFU=
-N,
-  channelSecret: process.env.c9865f7627be2bdc7a37a411b99e0d16
-,
-};
+const fs = require('fs');
+const line = require('@line/bot-sdk');
 
 
-// create LINE SDK client
-const client = new line.Client(config);
 
-// create Express app
-// about Express itself: https://expressjs.com/
-const app = express();
 
-// serve static and downloaded files
+const app = express()
+const port = process.env.PORT || 4000
+const aimlParser = new AIMLParser({ name:'HelloBot' })
+
+
+ 
+
+
+
+aimlParser.load(['./test-aiml.xml'])
+
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 app.use('/static', express.static('static'));
 app.use('/downloaded', express.static('downloaded'));
+
 app.post('/webhook', (req, res) => {
+
     let reply_token = req.body.events[0].replyToken
     let msg = req.body.events[0].message.text
-    let user = req.body.events[0].source.userId
+    let ljf = req.body.events[0].message.text
     aimlParser.getResult(msg, (answer, wildCardArray, input) => {
-        reply(reply_token, answer , user)
+        reply(replyToken, answer )
     })
 
     res.sendStatus(200)
+
 })
-// webhook callback
-app.post('/callback', line.middleware(config), (req, res) => {
-  // req.body.events should be an array of events
-  if (!Array.isArray(req.body.events)) {
-    return res.status(500).end();
-  }
 
-  // handle events separately
-  Promise.all(req.body.events.map(handleEvent))
-    .then(() => res.end())
-    .catch((err) => {
-      console.error(err);
-      res.status(500).end();
-    });
-});
+app.listen(port)
 
-// simple reply function
-const replyText = (token, texts) => {
-  texts = Array.isArray(texts) ? texts : [texts];
-  return client.replyMessage(
-    token,
-    texts.map((text) => ({ type: 'text', text }))
-  );
-};
+function reply(message, replyToken, source, msg) {
 
-// callback function to handle a single event
-function handleEvent(event) {
-  switch (event.type) {
-    case 'message':
-      const message = event.message;
-      switch (message.type) {
-        case 'text':
-          return handleText(message, event.replyToken, event.source);
-        case 'image':
-          return handleImage(message, event.replyToken);
-        case 'video':
-          return handleVideo(message, event.replyToken);
-        case 'audio':
-          return handleAudio(message, event.replyToken);
-        case 'location':
-          return handleLocation(message, event.replyToken);
-        case 'sticker':
-          return handleSticker(message, event.replyToken);
-        default:
-          throw new Error(`Unknown message: ${JSON.stringify(message)}`);
-      }
+    let headers = {
 
-    case 'follow':
-      return replyText(event.replyToken, 'Got followed event');
+        'Content-Type': 'application/json',
 
-    case 'unfollow':
-      return console.log(`Unfollowed this bot: ${JSON.stringify(event)}`);
-
-    case 'join':
-      return replyText(event.replyToken, `Joined ${event.source.type}`);
-
-    case 'leave':
-      return console.log(`Left: ${JSON.stringify(event)}`);
-
-    case 'postback':
-      let data = event.postback.data;
-      if (data === 'DATE' || data === 'TIME' || data === 'DATETIME') {
-        data += `(${JSON.stringify(event.postback.params)})`;
-      }
-      return replyText(event.replyToken, `Got postback: ${data}`);
-
-    case 'beacon':
-      return replyText(event.replyToken, `Got beacon: ${event.beacon.hwid}`);
-
-    default:
-      throw new Error(`Unknown event: ${JSON.stringify(event)}`);
-  }
-}
+        'Authorization': 'Bearer {ffoSQHv7DNQl8fCqtoCR7aZlf+wHzJcNd7K9crw+nIcZcTepvAZ3933vuwEwSnUxg41iHupe5eZHvPkYDGxLJEcwZUlA/+kS6bWbL0OtbsYC1b6/NfVnXX09z4uUhzHvza4UrjWsRx8nAsA1vsLHPAdB04t89/1O/w1cDnyilFU=}'
 
 function handleText(message, replyToken, source) {
-  const buttons = ``;
+  const buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
 
   switch (message.text) {
     case 'profile':
-      if (source.userId) {
-        return client.getProfile(source.userId)
-          .then((profile) => replyText(
-            replyToken,
-            [
-              `Display name: ${profile.displayName}`,
-              `Status message: ${profile.statusMessage}`,
-            ]
-          ));
-      } else {
+      if {
         return replyText(replyToken, 'Bot can\'t use profile API without user ID');
       }
     case 'buttons':
@@ -375,9 +310,18 @@ function handleSticker(message, replyToken) {
     }
   );
 }
+    request.post({
 
-// listen on port
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`listening on ${port}`);
-});
+        url: 'https://api.line.me/v2/bot/message/reply',
+
+        headers: headers,
+
+        body: body
+
+    }, (err, res, body) => {
+
+        console.log('status = ' + res.statusCode);
+
+    });
+
+}
