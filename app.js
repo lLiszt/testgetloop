@@ -69,12 +69,8 @@ function reply(reply_token, msg) {
 
             text: msg
 
-        }]
-      
-
-    }
-    )
-const message: TemplateMessage = {
+        }],
+        const message: TemplateMessage = {
   type: "template",
   altText: "cannot display template message",
   template: {
@@ -90,6 +86,11 @@ const message: TemplateMessage = {
     } ],
   },
 }
+      
+
+    }
+    )
+
 
     request.post({
 
