@@ -5,7 +5,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
-
+const AIMLParser = require('aimlparser')
 const path = require('path');
 const cp = require('child_process');
 const fs = require('fs');
@@ -23,7 +23,7 @@ const aimlParser = new AIMLParser({ name:'HelloBot' })
 
 
 
-
+aimlParser.load(['./test-aiml.xml'])
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -32,7 +32,7 @@ app.use('/downloaded', express.static('downloaded'));
 
 app.post('/webhook', (req, res) => {
 
-    let reply_token = req.body.events[0].reply_token
+    let reply_token = req.body.events[0].replyToken
     let msg = req.body.events[0].message.text
     let ljf = req.body.events[0].message.text
     aimlParser.getResult(msg, (answer, wildCardArray, input) => {
@@ -45,25 +45,32 @@ app.post('/webhook', (req, res) => {
 
 app.listen(port)
 
+function reply(reply_token, msg) {
 
-
-  
-   
-   function reply(message,reply_token, msg, source) {
-      let headers = {
+    let headers = {
 
         'Content-Type': 'application/json',
 
         'Authorization': 'Bearer {ffoSQHv7DNQl8fCqtoCR7aZlf+wHzJcNd7K9crw+nIcZcTepvAZ3933vuwEwSnUxg41iHupe5eZHvPkYDGxLJEcwZUlA/+kS6bWbL0OtbsYC1b6/NfVnXX09z4uUhzHvza4UrjWsRx8nAsA1vsLHPAdB04t89/1O/w1cDnyilFU=}'
 
     }
-  
-
-  switch (message.text) {
-   
+   switch (message.text) {
+    case 'profile':
+      if (source.userId) {
+        return client.getProfile(source.userId)
+          .then((profile) => replyText(
+            replyToken,
+            [
+              `Display name: ${profile.displayName}`,
+              `Status message: ${profile.statusMessage}`,
+            ]
+          ));
+      } else {
+        return replyText(replyToken, 'Bot can\'t use profile API without user ID');
+      }
     case 'buttons':
       return client.replyMessage(
-        reply_token,
+        replyToken,
         {
           type: 'template',
           altText: 'Buttons alt text',
@@ -83,7 +90,7 @@ app.listen(port)
       );
     case 'confirm':
       return client.replyMessage(
-        reply_token,
+        replyToken,
         {
           type: 'template',
           altText: 'Confirm alt text',
@@ -99,7 +106,7 @@ app.listen(port)
       )
     case 'carousel':
       return client.replyMessage(
-        reply_token,
+        replyToken,
         {
           type: 'template',
           altText: 'Carousel alt text',
@@ -130,7 +137,7 @@ app.listen(port)
       );
     case 'image carousel':
       return client.replyMessage(
-        reply_token,
+        replyToken,
         {
           type: 'template',
           altText: 'Image carousel alt text',
@@ -164,7 +171,7 @@ app.listen(port)
       );
     case 'datetime':
       return client.replyMessage(
-        reply_token,
+        replyToken,
         {
           type: 'template',
           altText: 'Datetime pickers alt text',
@@ -181,7 +188,7 @@ app.listen(port)
       );
     case 'imagemap':
       return client.replyMessage(
-        reply_token,
+        replyToken,
         {
           type: 'imagemap',
           baseUrl: `${baseURL}/static/rich`,
@@ -198,21 +205,21 @@ app.listen(port)
     case 'bye':
       switch (source.type) {
         case 'user':
-          return replyText(reply_token, 'Bot can\'t leave from 1:1 chat');
+          return replyText(replyToken, 'Bot can\'t leave from 1:1 chat');
         case 'group':
-          return replyText(reply_token, 'Leaving group')
+          return replyText(replyToken, 'Leaving group')
             .then(() => client.leaveGroup(source.groupId));
         case 'room':
-          return replyText(reply_token, 'Leaving room')
+          return replyText(replyToken, 'Leaving room')
             .then(() => client.leaveRoom(source.roomId));
       }
     default:
-      console.log(`Echo message to ${reply_token}: ${message.text}`);
-      return replyText(reply_token, message.text);
+      console.log(`Echo message to ${replyToken}: ${message.text}`);
+      return replyText(replyToken, message.text);
   }
 }
 
-function handleImage(message, reply_token) {
+function handleImage(message, replyToken) {
   const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.jpg`);
   const previewPath = path.join(__dirname, 'downloaded', `${message.id}-preview.jpg`);
 
@@ -223,7 +230,7 @@ function handleImage(message, reply_token) {
       cp.execSync(`convert -resize 240x jpeg:${downloadPath} jpeg:${previewPath}`);
 
       return client.replyMessage(
-        reply_token,
+        replyToken,
         {
           type: 'image',
           originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
@@ -233,7 +240,7 @@ function handleImage(message, reply_token) {
     });
 }
 
-function handleVideo(message, reply_token) {
+function handleVideo(message, replyToken) {
   const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.mp4`);
   const previewPath = path.join(__dirname, 'downloaded', `${message.id}-preview.jpg`);
 
@@ -244,7 +251,7 @@ function handleVideo(message, reply_token) {
       cp.execSync(`convert mp4:${downloadPath}[0] jpeg:${previewPath}`);
 
       return client.replyMessage(
-        reply_token,
+        replyToken,
         {
           type: 'video',
           originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
@@ -254,7 +261,7 @@ function handleVideo(message, reply_token) {
     });
 }
 
-function handleAudio(message, reply_token) {
+function handleAudio(message, replyToken) {
   const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.m4a`);
 
   return downloadContent(message.id, downloadPath)
@@ -266,7 +273,7 @@ function handleAudio(message, reply_token) {
         .catch((error) => { audioDuration = 1; })
         .finally(() => {
           return client.replyMessage(
-            reply_token,
+            replyToken,
             {
               type: 'audio',
               originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
@@ -287,9 +294,9 @@ function downloadContent(messageId, downloadPath) {
     }));
 }
 
-function handleLocation(message, reply_token) {
+function handleLocation(message, replyToken) {
   return client.replyMessage(
-    reply_token,
+    replyToken,
     {
       type: 'location',
       title: message.title,
@@ -300,9 +307,9 @@ function handleLocation(message, reply_token) {
   );
 }
 
-function handleSticker(message, reply_token) {
+function handleSticker(message, replyToken) {
   return client.replyMessage(
-    reply_token,
+    replyToken,
     {
       type: 'sticker',
       packageId: message.packageId,
@@ -316,6 +323,8 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`listening on ${port}`);
 });
+
+
 
     request.post({
 
