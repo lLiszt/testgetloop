@@ -15,7 +15,7 @@ const line = require('@line/bot-sdk');
 
 
 const app = express()
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 1234
 
 
 
@@ -186,7 +186,7 @@ function handleText(message, replyToken, source) {
         replyToken,
         {
           type: 'imagemap',
-          baseUrl: `${baseURL}/static/rich`,
+          baseUrl: `./static/rich`,
           altText: 'Imagemap alt text',
           baseSize: { width: 1040, height: 1040 },
           actions: [
