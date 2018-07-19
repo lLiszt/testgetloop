@@ -63,9 +63,9 @@ function handleText(message, replyToken, source) {
 
   switch (message.text) {
     case 'profile':
-      {
+      
         return replyText(replyToken, 'Bot can\'t use profile API without user ID');
-      }
+      
     case 'buttons':
       return client.replyMessage(
         replyToken,
