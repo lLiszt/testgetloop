@@ -35,7 +35,7 @@ app.post('/webhook', (req, res) => {
     let reply_token = req.body.events[0].replyToken
     let message = req.body.events[0].message.text
     aimlParser.getResult(msg, (answer, wildCardArray, input) => {
-        reply(reply_token, answer)
+        handleText(reply_token, answer)
     })
 
     res.sendStatus(200)
@@ -44,15 +44,76 @@ app.post('/webhook', (req, res) => {
 
 app.listen(port)
 
-const replyText = (token, texts) => {
-  texts = Array.isArray(texts) ? texts : [texts];
-  return client.replyMessage(
-    token,
-    texts.map((text) => ({ type: 'text', text }))
-  );
-};
+function handleEvent(event) {
+  switch (event.type) {
+    case 'message':
+      const message = event.message;
+      switch (message.type) {
+        case 'text':
+          return handleText(message, event.replyToken, event.source);
+        case 'image':
+          return handleImage(message, event.replyToken);
+        case 'video':
+          return handleVideo(message, event.replyToken);
+        case 'audio':
+          return handleAudio(message, event.replyToken);
+        case 'location':
+          return handleLocation(message, event.replyToken);
+        case 'sticker':
+          return handleSticker(message, event.replyToken);
+        default:
+          throw new Error(`Unknown message: ${JSON.stringify(message)}`);
+      }
 
+    case 'follow':
+      return replyText(event.replyToken, 'Got followed event');
 
+    case 'unfollow':
+      return console.log(`Unfollowed this bot: ${JSON.stringify(event)}`);
+
+    case 'join':
+      return replyText(event.replyToken, `Joined ${event.source.type}`);
+
+    case 'leave':
+      return console.log(`Left: ${JSON.stringify(event)}`);
+
+    case 'postback':
+      let data = event.postback.data;
+      if (data === 'DATE' || data === 'TIME' || data === 'DATETIME') {
+        data += `(${JSON.stringify(event.postback.params)})`;
+      }
+      return replyText(event.replyToken, `Got postback: ${data}`);
+
+    case 'beacon':
+      return replyText(event.replyToken, `Got beacon: ${event.beacon.hwid}`);
+
+    default:
+      throw new Error(`Unknown event: ${JSON.stringify(event)}`);
+  }
+}
+
+function replyText(reply_token, msg , user) {
+    let headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer {ffoSQHv7DNQl8fCqtoCR7aZlf+wHzJcNd7K9crw+nIcZcTepvAZ3933vuwEwSnUxg41iHupe5eZHvPkYDGxLJEcwZUlA/+kS6bWbL0OtbsYC1b6/NfVnXX09z4uUhzHvza4UrjWsRx8nAsA1vsLHPAdB04t89/1O/w1cDnyilFU=}'
+    }
+
+    let body = JSON.stringify({
+        replyToken: reply_token,
+        messages: [{
+            type: 'text',
+            text: msg+" --> "+user
+        }]
+    })
+
+    request.post({
+        url: 'https://api.line.me/v2/bot/message/reply',
+        headers: headers,
+        body: body
+    }, (err, res, body) => {
+        console.log('status = ' + res.statusCode);
+    });
+}
 function handleText(message, replyToken, source) {
      let headers = {
 
