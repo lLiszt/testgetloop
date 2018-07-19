@@ -15,7 +15,7 @@ const line = require('@line/bot-sdk');
 
 
 const app = express()
-const port = process.env.PORT || 1234
+const port = process.env.PORT || 4000
 
 
 
@@ -23,7 +23,7 @@ const port = process.env.PORT || 1234
 
 
 
-aimlParser.load(['./test-aiml.xml'])
+
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -60,7 +60,7 @@ function handleText(message, replyToken, source) {
 
   switch (message.text) {
     case 'profile':
-      if {
+      {
         return replyText(replyToken, 'Bot can\'t use profile API without user ID');
       }
     case 'buttons':
