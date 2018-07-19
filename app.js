@@ -345,7 +345,7 @@ function handleText(message, replyToken, source) {
   }
 }
 
-app.set('port', (4000));
+app.set('port', (process.env.PORT || 3000));
 app.listen(app.get('port'), function () {
   console.log('run at port', app.get('port'));
 });
