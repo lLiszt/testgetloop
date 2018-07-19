@@ -15,10 +15,7 @@ const line = require('@line/bot-sdk');
 
 
 const app = express()
-const port = process.env.PORT=1234 || 3000;
-app.listen(port, () => {
-  console.log(`listening on ${port}`);
-});
+const port = process.env.PORT || 4000
 
 
 
@@ -47,7 +44,13 @@ app.post('/webhook', (req, res) => {
 
 app.listen(port)
 
-
+const replyText = (token, texts) => {
+  texts = Array.isArray(texts) ? texts : [texts];
+  return client.replyMessage(
+    token,
+    texts.map((text) => ({ type: 'text', text }))
+  );
+};
 
 
 function handleText(message, replyToken, source) {
@@ -63,7 +66,7 @@ function handleText(message, replyToken, source) {
 
   switch (message.text) {
     case 'profile':
-      
+     
         return replyText(replyToken, 'Bot can\'t use profile API without user ID');
       
     case 'buttons':
@@ -215,3 +218,4 @@ function handleText(message, replyToken, source) {
       console.log(`Echo message to ${replyToken}: ${message.text}`);
       return replyText(replyToken, message.text);
   }
+}
