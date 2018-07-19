@@ -32,7 +32,7 @@ app.use('/downloaded', express.static('downloaded'));
 
 app.post('/webhook', (req, res) => {
 
-    let reply_token = req.body.events[0].reply_token
+    let reply_token = req.body.events[0].replyToken
     let msg = req.body.events[0].message.text
     let ljf = req.body.events[0].message.text
     aimlParser.getResult(msg, (answer, wildCardArray, input) => {
@@ -51,15 +51,15 @@ function reply(reply_token, msg) {
 
         'Content-Type': 'application/json',
 
-        'Authorization': 'Bearer {ffoSQHv7DNQl8fCqtoCR7aZlf+wHzJcNd7K9crw+nIcZcTepvAZ3933vuwEwSnUxg41iHupe5eZHvPkYDGxLJEcwZUlA/+kS6bWbL0OtbsYC1b6/NfVnXX09z4uUhzHvza4UrjWsRx8nAsA1vsLHPAdB04t89/1O/w1cDnyilFU=}'
+        'Authorization': 'Bearer {UjrsRyWdu+aC7ZTxNZDTOvWpEUfZXQtIeNvCBNIU+BCgfx6rpIovP3eg4wqbgDoL9pKY27wM7KGn6lQddob2DYHlnTtBA9IK9pF8M4q6cGt8QBUV4FCyzbgGfo7N4oo2L7y1aYhcOSU6bjggJS6+mgdB04t89/1O/w1cDnyilFU=}'
 
     }
    
-    var test = require("./test.json");
+   
 
     let body = JSON.stringify({
 
-        reply_token: reply_token,
+        replyToken: reply_token,
 
         messages: [{
 
@@ -75,230 +75,7 @@ function reply(reply_token, msg) {
     }
     )
 
-    function handleText(message, reply_token, source) {
-  const  = `${baseURL}/static/buttons/1040.jpg`;
-
-  switch (message.text) {
-    case 'profile':
-      if {
-        return replyText(reply_token, 'Bot can\'t use profile API without user ID');
-      }
-    case 'buttons':
-      return client.replyMessage(
-        reply_token,
-        {
-          type: 'template',
-          altText: 'Buttons alt text',
-          template: {
-            type: 'buttons',
-            thumbnailImageUrl: ,
-            title: 'My button sample',
-            text: 'Hello, my button',
-            actions: [
-              { label: 'Go to line.me', type: 'uri', uri: 'https://line.me' },
-              { label: 'Say hello1', type: 'postback', data: 'hello こんにちは' },
-              { label: '言 hello2', type: 'postback', data: 'hello こんにちは', text: 'hello こんにちは' },
-              { label: 'Say message', type: 'message', text: 'Rice=米' },
-            ],
-          },
-        }
-      );
-    case 'confirm':
-      return client.replyMessage(
-        reply_token,
-        {
-          type: 'template',
-          altText: 'Confirm alt text',
-          template: {
-            type: 'confirm',
-            text: 'Do it?',
-            actions: [
-              { label: 'Yes', type: 'message', text: 'Yes!' },
-              { label: 'No', type: 'message', text: 'No!' },
-            ],
-          },
-        }
-      )
-    case 'carousel':
-      return client.replyMessage(
-        reply_token,
-        {
-          type: 'template',
-          altText: 'Carousel alt text',
-          template: {
-            type: 'carousel',
-            columns: [
-              {
-                thumbnailImageUrl: ,
-                title: 'hoge',
-                text: 'fuga',
-                actions: [
-                  { label: 'Go to line.me', type: 'uri', uri: 'https://line.me' },
-                  { label: 'Say hello1', type: 'postback', data: 'hello こんにちは' },
-                ],
-              },
-              {
-                thumbnailImageUrl: ,
-                title: 'hoge',
-                text: 'fuga',
-                actions: [
-                  { label: '言 hello2', type: 'postback', data: 'hello こんにちは', text: 'hello こんにちは' },
-                  { label: 'Say message', type: 'message', text: 'Rice=米' },
-                ],
-              },
-            ],
-          },
-        }
-      );
-    case 'image carousel':
-      return client.replyMessage(
-        reply_token,
-        {
-          type: 'template',
-          altText: 'Image carousel alt text',
-          template: {
-            type: 'image_carousel',
-            columns: [
-              {
-                imageUrl: ,
-                action: { label: 'Go to LINE', type: 'uri', uri: 'https://line.me' },
-              },
-              {
-                imageUrl: ,
-                action: { label: 'Say hello1', type: 'postback', data: 'hello こんにちは' },
-              },
-              {
-                imageUrl: ,
-                action: { label: 'Say message', type: 'message', text: 'Rice=米' },
-              },
-              {
-                imageUrl: ,
-                action: {
-                  label: 'datetime',
-                  type: 'datetimepicker',
-                  data: 'DATETIME',
-                  mode: 'datetime',
-                },
-              },
-            ]
-          },
-        }
-      );
-    case 'datetime':
-      return client.replyMessage(
-        reply_token,
-        {
-          type: 'template',
-          altText: 'Datetime pickers alt text',
-          template: {
-            type: 'buttons',
-            text: 'Select date / time !',
-            actions: [
-              { type: 'datetimepicker', label: 'date', data: 'DATE', mode: 'date' },
-              { type: 'datetimepicker', label: 'time', data: 'TIME', mode: 'time' },
-              { type: 'datetimepicker', label: 'datetime', data: 'DATETIME', mode: 'datetime' },
-            ],
-          },
-        }
-      );
-    case 'imagemap':
-      return client.replyMessage(
-        reply_token,
-        {
-          type: 'imagemap',
-          baseUrl: `${baseURL}/static/rich`,
-          altText: 'Imagemap alt text',
-          baseSize: { width: 1040, height: 1040 },
-          actions: [
-            { area: { x: 0, y: 0, width: 520, height: 520 }, type: 'uri', linkUri: 'https://store.line.me/family/manga/en' },
-            { area: { x: 520, y: 0, width: 520, height: 520 }, type: 'uri', linkUri: 'https://store.line.me/family/music/en' },
-            { area: { x: 0, y: 520, width: 520, height: 520 }, type: 'uri', linkUri: 'https://store.line.me/family/play/en' },
-            { area: { x: 520, y: 520, width: 520, height: 520 }, type: 'message', text: 'URANAI!' },
-          ],
-        }
-      );
-    case 'bye':
-      switch (source.type) {
-        case 'user':
-          return replyText(reply_token, 'Bot can\'t leave from 1:1 chat');
-        case 'group':
-          return replyText(reply_token, 'Leaving group')
-            .then(() => client.leaveGroup(source.groupId));
-        case 'room':
-          return replyText(reply_token, 'Leaving room')
-            .then(() => client.leaveRoom(source.roomId));
-      }
-    default:
-      console.log(`Echo message to ${reply_token}: ${message.text}`);
-      return replyText(reply_token, message.text);
-  }
-}
-
-function handleImage(message, reply_token) {
-  const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.jpg`);
-  const previewPath = path.join(__dirname, 'downloaded', `${message.id}-preview.jpg`);
-
-  return downloadContent(message.id, downloadPath)
-    .then((downloadPath) => {
-      // ImageMagick is needed here to run 'convert'
-      // Please consider about security and performance by yourself
-      cp.execSync(`convert -resize 240x jpeg:${downloadPath} jpeg:${previewPath}`);
-
-      return client.replyMessage(
-        reply_token,
-        {
-          type: 'image',
-          originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
-          previewImageUrl: baseURL + '/downloaded/' + path.basename(previewPath),
-        }
-      );
-    });
-}
-
-function handleVideo(message, reply_token) {
-  const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.mp4`);
-  const previewPath = path.join(__dirname, 'downloaded', `${message.id}-preview.jpg`);
-
-  return downloadContent(message.id, downloadPath)
-    .then((downloadPath) => {
-      // FFmpeg and ImageMagick is needed here to run 'convert'
-      // Please consider about security and performance by yourself
-      cp.execSync(`convert mp4:${downloadPath}[0] jpeg:${previewPath}`);
-
-      return client.replyMessage(
-        reply_token,
-        {
-          type: 'video',
-          originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
-          previewImageUrl: baseURL + '/downloaded/' + path.basename(previewPath),
-        }
-      );
-    });
-}
-
-function handleAudio(message, reply_token) {
-  const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.m4a`);
-
-  return downloadContent(message.id, downloadPath)
-    .then((downloadPath) => {
-      var getDuration = require('get-audio-duration');
-      var audioDuration;
-      getDuration(downloadPath)
-        .then((duration) => { audioDuration = duration; })
-        .catch((error) => { audioDuration = 1; })
-        .finally(() => {
-          return client.replyMessage(
-            reply_token,
-            {
-              type: 'audio',
-              originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
-              duration: audioDuration * 1000,
-            }
-          );
-        });
-    });
-}
-
+    
 
 
     request.post({
@@ -316,3 +93,160 @@ function handleAudio(message, reply_token) {
     });
 
 }
+function handleText(message, replyToken, source) {
+  const buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
+
+  switch (message.text) {
+    case 'profile':
+      if {
+        return replyText(replyToken, 'Bot can\'t use profile API without user ID');
+      }
+    case 'buttons':
+      return client.replyMessage(
+        replyToken,
+        {
+          type: 'template',
+          altText: 'Buttons alt text',
+          template: {
+            type: 'buttons',
+            thumbnailImageUrl: buttonsImageURL,
+            title: 'My button sample',
+            text: 'Hello, my button',
+            actions: [
+              { label: 'Go to line.me', type: 'uri', uri: 'https://line.me' },
+              { label: 'Say hello1', type: 'postback', data: 'hello こんにちは' },
+              { label: '言 hello2', type: 'postback', data: 'hello こんにちは', text: 'hello こんにちは' },
+              { label: 'Say message', type: 'message', text: 'Rice=米' },
+            ],
+          },
+        }
+      );
+    case 'confirm':
+      return client.replyMessage(
+        replyToken,
+        {
+          type: 'template',
+          altText: 'Confirm alt text',
+          template: {
+            type: 'confirm',
+            text: 'Do it?',
+            actions: [
+              { label: 'Yes', type: 'message', text: 'Yes!' },
+              { label: 'No', type: 'message', text: 'No!' },
+            ],
+          },
+        }
+      )
+    case 'carousel':
+      return client.replyMessage(
+        replyToken,
+        {
+          type: 'template',
+          altText: 'Carousel alt text',
+          template: {
+            type: 'carousel',
+            columns: [
+              {
+                thumbnailImageUrl: buttonsImageURL,
+                title: 'hoge',
+                text: 'fuga',
+                actions: [
+                  { label: 'Go to line.me', type: 'uri', uri: 'https://line.me' },
+                  { label: 'Say hello1', type: 'postback', data: 'hello こんにちは' },
+                ],
+              },
+              {
+                thumbnailImageUrl: buttonsImageURL,
+                title: 'hoge',
+                text: 'fuga',
+                actions: [
+                  { label: '言 hello2', type: 'postback', data: 'hello こんにちは', text: 'hello こんにちは' },
+                  { label: 'Say message', type: 'message', text: 'Rice=米' },
+                ],
+              },
+            ],
+          },
+        }
+      );
+    case 'image carousel':
+      return client.replyMessage(
+        replyToken,
+        {
+          type: 'template',
+          altText: 'Image carousel alt text',
+          template: {
+            type: 'image_carousel',
+            columns: [
+              {
+                imageUrl: buttonsImageURL,
+                action: { label: 'Go to LINE', type: 'uri', uri: 'https://line.me' },
+              },
+              {
+                imageUrl: buttonsImageURL,
+                action: { label: 'Say hello1', type: 'postback', data: 'hello こんにちは' },
+              },
+              {
+                imageUrl: buttonsImageURL,
+                action: { label: 'Say message', type: 'message', text: 'Rice=米' },
+              },
+              {
+                imageUrl: buttonsImageURL,
+                action: {
+                  label: 'datetime',
+                  type: 'datetimepicker',
+                  data: 'DATETIME',
+                  mode: 'datetime',
+                },
+              },
+            ]
+          },
+        }
+      );
+    case 'datetime':
+      return client.replyMessage(
+        replyToken,
+        {
+          type: 'template',
+          altText: 'Datetime pickers alt text',
+          template: {
+            type: 'buttons',
+            text: 'Select date / time !',
+            actions: [
+              { type: 'datetimepicker', label: 'date', data: 'DATE', mode: 'date' },
+              { type: 'datetimepicker', label: 'time', data: 'TIME', mode: 'time' },
+              { type: 'datetimepicker', label: 'datetime', data: 'DATETIME', mode: 'datetime' },
+            ],
+          },
+        }
+      );
+    case 'imagemap':
+      return client.replyMessage(
+        replyToken,
+        {
+          type: 'imagemap',
+          baseUrl: `${baseURL}/static/rich`,
+          altText: 'Imagemap alt text',
+          baseSize: { width: 1040, height: 1040 },
+          actions: [
+            { area: { x: 0, y: 0, width: 520, height: 520 }, type: 'uri', linkUri: 'https://store.line.me/family/manga/en' },
+            { area: { x: 520, y: 0, width: 520, height: 520 }, type: 'uri', linkUri: 'https://store.line.me/family/music/en' },
+            { area: { x: 0, y: 520, width: 520, height: 520 }, type: 'uri', linkUri: 'https://store.line.me/family/play/en' },
+            { area: { x: 520, y: 520, width: 520, height: 520 }, type: 'message', text: 'URANAI!' },
+          ],
+        }
+      );
+    case 'bye':
+      switch (source.type) {
+        case 'user':
+          return replyText(replyToken, 'Bot can\'t leave from 1:1 chat');
+        case 'group':
+          return replyText(replyToken, 'Leaving group')
+            .then(() => client.leaveGroup(source.groupId));
+        case 'room':
+          return replyText(replyToken, 'Leaving room')
+            .then(() => client.leaveRoom(source.roomId));
+      }
+    default:
+      console.log(`Echo message to ${replyToken}: ${message.text}`);
+      return replyText(replyToken, message.text);
+  }
