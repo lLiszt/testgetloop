@@ -16,7 +16,7 @@ const line = require('@line/bot-sdk');
 
 const app = express()
 const port = process.env.PORT || 4000
-const aimlParser = new AIMLParser({ name:'HelloBot' })
+
 
 
  
@@ -34,9 +34,8 @@ app.post('/webhook', (req, res) => {
 
     let reply_token = req.body.events[0].replyToken
     let msg = req.body.events[0].message.text
-    let ljf = req.body.events[0].message.text
     aimlParser.getResult(msg, (answer, wildCardArray, input) => {
-        reply(reply_token, answer )
+        reply(reply_token, answer)
     })
 
     res.sendStatus(200)
@@ -93,6 +92,8 @@ function reply(reply_token, msg) {
     });
 
 }
+
+
 function handleText(message, replyToken, source) {
   const buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
 
