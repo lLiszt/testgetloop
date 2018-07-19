@@ -44,58 +44,19 @@ app.post('/webhook', (req, res) => {
 
 app.listen(port)
 
-function reply(reply_token, msg) {
 
-    let headers = {
+
+
+function handleText(message, replyToken, source) {
+     let headers = {
 
         'Content-Type': 'application/json',
 
         'Authorization': 'Bearer {UjrsRyWdu+aC7ZTxNZDTOvWpEUfZXQtIeNvCBNIU+BCgfx6rpIovP3eg4wqbgDoL9pKY27wM7KGn6lQddob2DYHlnTtBA9IK9pF8M4q6cGt8QBUV4FCyzbgGfo7N4oo2L7y1aYhcOSU6bjggJS6+mgdB04t89/1O/w1cDnyilFU=}'
 
     }
-   
-   
+  const buttonsImageURL = `./static/buttons/1040.jpg`;
 
-    let body = JSON.stringify({
-
-        replyToken: reply_token,
-
-        messages: [{
-
-            type: 
-
-            'text',
-
-            text: msg
-
-        }]
-      
-
-    }
-    )
-
-    
-
-
-    request.post({
-
-        url: 'https://api.line.me/v2/bot/message/reply',
-
-        headers: headers,
-
-        body: body
-
-    }, (err, res, body) => {
-
-        console.log('status = ' + res.statusCode);
-
-    });
-
-}
-
-
-function handleText(message, replyToken, source) {
-  const buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
 
   switch (message.text) {
     case 'profile':
