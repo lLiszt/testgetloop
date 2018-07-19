@@ -15,7 +15,10 @@ const line = require('@line/bot-sdk');
 
 
 const app = express()
-const port = process.env.PORT || 4000
+const port = process.env.PORT=1234 || 3000;
+app.listen(port, () => {
+  console.log(`listening on ${port}`);
+});
 
 
 
