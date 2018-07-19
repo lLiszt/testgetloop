@@ -12,33 +12,34 @@ require('dotenv').config();
 const app = express()
 
 const config = {
-  channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
-  channelSecret: process.env.CHANNEL_SECRET,
+  channelAccessToken: (process.env.CHANNEL_ACCESS_TOKEN || 'bKnpMUyNA/x2oNpkrFT4nCNgkraXXuJh9FuTKC1+L/qtLVPQEo6P1LNcOs6OvklfQBgB5MyDrsEYkrcMzyWAIP+exBuY8SXwcbIjqCgS4Agdkpvbf6jSP+telXIIAmwHxnDnvql1/ewpL0i3nX851gdB04t89/1O/w1cDnyilFU='),
+  channelSecret: (process.env.CHANNEL_SECRET || '243d8e4bbd8d5b4d2c48641b5b2224ed'),
 };
 
 // base URL for webhook server
-const baseURL = 'https://git.heroku.com/botja.git';
+const baseURL = 'https://git.heroku.com/botbot213.git';
 
 // create LINE SDK client
 const client = new line.Client(config);
 
-// app.use('/static', express.static('static'));
-// app.use('/downloaded', express.static('downloaded'));
+app.use('/static', express.static('static'));
+app.use('/downloaded', express.static('downloaded'));
 
-app.post('/webhook', (req, res) => {
+app.post('/webhook', line.middleware(config), (req, res) => {
   // req.body.events should be an array of events
   res.sendStatus(200)
 
-  // if (!Array.isArray(req.body.events)) {
-  //   return res.status(500).end();
-  // }
+  if (!Array.isArray(req.body.events)) {
+    return res.status(500).end();
+  }
 
-  // Promise
-  //   .all(req.body.events.map(handleEvent))
-  //   .then((result) => res.json(result))
-  //   .catch((err) => {
-  //     res.status(500).end();
-  //   });
+  Promise
+    .all(req.body.events.map(handleEvent))
+    .then((result) => res.json(result))
+    .catch((err) => {
+      console.error(err);
+      res.status(500).end();
+    });
 
 });
 
@@ -345,7 +346,7 @@ function handleText(message, replyToken, source) {
   }
 }
 
-app.set('port', (process.env.PORT || 3000));
+app.set('port', (process.env.PORT || 4000));
 app.listen(app.get('port'), function () {
   console.log('run at port', app.get('port'));
 });
