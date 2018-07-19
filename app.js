@@ -1,85 +1,79 @@
 // Echo reply
 "use strict";
 
-
 const express = require('express')
-const bodyParser = require('body-parser')
 const request = require('request')
-const AIMLParser = require('aimlparser')
 const path = require('path');
 const cp = require('child_process');
-const fs = require('fs');
 const line = require('@line/bot-sdk');
 
-
-
+require('dotenv').config();
 
 const app = express()
-const port = process.env.PORT || 4000
-app.listen(port)
-
-
- 
-
-
-
 
 const config = {
-  channelAccessToken: process.env.'UjrsRyWdu+aC7ZTxNZDTOvWpEUfZXQtIeNvCBNIU+BCgfx6rpIovP3eg4wqbgDoL9pKY27wM7KGn6lQddob2DYHlnTtBA9IK9pF8M4q6cGt8QBUV4FCyzbgGfo7N4oo2L7y1aYhcOSU6bjggJS6+mgdB04t89/1O/w1cDnyilFU=',
-  channelSecret: process.env.'f9c56d46155aa1a95647447e80b116b4',
+  channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
+  channelSecret: process.env.CHANNEL_SECRET,
 };
 
 // base URL for webhook server
-const baseURL = process.env.'https://git.heroku.com/botbot213.git';
+const baseURL = 'https://git.heroku.com/botbot213.git';
 
 // create LINE SDK client
 const client = new line.Client(config);
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+
 app.use('/static', express.static('static'));
 app.use('/downloaded', express.static('downloaded'));
 
-app.post('/webhook', line.middleware(config), (req, res) => {
+app.post('/webhook', (req, res) => {
   // req.body.events should be an array of events
-  if (!Array.isArray(req.body.events)) {
-    return res.status(500).end();
-  }
+  res.sendStatus(200)
 
-  // handle events separately
-  Promise.all(req.body.events.map(handleEvent))
-    .then(() => res.end())
-    .catch((err) => {
-      console.error(err);
-      res.status(500).end();
-    });
+  // if (!Array.isArray(req.body.events)) {
+  //   return res.status(500).end();
+  // }
+
+  // Promise
+  //   .all(req.body.events.map(handleEvent))
+  //   .then((result) => res.json(result))
+  //   .catch((err) => {
+  //     res.status(500).end();
+  //   });
+
 });
 
+// function replyText(reply_token, msg, user) {
+//   let headers = {
+//     'Content-Type': 'application/json',
+//     'Authorization': 'Bearer {ffoSQHv7DNQl8fCqtoCR7aZlf+wHzJcNd7K9crw+nIcZcTepvAZ3933vuwEwSnUxg41iHupe5eZHvPkYDGxLJEcwZUlA/+kS6bWbL0OtbsYC1b6/NfVnXX09z4uUhzHvza4UrjWsRx8nAsA1vsLHPAdB04t89/1O/w1cDnyilFU=}'
+//   }
 
+//   let body = JSON.stringify({
+//     replyToken: reply_token,
+//     messages: [{
+//       type: 'text',
+//       text: msg + " --> " + user
+//     }]
+//   })
 
+//   request.post({
+//     url: 'https://api.line.me/v2/bot/message/reply',
+//     headers: headers,
+//     body: body
+//   }, (err, res, body) => {
+//     console.log('status = ' + res.statusCode);
+//   });
+// }
 
+const replyText = (token, texts) => {
+  texts = Array.isArray(texts) ? texts : [texts];
+  
+  return client.replyMessage(
+    token,
+    texts.map((text) => ({ type: 'text', text }))
+  );
+};
 
-function replyText(reply_token, msg , user) {
-    let headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer {ffoSQHv7DNQl8fCqtoCR7aZlf+wHzJcNd7K9crw+nIcZcTepvAZ3933vuwEwSnUxg41iHupe5eZHvPkYDGxLJEcwZUlA/+kS6bWbL0OtbsYC1b6/NfVnXX09z4uUhzHvza4UrjWsRx8nAsA1vsLHPAdB04t89/1O/w1cDnyilFU=}'
-    }
-
-    let body = JSON.stringify({
-        replyToken: reply_token,
-        messages: [{
-            type: 'text',
-            text: msg+" --> "+user
-        }]
-    })
-
-    request.post({
-        url: 'https://api.line.me/v2/bot/message/reply',
-        headers: headers,
-        body: body
-    }, (err, res, body) => {
-        console.log('status = ' + res.statusCode);
-    });
-}
 function handleEvent(event) {
   switch (event.type) {
     case 'message':
@@ -133,9 +127,7 @@ function handleText(message, replyToken, source) {
 
   switch (message.text) {
     case 'profile':
-      if {
-        return replyText(replyToken, 'Bot can\'t use profile API without user ID');
-      }
+      return replyText(replyToken, 'Bot can\'t use profile API without user ID');
     case 'buttons':
       return client.replyMessage(
         replyToken,
@@ -287,67 +279,73 @@ function handleText(message, replyToken, source) {
   }
 
 
-function handleImage(message, replyToken) {
-  const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.jpg`);
-  const previewPath = path.join(__dirname, 'downloaded', `${message.id}-preview.jpg`);
+  function handleImage(message, replyToken) {
+    const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.jpg`);
+    const previewPath = path.join(__dirname, 'downloaded', `${message.id}-preview.jpg`);
 
-  return downloadContent(message.id, downloadPath)
-    .then((downloadPath) => {
-      // ImageMagick is needed here to run 'convert'
-      // Please consider about security and performance by yourself
-      cp.execSync(`convert -resize 240x jpeg:${downloadPath} jpeg:${previewPath}`);
+    return downloadContent(message.id, downloadPath)
+      .then((downloadPath) => {
+        // ImageMagick is needed here to run 'convert'
+        // Please consider about security and performance by yourself
+        cp.execSync(`convert -resize 240x jpeg:${downloadPath} jpeg:${previewPath}`);
 
-      return client.replyMessage(
-        replyToken,
-        {
-          type: 'image',
-          originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
-          previewImageUrl: baseURL + '/downloaded/' + path.basename(previewPath),
-        }
-      );
-    });
+        return client.replyMessage(
+          replyToken,
+          {
+            type: 'image',
+            originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
+            previewImageUrl: baseURL + '/downloaded/' + path.basename(previewPath),
+          }
+        );
+      });
+  }
+
+  function handleVideo(message, replyToken) {
+    const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.mp4`);
+    const previewPath = path.join(__dirname, 'downloaded', `${message.id}-preview.jpg`);
+
+    return downloadContent(message.id, downloadPath)
+      .then((downloadPath) => {
+        // FFmpeg and ImageMagick is needed here to run 'convert'
+        // Please consider about security and performance by yourself
+        cp.execSync(`convert mp4:${downloadPath}[0] jpeg:${previewPath}`);
+
+        return client.replyMessage(
+          replyToken,
+          {
+            type: 'video',
+            originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
+            previewImageUrl: baseURL + '/downloaded/' + path.basename(previewPath),
+          }
+        );
+      });
+  }
+
+  function handleAudio(message, replyToken) {
+    const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.m4a`);
+
+    return downloadContent(message.id, downloadPath)
+      .then((downloadPath) => {
+        var getDuration = require('get-audio-duration');
+        var audioDuration;
+        getDuration(downloadPath)
+          .then((duration) => { audioDuration = duration; })
+          .catch((error) => { audioDuration = 1; })
+          .finally(() => {
+            return client.replyMessage(
+              replyToken,
+              {
+                type: 'audio',
+                originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
+                duration: audioDuration * 1000,
+              }
+            );
+          });
+      });
+  }
 }
 
-function handleVideo(message, replyToken) {
-  const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.mp4`);
-  const previewPath = path.join(__dirname, 'downloaded', `${message.id}-preview.jpg`);
-
-  return downloadContent(message.id, downloadPath)
-    .then((downloadPath) => {
-      // FFmpeg and ImageMagick is needed here to run 'convert'
-      // Please consider about security and performance by yourself
-      cp.execSync(`convert mp4:${downloadPath}[0] jpeg:${previewPath}`);
-
-      return client.replyMessage(
-        replyToken,
-        {
-          type: 'video',
-          originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
-          previewImageUrl: baseURL + '/downloaded/' + path.basename(previewPath),
-        }
-      );
-    });
-}
-
-function handleAudio(message, replyToken) {
-  const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.m4a`);
-
-  return downloadContent(message.id, downloadPath)
-    .then((downloadPath) => {
-      var getDuration = require('get-audio-duration');
-      var audioDuration;
-      getDuration(downloadPath)
-        .then((duration) => { audioDuration = duration; })
-        .catch((error) => { audioDuration = 1; })
-        .finally(() => {
-          return client.replyMessage(
-            replyToken,
-            {
-              type: 'audio',
-              originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
-              duration: audioDuration * 1000,
-            }
-          );
-        });
-    });
-}
+app.set('port', (4000));
+app.listen(app.get('port'), function () {
+  console.log('run at port', app.get('port'));
+});
