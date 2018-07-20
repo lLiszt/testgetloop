@@ -74,19 +74,46 @@ const replyText = (token, texts) => {
     texts.map((text) => ({ type: 'text', text }))
   );
 };
-const push = (res, msg) => {
+function handleText(message, replyToken, source) {
+  const buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
+  const push = (res, msg) => {
   return request({
     method: `POST`,
     uri: `${LINE_MESSAGING_API}/push`,
     headers: LINE_HEADER,
     body: JSON.stringify({
       to: `U764500f94537bf8fea32888c9dfbc739`,
-      messages: [
+      case 'A':
+      return client.replyMessage(
+        replyToken,
         {
-          type: `text`,
-          text:.Yok
+          type: 'template',
+          altText: 'Carousel alt text',
+          template: {
+            type: 'carousel',
+            columns: [
+              {
+                thumbnailImageUrl: buttonsImageURL,
+                title: 'hoge',
+                text: 'fuga',
+                actions: [
+                  { label: 'Go to line.me', type: 'uri', uri: 'https://line.me' },
+                  { label: 'Say hello1', type: 'postback', data: 'hello こんにちは' },
+                ],
+              },
+              {
+                thumbnailImageUrl: buttonsImageURL,
+                title: 'hoge',
+                text: 'fuga',
+                actions: [
+                  { label: '言 hello2', type: 'postback', data: 'hello こんにちは', text: 'hello こんにちは' },
+                  { label: 'Say message', type: 'message', text: 'Rice=米' },
+                ],
+              },
+            ],
+          },
         }
-      ]
+      );
     },
     {
     method: `POST`,
@@ -94,12 +121,37 @@ const push = (res, msg) => {
     headers: LINE_HEADER,
     body: JSON.stringify({
       to: `Ub8cad621e155de8753e6ebddc9db3d68`,
-      messages: [
+      case 'A':
+      return client.replyMessage(
+        replyToken,
         {
-          type: `text`,
-          text: Hi TK.mind
+          type: 'template',
+          altText: 'Carousel alt text',
+          template: {
+            type: 'carousel',
+            columns: [
+              {
+                thumbnailImageUrl: buttonsImageURL,
+                title: 'hoge',
+                text: 'fuga',
+                actions: [
+                  { label: 'Go to line.me', type: 'uri', uri: 'https://line.me' },
+                  { label: 'Say hello1', type: 'postback', data: 'hello こんにちは' },
+                ],
+              },
+              {
+                thumbnailImageUrl: buttonsImageURL,
+                title: 'hoge',
+                text: 'fuga',
+                actions: [
+                  { label: '言 hello2', type: 'postback', data: 'hello こんにちは', text: 'hello こんにちは' },
+                  { label: 'Say message', type: 'message', text: 'Rice=米' },
+                ],
+              },
+            ],
+          },
         }
-      ]
+      );
     })
   }).then(() => {
     return res.status(200).send(`Done`);
@@ -107,6 +159,10 @@ const push = (res, msg) => {
     return Promise.reject(error);
   });
 }
+}
+
+  }
+
 function handleEvent(event) {
   switch (event.type) {
     case 'message':
