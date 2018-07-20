@@ -14,14 +14,10 @@ const app = express()
 const config = {
   channelAccessToken: (process.env.CHANNEL_ACCESS_TOKEN || 'ffoSQHv7DNQl8fCqtoCR7aZlf+wHzJcNd7K9crw+nIcZcTepvAZ3933vuwEwSnUxg41iHupe5eZHvPkYDGxLJEcwZUlA/+kS6bWbL0OtbsYC1b6/NfVnXX09z4uUhzHvza4UrjWsRx8nAsA1vsLHPAdB04t89/1O/w1cDnyilFU='),
   channelSecret: (process.env.CHANNEL_SECRET || 'c9865f7627be2bdc7a37a411b99e0d16'),
-  channelId: (process.env.CHANNEL_SECRET || 'Ub8cad621e155de8753e6ebddc9db3d68')
-};
-const bot = {
-  channelAccessToken: (process.env.CHANNEL_ACCESS_TOKEN || 'ffoSQHv7DNQl8fCqtoCR7aZlf+wHzJcNd7K9crw+nIcZcTepvAZ3933vuwEwSnUxg41iHupe5eZHvPkYDGxLJEcwZUlA/+kS6bWbL0OtbsYC1b6/NfVnXX09z4uUhzHvza4UrjWsRx8nAsA1vsLHPAdB04t89/1O/w1cDnyilFU='),
-  channelSecret: (process.env.CHANNEL_SECRET || 'c9865f7627be2bdc7a37a411b99e0d16'),
   channelId: (process.env.CHANNEL_SECRET || 'Ub8cad621e155de8753e6ebddc9db3d68'),
   verify: true // default=true
 };
+
 
 // base URL for webhook server
 const baseURL = 'https://git.heroku.com/botbotbot213.git';
@@ -82,17 +78,17 @@ const replyText = (token, texts) => {
   );
 };
 
-function handleEvent(event) {
+config.on('message', function handleEvent (event) {
   switch (event.type) {
 
     case 'Push':
-          bot.push('U17448c796a01b715d293c34810985a4c', ['Hey!', 'สวัสดี ' + String.fromCharCode(0xD83D, 0xDE01)]);
+          config.push('U17448c796a01b715d293c34810985a4c', ['Hey!', 'สวัสดี ' + String.fromCharCode(0xD83D, 0xDE01)]);
           break;
     case 'Push2':
-          bot.push('Cba71ba25dafbd6a1472c655fe22979e2', 'Push to group');
+          config.push('Cba71ba25dafbd6a1472c655fe22979e2', 'Push to group');
           break;
     case 'Multicast':
-          bot.push(['U17448c796a01b715d293c34810985a4c', 'Cba71ba25dafbd6a1472c655fe22979e2'], 'Multicast!');
+          config.push(['U17448c796a01b715d293c34810985a4c', 'Cba71ba25dafbd6a1472c655fe22979e2'], 'Multicast!');
           break;
 
     case 'message':
