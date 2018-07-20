@@ -17,7 +17,7 @@ const config = {
 };
 
 // base URL for webhook server
-const baseURL = 'https://git.heroku.com/botbot213.git';
+const baseURL = 'https://git.heroku.com/botbotbot213.git';
 
 // create LINE SDK client
 const client = new line.Client(config);
@@ -74,7 +74,39 @@ const replyText = (token, texts) => {
     texts.map((text) => ({ type: 'text', text }))
   );
 };
-
+const push = (res, msg) => {
+  return request({
+    method: `POST`,
+    uri: `${LINE_MESSAGING_API}/push`,
+    headers: LINE_HEADER,
+    body: JSON.stringify({
+      to: `U764500f94537bf8fea32888c9dfbc739`,
+      messages: [
+        {
+          type: `text`,
+          text:.Yok🐬
+        }
+      ]
+    },
+    {
+    method: `POST`,
+    uri: `${LINE_MESSAGING_API}/push`,
+    headers: LINE_HEADER,
+    body: JSON.stringify({
+      to: `Ub8cad621e155de8753e6ebddc9db3d68`,
+      messages: [
+        {
+          type: `text`,
+          text: Hi TK.mind
+        }
+      ]
+    })
+  }).then(() => {
+    return res.status(200).send(`Done`);
+  }).catch((error) => {
+    return Promise.reject(error);
+  });
+}
 function handleEvent(event) {
   switch (event.type) {
     case 'message':
