@@ -6,6 +6,7 @@ const request = require('request')
 const path = require('path');
 const cp = require('child_process');
 const line = require('@line/bot-sdk');
+const 
 
 require('dotenv').config();
 
@@ -17,7 +18,6 @@ const config = {
   channelId: (process.env.CHANNEL_SECRET || 'Ub8cad621e155de8753e6ebddc9db3d68'),
   verify: true // default=true
 };
-
 
 // base URL for webhook server
 const baseURL = 'https://git.heroku.com/botbotbot213.git';
@@ -78,11 +78,11 @@ const replyText = (token, texts) => {
   );
 };
 
-config.on( function handleEvent (event) {
+function handleEvent(event) {
   switch (event.type) {
 
     case 'Push':
-          config.push('U17448c796a01b715d293c34810985a4c', ['Hey!', 'สวัสดี ' + String.fromCharCode(0xD83D, 0xDE01)]);
+          config.push('U17448c796a01b715d293c34810985a4c', ['Hey!']);
           break;
     case 'Push2':
           config.push('Cba71ba25dafbd6a1472c655fe22979e2', 'Push to group');
