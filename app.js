@@ -132,7 +132,7 @@ config.on('message', function (event) {
       switch (event.message.text) {
 
     case 'Push':
-      config.push('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!']);
+      config.push('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!', 'สวัสดี ' + String.fromCharCode(0xD83D, 0xDE01)]);
     
     case 'Push2':
       config.push('Ub8cad621e155de8753e6ebddc9db3d68', 'Push to group');
@@ -140,7 +140,7 @@ config.on('message', function (event) {
     case 'Multicast':
       config.push(['Ub8cad621e155de8753e6ebddc9db3d68', 'U764500f94537bf8fea32888c9dfbc739'], 'Multicast!');
     }
-  }
+  };
 }
 
 
