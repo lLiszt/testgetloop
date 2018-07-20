@@ -80,7 +80,7 @@ const replyText = (token, texts) => {
 };
 
 
-  function sendText (sender, text) {
+  function sendText (userID, text) {
   let data = {
     to: "Ub8cad621e155de8753e6ebddc9db3d68",
     messages: [
