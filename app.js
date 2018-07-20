@@ -95,7 +95,9 @@ function handleEvent(event) {
         default:
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
-
+    case 'Push':
+      return.replyText('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!']);
+      
     case 'follow':
       return replyText(event.replyToken, 'Got followed event');
 
@@ -117,6 +119,7 @@ function handleEvent(event) {
 
     case 'beacon':
       return replyText(event.replyToken, `Got beacon: ${event.beacon.hwid}`);
+
 
     default:
       throw new Error(`Unknown event: ${JSON.stringify(event)}`);
