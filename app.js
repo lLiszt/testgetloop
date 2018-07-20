@@ -95,15 +95,7 @@ function handleEvent(event) {
         default:
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
-       case 'Push':
-          return.push('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!', 'สวัสดี ' + String.fromCharCode(0xD83D, 0xDE01)]);
-          break;
-        case 'Push2':
-          return.push('Cba71ba25dafbd6a1472c655fe22979e2', 'Push to group');
-          break;
-        case 'Multicast':
-          return.push(['U17448c796a01b715d293c34810985a4c', 'Cba71ba25dafbd6a1472c655fe22979e2'], 'Multicast!');
-          break;
+      
 
     case 'follow':
       return replyText(event.replyToken, 'Got followed event');
