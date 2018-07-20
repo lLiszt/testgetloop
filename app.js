@@ -80,31 +80,111 @@ const replyText = (token, texts) => {
 };
 
 
-  function sendText (userID, text) {
-  let data = {
-    to: "Ub8cad621e155de8753e6ebddc9db3d68",
-    messages: [
-      {
-        type: 'text',
-        text: 'สวัสดีค่ะ '
+config.on('message', function (event) {
+  switch (event.message.type) {
+    case 'text':
+      switch (event.message.text) {
+        case 'Me':
+          event.source.profile().then(function (profile) {
+            return event.reply('Hello ' + profile.displayName + ' ' + profile.userId);
+          });
+          break;
+        case 'Member':
+          event.source.member().then(function (member) {
+            return event.reply(JSON.stringify(member));
+          });
+          break;
+        case 'Picture':
+          event.reply({
+            type: 'image',
+            originalContentUrl: 'https://d.line-scdn.net/stf/line-lp/family/en-US/190X190_line_me.png',
+            previewImageUrl: 'https://d.line-scdn.net/stf/line-lp/family/en-US/190X190_line_me.png'
+          });
+          break;
+        case 'Location':
+          event.reply({
+            type: 'location',
+            title: 'LINE Plus Corporation',
+            address: '1 Empire tower, Sathorn, Bangkok 10120, Thailand',
+            latitude: 13.7202068,
+            longitude: 100.5298698
+          });
+          break;
+        case 'Push':
+          config.push('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!', 'สวัสดี ' + String.fromCharCode(0xD83D, 0xDE01)]);
+          break;
+        case 'Push2':
+          config.push('Ub8cad621e155de8753e6ebddc9db3d68', 'Push to group');
+          break;
+        case 'Multicast':
+          config.push(['Ub8cad621e155de8753e6ebddc9db3d68', 'Ub8cad621e155de8753e6ebddc9db3d68'], 'Multicast!');
+          break;
+        case 'Confirm':
+          event.reply({
+            type: 'template',
+            altText: 'this is a confirm template',
+            template: {
+              type: 'confirm',
+              text: 'Are you sure?',
+              actions: [{
+                type: 'message',
+                label: 'Yes',
+                text: 'yes'
+              }, {
+                type: 'message',
+                label: 'No',
+                text: 'no'
+              }]
+            }
+          });
+          break;
+        case 'Multiple':
+          return event.reply(['Line 1', 'Line 2', 'Line 3', 'Line 4', 'Line 5']);
+          break;
+        case 'Version':
+          event.reply('linebot@' + require('../package.json').version);
+          break;
+        default:
+          event.reply(event.message.text).then(function (data) {
+            console.log('Success', data);
+          }).catch(function (error) {
+            console.log('Error', error);
+          });
+          break;
       }
-    ]
+      break;
+    case 'image':
+      event.message.content().then(function (data) {
+        const s = data.toString('hex').substring(0, 32);
+        return event.reply('Nice picture! ' + s);
+      }).catch(function (err) {
+        return event.reply(err.toString());
+      });
+      break;
+    case 'video':
+      event.reply('Nice video!');
+      break;
+    case 'audio':
+      event.reply('Nice audio!');
+      break;
+    case 'location':
+      event.reply(['That\'s a good location!', 'Lat:' + event.message.latitude, 'Long:' + event.message.longitude]);
+      break;
+    case 'sticker':
+      event.reply({
+        type: 'sticker',
+        packageId: 1,
+        stickerId: 1
+      });
+      break;
+    default:
+      event.reply('Unknow message: ' + JSON.stringify(event));
+      break;
   }
-  request({
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer {ffoSQHv7DNQl8fCqtoCR7aZlf+wHzJcNd7K9crw+nIcZcTepvAZ3933vuwEwSnUxg41iHupe5eZHvPkYDGxLJEcwZUlA/+kS6bWbL0OtbsYC1b6/NfVnXX09z4uUhzHvza4UrjWsRx8nAsA1vsLHPAdB04t89/1O/w1cDnyilFU=}'
-    },
-    url: 'https://api.line.me/v2/bot/message/push',
-    method: 'POST',
-    body: data,
-    json: true
-  }, function (err, res, body) {
-    if (err) console.log('error')
-    if (res) console.log('success')
-    if (body) console.log(body)
-  })
-}
+});
+
+
+  
 
 // function handleEvent(event) {
 //   switch (event.type) {
