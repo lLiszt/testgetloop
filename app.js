@@ -83,7 +83,7 @@ function handleText(message, replyToken, source) {
     headers: LINE_HEADER,
     body: JSON.stringify({
       to: `U764500f94537bf8fea32888c9dfbc739`,
-      case 'A':
+      case 'C':
       return client.replyMessage(
         replyToken,
         {
@@ -121,7 +121,7 @@ function handleText(message, replyToken, source) {
     headers: LINE_HEADER,
     body: JSON.stringify({
       to: `Ub8cad621e155de8753e6ebddc9db3d68`,
-      case 'A':
+      case 'B':
       return client.replyMessage(
         replyToken,
         {
