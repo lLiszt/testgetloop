@@ -96,11 +96,9 @@ function handleEvent(event) {
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
        case 'Push':
-          config.push('U17448c796a01b715d293c34810985a4c', ['Hey!', 'สวัสดี ' + String.fromCharCode(0xD83D, 0xDE01)]);
-          break;
+          config.push('U17448c796a01b715d293c34810985a4c', ['Hey!', 'สวัสดี ']);          
         case 'Push2':
-          config.push('Cba71ba25dafbd6a1472c655fe22979e2', 'Push to group');
-          break;
+          config.push('Cba71ba25dafbd6a1472c655fe22979e2', 'Push to group');          
         case 'Multicast':
           config.push(['U17448c796a01b715d293c34810985a4c', 'Cba71ba25dafbd6a1472c655fe22979e2'], 'Multicast!');
           
