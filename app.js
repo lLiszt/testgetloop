@@ -100,11 +100,11 @@ function handleEvent(event) {
       }
       
         case 'Push':
-          config.push('U17448c796a01b715d293c34810985a4c', ['Hey!'+ 'สวัสดี ']);          
+          return.push('U17448c796a01b715d293c34810985a4c', ['Hey!'+ 'สวัสดี ']);          
         case 'Push2':
-          config.push('Cba71ba25dafbd6a1472c655fe22979e2', 'Push to group');          
+          return.push('Cba71ba25dafbd6a1472c655fe22979e2', 'Push to group');          
         case 'Multicast':
-          config.push(['U17448c796a01b715d293c34810985a4c', 'Cba71ba25dafbd6a1472c655fe22979e2'], 'Multicast!');
+          return.push(['U17448c796a01b715d293c34810985a4c', 'Cba71ba25dafbd6a1472c655fe22979e2'], 'Multicast!');
              
 
     case 'follow':
