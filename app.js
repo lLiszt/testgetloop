@@ -84,7 +84,7 @@ const push = (res, msg) => {
       messages: [
         {
           type: `text`,
-          text:.Yok🐬
+          text:.Yok
         }
       ]
     },
