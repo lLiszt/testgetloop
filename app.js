@@ -83,29 +83,7 @@ function handleEvent(event) {
           config.push('Cba71ba25dafbd6a1472c655fe22979e2', 'Push to group');          
         case 'Multicast':
           config.push(['U17448c796a01b715d293c34810985a4c', 'Cba71ba25dafbd6a1472c655fe22979e2'], 'Multicast!');
-          
-    case 'message':
-      const message = event.message;
-
-      switch (message.type) {
-        case 'text':
-          return handleText(message, event.replyToken, event.source);
-        case 'image':
-          return handleImage(message, event.replyToken);
-        case 'video':
-          return handleVideo(message, event.replyToken);
-        case 'audio':
-          return handleAudio(message, event.replyToken);
-        case 'location':
-          return handleLocation(message, event.replyToken);
-        case 'sticker':
-          return handleSticker(message, event.replyToken);
-        default:
-          throw new Error(`Unknown message: ${JSON.stringify(message)}`);
-      }
-      
-          
-
+ 
     case 'follow':
       return replyText(event.replyToken, 'Got followed event');
 
