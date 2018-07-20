@@ -92,12 +92,13 @@ function handleEvent(event) {
           return handleLocation(message, event.replyToken);
         case 'sticker':
           return handleSticker(message, event.replyToken);
+        case 'Push':
+          return.replyText(to:'Ub8cad621e155de8753e6ebddc9db3d68',text: ['Hey!']);
         default:
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
-    case 'Push':
-      return.replyText('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!']);
-      
+   
+
     case 'follow':
       return replyText(event.replyToken, 'Got followed event');
 
