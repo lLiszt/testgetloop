@@ -6,6 +6,7 @@ const request = require('request')
 const path = require('path');
 const cp = require('child_process');
 const line = require('@line/bot-sdk');
+const axios = require('axios')
 
 require('dotenv').config();
 
