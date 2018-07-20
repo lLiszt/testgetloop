@@ -20,6 +20,7 @@
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "fs": "0.0.1-security",
+    "linebot": "^1.4.1",
     "load-json-file": "^5.0.0",
     "path": "^0.12.7",
     "request": "^2.87.0"
