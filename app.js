@@ -6,7 +6,6 @@ const request = require('request')
 const path = require('path');
 const cp = require('child_process');
 const line = require('@line/bot-sdk');
-const 
 
 require('dotenv').config();
 
@@ -15,8 +14,6 @@ const app = express()
 const config = {
   channelAccessToken: (process.env.CHANNEL_ACCESS_TOKEN || 'ffoSQHv7DNQl8fCqtoCR7aZlf+wHzJcNd7K9crw+nIcZcTepvAZ3933vuwEwSnUxg41iHupe5eZHvPkYDGxLJEcwZUlA/+kS6bWbL0OtbsYC1b6/NfVnXX09z4uUhzHvza4UrjWsRx8nAsA1vsLHPAdB04t89/1O/w1cDnyilFU='),
   channelSecret: (process.env.CHANNEL_SECRET || 'c9865f7627be2bdc7a37a411b99e0d16'),
-  channelId: (process.env.CHANNEL_SECRET || 'Ub8cad621e155de8753e6ebddc9db3d68'),
-  
 };
 
 // base URL for webhook server
@@ -80,8 +77,6 @@ const replyText = (token, texts) => {
 
 function handleEvent(event) {
   switch (event.type) {
-
-  
     case 'message':
       const message = event.message;
       switch (message.type) {
@@ -97,11 +92,9 @@ function handleEvent(event) {
           return handleLocation(message, event.replyToken);
         case 'sticker':
           return handleSticker(message, event.replyToken);
-      
         default:
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
- 
 
     case 'follow':
       return replyText(event.replyToken, 'Got followed event');
@@ -124,7 +117,6 @@ function handleEvent(event) {
 
     case 'beacon':
       return replyText(event.replyToken, `Got beacon: ${event.beacon.hwid}`);
-
 
     default:
       throw new Error(`Unknown event: ${JSON.stringify(event)}`);
