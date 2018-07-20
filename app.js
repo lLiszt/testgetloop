@@ -79,6 +79,17 @@ const replyText = (token, texts) => {
   );
 };
 
+function sendText (userID, text) {
+  let data = {
+    to: "Ub8cad621e155de8753e6ebddc9db3d68",
+    messages: [
+      {
+        type: 'text',
+        text: 'สวัสดีค่ะ '
+      }
+    ]
+  }
+  
 function handleEvent(event) {
   switch (event.type) {
     case 'message':
