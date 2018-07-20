@@ -36,7 +36,7 @@ app.post('/webhook', line.middleware(config), (req, res) => {
 client.push(['U17448c796a01b715d293c34810985a4c'], {
   type: 'text',
   text: 'hello, world',
-})
+});
   Promise
     .all(req.body.events.map(handleEvent))
     .then((result) => res.json(result))
@@ -82,7 +82,25 @@ const replyText = (token, texts) => {
 function handleEvent(event) {
   switch (event.type) {
 
-    
+    case 'message':
+      const message = event.message;
+
+      switch (message.type) {
+        case 'text':
+          return handleText(message, event.replyToken, event.source);
+        case 'image':
+          return handleImage(message, event.replyToken);
+        case 'video':
+          return handleVideo(message, event.replyToken);
+        case 'audio':
+          return handleAudio(message, event.replyToken);
+        case 'location':
+          return handleLocation(message, event.replyToken);
+        case 'sticker':
+          return handleSticker(message, event.replyToken);
+        default:
+          throw new Error(`Unknown message: ${JSON.stringify(message)}`);
+      }
       
        
              
