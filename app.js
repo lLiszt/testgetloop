@@ -33,10 +33,7 @@ app.post('/webhook', line.middleware(config), (req, res) => {
   if (!Array.isArray(req.body.events)) {
     return res.status(500).end();
   }
-client.push(['U17448c796a01b715d293c34810985a4c'], {
-  type: 'text',
-  text: 'hello, world',
-});
+
   Promise
     .all(req.body.events.map(handleEvent))
     .then((result) => res.json(result))
