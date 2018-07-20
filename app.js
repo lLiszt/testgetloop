@@ -114,7 +114,7 @@ function handleEvent(event) {
       return console.log(`Left: ${JSON.stringify(event)}`);
     
     case 'Push':
-      return.push('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!']);
+      return.replyText('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!']);
     
     case 'Push2':
       return.push('Ub8cad621e155de8753e6ebddc9db3d68', 'Push to group');
