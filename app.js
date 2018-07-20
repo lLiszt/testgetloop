@@ -9,11 +9,6 @@ const line = require('@line/bot-sdk');
 const axios = require('axios')
 var linebot = require('linebot');
 
-var bot = linebot({
-  channelId: CHANNEL_ID,
-  channelSecret: CHANNEL_SECRET,
-  channelAccessToken: CHANNEL_ACCESS_TOKEN
-});
 
 
 
