@@ -92,12 +92,19 @@ function handleEvent(event) {
           return handleLocation(message, event.replyToken);
         case 'sticker':
           return handleSticker(message, event.replyToken);
-        case 'Push':
-          return.replyText(to:'Ub8cad621e155de8753e6ebddc9db3d68',text: ['Hey!']);
+      
         default:
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
-   
+    case 'Push':
+          config.push('U17448c796a01b715d293c34810985a4c', ['Hey!', 'สวัสดี ' + String.fromCharCode(0xD83D, 0xDE01)]);
+          return;
+    case 'Push2':
+          config.push('Cba71ba25dafbd6a1472c655fe22979e2', 'Push to group');
+          return;
+    case 'Multicast':
+          config.push(['U17448c796a01b715d293c34810985a4c', 'Cba71ba25dafbd6a1472c655fe22979e2'], 'Multicast!');
+          return;
 
     case 'follow':
       return replyText(event.replyToken, 'Got followed event');
