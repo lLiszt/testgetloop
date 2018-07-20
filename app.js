@@ -139,7 +139,7 @@ function handleText(message, replyToken, source) {
     case 'profile':
       return replyText(replyToken, 'Bot can\'t use profile API without user ID');
        
-       case 'Push':
+       case 'WWW':
          return config.push('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!', 'สวัสดี ' + String.fromCharCode(0xD83D, 0xDE01)]);
         
      
