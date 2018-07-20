@@ -33,7 +33,10 @@ app.post('/webhook', line.middleware(config), (req, res) => {
   if (!Array.isArray(req.body.events)) {
     return res.status(500).end();
   }
-
+client.multicast(['U17448c796a01b715d293c34810985a4c'], {
+  type: 'text',
+  text: 'hello, world',
+})
   Promise
     .all(req.body.events.map(handleEvent))
     .then((result) => res.json(result))
@@ -99,12 +102,7 @@ function handleEvent(event) {
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
       
-        case 'Push':
-          return.push('U17448c796a01b715d293c34810985a4c', ['Hey!'+ 'สวัสดี ']);          
-        case 'Push2':
-          return.push('Cba71ba25dafbd6a1472c655fe22979e2', 'Push to group');          
-        case 'Multicast':
-          return.push(['U17448c796a01b715d293c34810985a4c', 'Cba71ba25dafbd6a1472c655fe22979e2'], 'Multicast!');
+       
              
 
     case 'follow':
