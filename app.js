@@ -98,7 +98,7 @@ function handleEvent(event) {
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
     case 'Push':
-      config.replyText('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!']);
+      config.push('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!']);
     
     case 'Push2':
       config.push('Ub8cad621e155de8753e6ebddc9db3d68', 'Push to group');
