@@ -97,14 +97,7 @@ function handleEvent(event) {
         default:
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
-    case 'Push':
-      config.push('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!']);
     
-    case 'Push2':
-      config.push('Ub8cad621e155de8753e6ebddc9db3d68', 'Push to group');
-    
-    case 'Multicast':
-      config.push(['Ub8cad621e155de8753e6ebddc9db3d68', 'U764500f94537bf8fea32888c9dfbc739'], 'Multicast!');
 
     case 'follow':
       return replyText(event.replyToken, 'Got followed event');
@@ -132,6 +125,23 @@ function handleEvent(event) {
       throw new Error(`Unknown event: ${JSON.stringify(event)}`);
   }
 }
+config.on('message', function (event) {
+  switch (event.message.type) {
+    case 'text':
+      switch (event.message.text) {
+
+    case 'Push':
+      config.push('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!']);
+    
+    case 'Push2':
+      config.push('Ub8cad621e155de8753e6ebddc9db3d68', 'Push to group');
+    
+    case 'Multicast':
+      config.push(['Ub8cad621e155de8753e6ebddc9db3d68', 'U764500f94537bf8fea32888c9dfbc739'], 'Multicast!');
+    }
+  }
+}
+
 
 function handleText(message, replyToken, source) {
   const buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
