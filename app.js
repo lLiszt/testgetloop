@@ -165,7 +165,7 @@ function handleText(message, replyToken, source) {
           },
         }
       )
-    case 'carousel':
+    case 'A':
       return client.replyMessage(
         replyToken,
         {
