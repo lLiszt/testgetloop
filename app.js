@@ -76,13 +76,14 @@ const replyText = (token, texts) => {
     texts.map((text) => ({ type: 'text', text }))
   );
 };
+var useridmind = 'Ub8cad621e155de8753e6ebddc9db3d68'
 
 function handleEvent(event) {
   switch (event.type) {
 
     case 'message':
       const message = event.message;
-      usercon(event.source.userId);
+      
 
       switch (message.type) {
         case 'text':
@@ -101,9 +102,6 @@ function handleEvent(event) {
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
       
-       
-             
-
     case 'follow':
       return replyText(event.replyToken, 'Got followed event');
 
@@ -115,6 +113,15 @@ function handleEvent(event) {
 
     case 'leave':
       return console.log(`Left: ${JSON.stringify(event)}`);
+    
+    case 'Push':
+      return.push('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!']);
+    
+    case 'Push2':
+      return.push('Ub8cad621e155de8753e6ebddc9db3d68', 'Push to group');
+    
+    case 'Multicast':
+      return.push(['Ub8cad621e155de8753e6ebddc9db3d68', 'U764500f94537bf8fea32888c9dfbc739'], 'Multicast!');
 
     case 'postback':
       let data = event.postback.data;
@@ -353,17 +360,7 @@ function handleText(message, replyToken, source) {
       });
   }
 }
-const usercon = async (userId) => {
-    const res = await axios.get('https://nodejs.org/ja/');
-    const item = res.data;
-    const version = item.match(/最新版"  data-version="(.*?)">/)[1]; //正規表現で(無理やり)取得
-    console.log(version);
 
-    await client.pushMessage(Ub8cad621e155de8753e6ebddc9db3d68, {
-        type: 'text',
-        text: `Fish is good`,
-    });
-}
 
 app.set('port', (process.env.PORT || 4000));
 app.listen(app.get('port'), function () {
