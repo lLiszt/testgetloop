@@ -80,382 +80,285 @@ const replyText = (token, texts) => {
 };
 
 
-config.on('message', function (event) {
-  switch (event.message.type) {
-    case 'text':
-      switch (event.message.text) {
-        case 'Me':
-          event.source.profile().then(function (profile) {
-            return event.reply('Hello ' + profile.displayName + ' ' + profile.userId);
-          });
-          break;
-        case 'Member':
-          event.source.member().then(function (member) {
-            return event.reply(JSON.stringify(member));
-          });
-          break;
-        case 'Picture':
-          event.reply({
-            type: 'image',
-            originalContentUrl: 'https://d.line-scdn.net/stf/line-lp/family/en-US/190X190_line_me.png',
-            previewImageUrl: 'https://d.line-scdn.net/stf/line-lp/family/en-US/190X190_line_me.png'
-          });
-          break;
-        case 'Location':
-          event.reply({
-            type: 'location',
-            title: 'LINE Plus Corporation',
-            address: '1 Empire tower, Sathorn, Bangkok 10120, Thailand',
-            latitude: 13.7202068,
-            longitude: 100.5298698
-          });
-          break;
-        case 'Push':
-          config.push('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!', 'สวัสดี ' + String.fromCharCode(0xD83D, 0xDE01)]);
-          break;
-        case 'Push2':
-          config.push('Ub8cad621e155de8753e6ebddc9db3d68', 'Push to group');
-          break;
-        case 'Multicast':
-          config.push(['Ub8cad621e155de8753e6ebddc9db3d68', 'Ub8cad621e155de8753e6ebddc9db3d68'], 'Multicast!');
-          break;
-        case 'Confirm':
-          event.reply({
-            type: 'template',
-            altText: 'this is a confirm template',
-            template: {
-              type: 'confirm',
-              text: 'Are you sure?',
-              actions: [{
-                type: 'message',
-                label: 'Yes',
-                text: 'yes'
-              }, {
-                type: 'message',
-                label: 'No',
-                text: 'no'
-              }]
-            }
-          });
-          break;
-        case 'Multiple':
-          return event.reply(['Line 1', 'Line 2', 'Line 3', 'Line 4', 'Line 5']);
-          break;
-        case 'Version':
-          event.reply('linebot@' + require('../package.json').version);
-          break;
-        default:
-          event.reply(event.message.text).then(function (data) {
-            console.log('Success', data);
-          }).catch(function (error) {
-            console.log('Error', error);
-          });
-          break;
-      }
-      break;
-    case 'image':
-      event.message.content().then(function (data) {
-        const s = data.toString('hex').substring(0, 32);
-        return event.reply('Nice picture! ' + s);
-      }).catch(function (err) {
-        return event.reply(err.toString());
-      });
-      break;
-    case 'video':
-      event.reply('Nice video!');
-      break;
-    case 'audio':
-      event.reply('Nice audio!');
-      break;
-    case 'location':
-      event.reply(['That\'s a good location!', 'Lat:' + event.message.latitude, 'Long:' + event.message.longitude]);
-      break;
-    case 'sticker':
-      event.reply({
-        type: 'sticker',
-        packageId: 1,
-        stickerId: 1
-      });
-      break;
-    default:
-      event.reply('Unknow message: ' + JSON.stringify(event));
-      break;
-  }
-});
 
 
   
 
-// function handleEvent(event) {
-//   switch (event.type) {
-//     case 'message':
-//       const message = event.message;
-//       switch (message.type) {
-//         case 'text':
-//           return handleText(message, event.replyToken, event.source);
-//         case 'image':
-//           return handleImage(message, event.replyToken);
-//         case 'video':
-//           return handleVideo(message, event.replyToken);
-//         case 'audio':
-//           return handleAudio(message, event.replyToken);
-//         case 'location':
-//           return handleLocation(message, event.replyToken);
-//         case 'sticker':
-//           return handleSticker(message, event.replyToken);
-//         default:
-//           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
-//       }
+function handleEvent(event) {
+  switch (event.type) {
+    case 'message':
+      const message = event.message;
+      switch (message.type) {
+        case 'text':
+          return handleText(message, event.replyToken, event.source);
+        case 'image':
+          return handleImage(message, event.replyToken);
+        case 'video':
+          return handleVideo(message, event.replyToken);
+        case 'audio':
+          return handleAudio(message, event.replyToken);
+        case 'location':
+          return handleLocation(message, event.replyToken);
+        case 'sticker':
+          return handleSticker(message, event.replyToken);
+        default:
+          throw new Error(`Unknown message: ${JSON.stringify(message)}`);
+      }
 
-//     case 'follow':
-//       return replyText(event.replyToken, 'Got followed event');
+    case 'follow':
+      return replyText(event.replyToken, 'Got followed event');
 
-//     case 'unfollow':
-//       return console.log(`Unfollowed this bot: ${JSON.stringify(event)}`);
+    case 'unfollow':
+      return console.log(`Unfollowed this bot: ${JSON.stringify(event)}`);
 
-//     case 'join':
-//       return replyText(event.replyToken, `Joined ${event.source.type}`);
+    case 'join':
+      return replyText(event.replyToken, `Joined ${event.source.type}`);
 
-//     case 'leave':
-//       return console.log(`Left: ${JSON.stringify(event)}`);
+    case 'leave':
+      return console.log(`Left: ${JSON.stringify(event)}`);
 
-//     case 'postback':
-//       let data = event.postback.data;
-//       if (data === 'DATE' || data === 'TIME' || data === 'DATETIME') {
-//         data += `(${JSON.stringify(event.postback.params)})`;
-//       }
-//       return replyText(event.replyToken, `Got postback: ${data}`);
+    case 'postback':
+      let data = event.postback.data;
+      if (data === 'DATE' || data === 'TIME' || data === 'DATETIME') {
+        data += `(${JSON.stringify(event.postback.params)})`;
+      }
+      return replyText(event.replyToken, `Got postback: ${data}`);
 
-//     case 'beacon':
-//       return replyText(event.replyToken, `Got beacon: ${event.beacon.hwid}`);
+    case 'beacon':
+      return replyText(event.replyToken, `Got beacon: ${event.beacon.hwid}`);
 
-//     default:
-//       throw new Error(`Unknown event: ${JSON.stringify(event)}`);
-//   }
-// }
+    default:
+      throw new Error(`Unknown event: ${JSON.stringify(event)}`);
+  }
+}
 
-// function handleText(message, replyToken, source) {
-//   const buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
+function handleText(message, replyToken, source) {
+  const buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
 
-//   switch (message.text) {
-//     case 'profile':
-//       return replyText(replyToken, 'Bot can\'t use profile API without user ID');
-//     case 'buttons':
-//       return client.replyMessage(
-//         replyToken,
-//         {
-//           type: 'template',
-//           altText: 'Buttons alt text',
-//           template: {
-//             type: 'buttons',
-//             thumbnailImageUrl: buttonsImageURL,
-//             title: 'My button sample',
-//             text: 'Hello, my button',
-//             actions: [
-//               { label: 'Go to line.me', type: 'uri', uri: 'https://line.me' },
-//               { label: 'Say hello1', type: 'postback', data: 'hello こんにちは' },
-//               { label: '言 hello2', type: 'postback', data: 'hello こんにちは', text: 'hello こんにちは' },
-//               { label: 'Say message', type: 'message', text: 'Rice=米' },
-//             ],
-//           },
-//         }
-//       );
-//     case 'confirm':
-//       return client.replyMessage(
-//         replyToken,
-//         {
-//           type: 'template',
-//           altText: 'Confirm alt text',
-//           template: {
-//             type: 'confirm',
-//             text: 'Do it?',
-//             actions: [
-//               { label: 'Yes', type: 'message', text: 'Yes!' },
-//               { label: 'No', type: 'message', text: 'No!' },
-//             ],
-//           },
-//         }
-//       )
-//     case 'A':
-//       return client.replyMessage(
-//         replyToken,
-//         {
-//           type: 'template',
-//           altText: 'Carousel alt text',
-//           template: {
-//             type: 'carousel',
-//             columns: [
-//               {
-//                 thumbnailImageUrl: buttonsImageURL,
-//                 title: 'hoge',
-//                 text: 'fuga',
-//                 actions: [
-//                   { label: 'Go to line.me', type: 'uri', uri: 'https://line.me' },
-//                   { label: 'Say hello1', type: 'postback', data: 'hello こんにちは' },
-//                 ],
-//               },
-//               {
-//                 thumbnailImageUrl: buttonsImageURL,
-//                 title: 'hoge',
-//                 text: 'fuga',
-//                 actions: [
-//                   { label: '言 hello2', type: 'postback', data: 'hello こんにちは', text: 'hello こんにちは' },
-//                   { label: 'Say message', type: 'message', text: 'Rice=米' },
-//                 ],
-//               },
-//             ],
-//           },
-//         }
-//       );
-//     case 'image carousel':
-//       return client.replyMessage(
-//         replyToken,
-//         {
-//           type: 'template',
-//           altText: 'Image carousel alt text',
-//           template: {
-//             type: 'image_carousel',
-//             columns: [
-//               {
-//                 imageUrl: buttonsImageURL,
-//                 action: { label: 'Go to LINE', type: 'uri', uri: 'https://line.me' },
-//               },
-//               {
-//                 imageUrl: buttonsImageURL,
-//                 action: { label: 'Say hello1', type: 'postback', data: 'hello こんにちは' },
-//               },
-//               {
-//                 imageUrl: buttonsImageURL,
-//                 action: { label: 'Say message', type: 'message', text: 'Rice=米' },
-//               },
-//               {
-//                 imageUrl: buttonsImageURL,
-//                 action: {
-//                   label: 'datetime',
-//                   type: 'datetimepicker',
-//                   data: 'DATETIME',
-//                   mode: 'datetime',
-//                 },
-//               },
-//             ]
-//           },
-//         }
-//       );
-//     case 'datetime':
-//       return client.replyMessage(
-//         replyToken,
-//         {
-//           type: 'template',
-//           altText: 'Datetime pickers alt text',
-//           template: {
-//             type: 'buttons',
-//             text: 'Select date / time !',
-//             actions: [
-//               { type: 'datetimepicker', label: 'date', data: 'DATE', mode: 'date' },
-//               { type: 'datetimepicker', label: 'time', data: 'TIME', mode: 'time' },
-//               { type: 'datetimepicker', label: 'datetime', data: 'DATETIME', mode: 'datetime' },
-//             ],
-//           },
-//         }
-//       );
-//     case 'imagemap':
-//       return client.replyMessage(
-//         replyToken,
-//         {
-//           type: 'imagemap',
-//           baseUrl: `${baseURL}/static/rich`,
-//           altText: 'Imagemap alt text',
-//           baseSize: { width: 1040, height: 1040 },
-//           actions: [
-//             { area: { x: 0, y: 0, width: 520, height: 520 }, type: 'uri', linkUri: 'https://store.line.me/family/manga/en' },
-//             { area: { x: 520, y: 0, width: 520, height: 520 }, type: 'uri', linkUri: 'https://store.line.me/family/music/en' },
-//             { area: { x: 0, y: 520, width: 520, height: 520 }, type: 'uri', linkUri: 'https://store.line.me/family/play/en' },
-//             { area: { x: 520, y: 520, width: 520, height: 520 }, type: 'message', text: 'URANAI!' },
-//           ],
-//         }
-//       );
-//     case 'bye':
-//       switch (source.type) {
-//         case 'user':
-//           return replyText(replyToken, 'Bot can\'t leave from 1:1 chat');
-//         case 'group':
-//           return replyText(replyToken, 'Leaving group')
-//             .then(() => client.leaveGroup(source.groupId));
-//         case 'room':
-//           return replyText(replyToken, 'Leaving room')
-//             .then(() => client.leaveRoom(source.roomId));
-//       }
-//     default:
-//       console.log(`Echo message to ${replyToken}: ${message.text}`);
-//       return replyText(replyToken, message.text);
-//   }
+  switch (message.text) {
+    case 'profile':
+      return replyText(replyToken, 'Bot can\'t use profile API without user ID');
+       
+       case 'Push':
+         return config.push('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!', 'สวัสดี ' + String.fromCharCode(0xD83D, 0xDE01)]);
+        
+     
+    case 'buttons':
+      return client.replyMessage(
+        replyToken,
+        {
+          type: 'template',
+          altText: 'Buttons alt text',
+          template: {
+            type: 'buttons',
+            thumbnailImageUrl: buttonsImageURL,
+            title: 'My button sample',
+            text: 'Hello, my button',
+            actions: [
+              { label: 'Go to line.me', type: 'uri', uri: 'https://line.me' },
+              { label: 'Say hello1', type: 'postback', data: 'hello こんにちは' },
+              { label: '言 hello2', type: 'postback', data: 'hello こんにちは', text: 'hello こんにちは' },
+              { label: 'Say message', type: 'message', text: 'Rice=米' },
+            ],
+          },
+        }
+      );
+    case 'confirm':
+      return client.replyMessage(
+        replyToken,
+        {
+          type: 'template',
+          altText: 'Confirm alt text',
+          template: {
+            type: 'confirm',
+            text: 'Do it?',
+            actions: [
+              { label: 'Yes', type: 'message', text: 'Yes!' },
+              { label: 'No', type: 'message', text: 'No!' },
+            ],
+          },
+        }
+      )
+    case 'A':
+      return client.replyMessage(
+        replyToken,
+        {
+          type: 'template',
+          altText: 'Carousel alt text',
+          template: {
+            type: 'carousel',
+            columns: [
+              {
+                thumbnailImageUrl: buttonsImageURL,
+                title: 'hoge',
+                text: 'fuga',
+                actions: [
+                  { label: 'Go to line.me', type: 'uri', uri: 'https://line.me' },
+                  { label: 'Say hello1', type: 'postback', data: 'hello こんにちは' },
+                ],
+              },
+              {
+                thumbnailImageUrl: buttonsImageURL,
+                title: 'hoge',
+                text: 'fuga',
+                actions: [
+                  { label: '言 hello2', type: 'postback', data: 'hello こんにちは', text: 'hello こんにちは' },
+                  { label: 'Say message', type: 'message', text: 'Rice=米' },
+                ],
+              },
+            ],
+          },
+        }
+      );
+    case 'image carousel':
+      return client.replyMessage(
+        replyToken,
+        {
+          type: 'template',
+          altText: 'Image carousel alt text',
+          template: {
+            type: 'image_carousel',
+            columns: [
+              {
+                imageUrl: buttonsImageURL,
+                action: { label: 'Go to LINE', type: 'uri', uri: 'https://line.me' },
+              },
+              {
+                imageUrl: buttonsImageURL,
+                action: { label: 'Say hello1', type: 'postback', data: 'hello こんにちは' },
+              },
+              {
+                imageUrl: buttonsImageURL,
+                action: { label: 'Say message', type: 'message', text: 'Rice=米' },
+              },
+              {
+                imageUrl: buttonsImageURL,
+                action: {
+                  label: 'datetime',
+                  type: 'datetimepicker',
+                  data: 'DATETIME',
+                  mode: 'datetime',
+                },
+              },
+            ]
+          },
+        }
+      );
+    case 'datetime':
+      return client.replyMessage(
+        replyToken,
+        {
+          type: 'template',
+          altText: 'Datetime pickers alt text',
+          template: {
+            type: 'buttons',
+            text: 'Select date / time !',
+            actions: [
+              { type: 'datetimepicker', label: 'date', data: 'DATE', mode: 'date' },
+              { type: 'datetimepicker', label: 'time', data: 'TIME', mode: 'time' },
+              { type: 'datetimepicker', label: 'datetime', data: 'DATETIME', mode: 'datetime' },
+            ],
+          },
+        }
+      );
+    case 'imagemap':
+      return client.replyMessage(
+        replyToken,
+        {
+          type: 'imagemap',
+          baseUrl: `${baseURL}/static/rich`,
+          altText: 'Imagemap alt text',
+          baseSize: { width: 1040, height: 1040 },
+          actions: [
+            { area: { x: 0, y: 0, width: 520, height: 520 }, type: 'uri', linkUri: 'https://store.line.me/family/manga/en' },
+            { area: { x: 520, y: 0, width: 520, height: 520 }, type: 'uri', linkUri: 'https://store.line.me/family/music/en' },
+            { area: { x: 0, y: 520, width: 520, height: 520 }, type: 'uri', linkUri: 'https://store.line.me/family/play/en' },
+            { area: { x: 520, y: 520, width: 520, height: 520 }, type: 'message', text: 'URANAI!' },
+          ],
+        }
+      );
+    case 'bye':
+      switch (source.type) {
+        case 'user':
+          return replyText(replyToken, 'Bot can\'t leave from 1:1 chat');
+        case 'group':
+          return replyText(replyToken, 'Leaving group')
+            .then(() => client.leaveGroup(source.groupId));
+        case 'room':
+          return replyText(replyToken, 'Leaving room')
+            .then(() => client.leaveRoom(source.roomId));
+      }
+    default:
+      console.log(`Echo message to ${replyToken}: ${message.text}`);
+      return replyText(replyToken, message.text);
+  }
 
 
-//   function handleImage(message, replyToken) {
-//     const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.jpg`);
-//     const previewPath = path.join(__dirname, 'downloaded', `${message.id}-preview.jpg`);
+  function handleImage(message, replyToken) {
+    const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.jpg`);
+    const previewPath = path.join(__dirname, 'downloaded', `${message.id}-preview.jpg`);
 
-//     return downloadContent(message.id, downloadPath)
-//       .then((downloadPath) => {
-//         // ImageMagick is needed here to run 'convert'
-//         // Please consider about security and performance by yourself
-//         cp.execSync(`convert -resize 240x jpeg:${downloadPath} jpeg:${previewPath}`);
+    return downloadContent(message.id, downloadPath)
+      .then((downloadPath) => {
+        // ImageMagick is needed here to run 'convert'
+        // Please consider about security and performance by yourself
+        cp.execSync(`convert -resize 240x jpeg:${downloadPath} jpeg:${previewPath}`);
 
-//         return client.replyMessage(
-//           replyToken,
-//           {
-//             type: 'image',
-//             originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
-//             previewImageUrl: baseURL + '/downloaded/' + path.basename(previewPath),
-//           }
-//         );
-//       });
-//   }
+        return client.replyMessage(
+          replyToken,
+          {
+            type: 'image',
+            originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
+            previewImageUrl: baseURL + '/downloaded/' + path.basename(previewPath),
+          }
+        );
+      });
+  }
 
-//   function handleVideo(message, replyToken) {
-//     const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.mp4`);
-//     const previewPath = path.join(__dirname, 'downloaded', `${message.id}-preview.jpg`);
+  function handleVideo(message, replyToken) {
+    const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.mp4`);
+    const previewPath = path.join(__dirname, 'downloaded', `${message.id}-preview.jpg`);
 
-//     return downloadContent(message.id, downloadPath)
-//       .then((downloadPath) => {
-//         // FFmpeg and ImageMagick is needed here to run 'convert'
-//         // Please consider about security and performance by yourself
-//         cp.execSync(`convert mp4:${downloadPath}[0] jpeg:${previewPath}`);
+    return downloadContent(message.id, downloadPath)
+      .then((downloadPath) => {
+        // FFmpeg and ImageMagick is needed here to run 'convert'
+        // Please consider about security and performance by yourself
+        cp.execSync(`convert mp4:${downloadPath}[0] jpeg:${previewPath}`);
 
-//         return client.replyMessage(
-//           replyToken,
-//           {
-//             type: 'video',
-//             originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
-//             previewImageUrl: baseURL + '/downloaded/' + path.basename(previewPath),
-//           }
-//         );
-//       });
-//   }
+        return client.replyMessage(
+          replyToken,
+          {
+            type: 'video',
+            originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
+            previewImageUrl: baseURL + '/downloaded/' + path.basename(previewPath),
+          }
+        );
+      });
+  }
 
-//   function handleAudio(message, replyToken) {
-//     const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.m4a`);
+  function handleAudio(message, replyToken) {
+    const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.m4a`);
 
-//     return downloadContent(message.id, downloadPath)
-//       .then((downloadPath) => {
-//         var getDuration = require('get-audio-duration');
-//         var audioDuration;
-//         getDuration(downloadPath)
-//           .then((duration) => { audioDuration = duration; })
-//           .catch((error) => { audioDuration = 1; })
-//           .finally(() => {
-//             return client.replyMessage(
-//               replyToken,
-//               {
-//                 type: 'audio',
-//                 originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
-//                 duration: audioDuration * 1000,
-//               }
-//             );
-//           });
-//       });
-//   }
-// }
+    return downloadContent(message.id, downloadPath)
+      .then((downloadPath) => {
+        var getDuration = require('get-audio-duration');
+        var audioDuration;
+        getDuration(downloadPath)
+          .then((duration) => { audioDuration = duration; })
+          .catch((error) => { audioDuration = 1; })
+          .finally(() => {
+            return client.replyMessage(
+              replyToken,
+              {
+                type: 'audio',
+                originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
+                duration: audioDuration * 1000,
+              }
+            );
+          });
+      });
+  }
+}
 
 app.set('port', (process.env.PORT || 4000));
 app.listen(app.get('port'), function () {
