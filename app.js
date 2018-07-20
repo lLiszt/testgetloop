@@ -259,11 +259,8 @@ function handleText(message, replyToken, source) {
       );
       case 'Push':
       
-      return client.replyMessage(
-        replyToken,
-        {
-         config.push('Ub8cad621e155de8753e6ebddc9db3d68', ['ข้อความ']);
-        );
+      return client.push('Ub8cad621e155de8753e6ebddc9db3d68', ['ข้อความ']);
+        
           
     case 'imagemap':
       return client.replyMessage(
