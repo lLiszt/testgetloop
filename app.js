@@ -138,11 +138,7 @@ function handleText(message, replyToken, source) {
   switch (message.text) {
     case 'profile':
       return replyText(replyToken, 'Bot can\'t use profile API without user ID');
-       
-       case 'WWW':
-          config.push('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!']);
-        
-     
+
     case 'buttons':
       return client.replyMessage(
         replyToken,
@@ -261,6 +257,14 @@ function handleText(message, replyToken, source) {
           },
         }
       );
+      case 'Push':
+      
+      return client.replyMessage(
+        replyToken,
+        {
+         config.push('Ub8cad621e155de8753e6ebddc9db3d68', ['ข้อความ']);
+        );
+          
     case 'imagemap':
       return client.replyMessage(
         replyToken,
