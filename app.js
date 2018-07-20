@@ -78,7 +78,7 @@ const replyText = (token, texts) => {
   );
 };
 
-config.on('message', function handleEvent (event) {
+config.on( function handleEvent (event) {
   switch (event.type) {
 
     case 'Push':
