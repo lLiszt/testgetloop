@@ -12,8 +12,8 @@ require('dotenv').config();
 const app = express()
 
 const config = {
-  channelAccessToken: (process.env.CHANNEL_ACCESS_TOKEN || 'bKnpMUyNA/x2oNpkrFT4nCNgkraXXuJh9FuTKC1+L/qtLVPQEo6P1LNcOs6OvklfQBgB5MyDrsEYkrcMzyWAIP+exBuY8SXwcbIjqCgS4Agdkpvbf6jSP+telXIIAmwHxnDnvql1/ewpL0i3nX851gdB04t89/1O/w1cDnyilFU='),
-  channelSecret: (process.env.CHANNEL_SECRET || '243d8e4bbd8d5b4d2c48641b5b2224ed'),
+  channelAccessToken: (process.env.CHANNEL_ACCESS_TOKEN || 'ffoSQHv7DNQl8fCqtoCR7aZlf+wHzJcNd7K9crw+nIcZcTepvAZ3933vuwEwSnUxg41iHupe5eZHvPkYDGxLJEcwZUlA/+kS6bWbL0OtbsYC1b6/NfVnXX09z4uUhzHvza4UrjWsRx8nAsA1vsLHPAdB04t89/1O/w1cDnyilFU='),
+  channelSecret: (process.env.CHANNEL_SECRET || 'c9865f7627be2bdc7a37a411b99e0d16'),
 };
 
 // base URL for webhook server
