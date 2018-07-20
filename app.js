@@ -76,7 +76,6 @@ const replyText = (token, texts) => {
     texts.map((text) => ({ type: 'text', text }))
   );
 };
-var useridmind = 'Ub8cad621e155de8753e6ebddc9db3d68'
 
 function handleEvent(event) {
   switch (event.type) {
