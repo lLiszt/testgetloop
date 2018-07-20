@@ -74,7 +74,6 @@ const replyText = (token, texts) => {
     texts.map((text) => ({ type: 'text', text }))
   );
 };
-
 const push = (res, msg) => {
   return request({
     method: `POST`,
@@ -85,7 +84,7 @@ const push = (res, msg) => {
       messages: [
         {
           type: `text`,
-          text:.Yok
+          text: msg
         }
       ]
     },
@@ -98,7 +97,7 @@ const push = (res, msg) => {
       messages: [
         {
           type: `text`,
-          text: Hi TK.mind
+          text: msg
         }
       ]
     })
@@ -108,6 +107,9 @@ const push = (res, msg) => {
     return Promise.reject(error);
   });
 }
+}
+
+
 function handleEvent(event) {
   switch (event.type) {
     case 'message':
