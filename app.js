@@ -55,7 +55,7 @@ function replyText(reply_token, msg, user) {
 
   let body = JSON.stringify({
     replyToken: reply_token,
-    to: "Ub8cad621e155de8753e6ebddc9db3d68",
+    {to: "Ub8cad621e155de8753e6ebddc9db3d68",
     messages:[
         {
             "type":"text",
@@ -67,6 +67,7 @@ function replyText(reply_token, msg, user) {
         }
     ]
 }
+
   
 
   request.post({
@@ -77,6 +78,7 @@ function replyText(reply_token, msg, user) {
     console.log('status = ' + res.statusCode);
   });
 }
+
 
 const replyText = (token, texts) => {
   texts = Array.isArray(texts) ? texts : [texts];
