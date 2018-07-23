@@ -148,7 +148,8 @@ function handleText(message, replyToken, source) {
        case 'Push':
           return client.push('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!', 'สวัสดี ' + String.fromCharCode(0xD83D, 0xDE01)]);
     
-case 'buttons':
+
+    case 'buttons':
       return client.replyMessage(
         replyToken,
         {
@@ -168,6 +169,8 @@ case 'buttons':
           },
         }
       );
+
+
     case 'confirm':
       return client.replyMessage(
         replyToken,
@@ -183,7 +186,7 @@ case 'buttons':
             ],
           },
         }
-      )
+      );
     case 'A':
       return client.replyMessage(
         replyToken,
