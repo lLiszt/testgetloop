@@ -55,19 +55,10 @@ function replyText(reply_token, msg, user) {
 
   let body = JSON.stringify({
     replyToken: reply_token,
-    messages:   {
-    "to": "Ub8cad621e155de8753e6ebddc9db3d68",
-    "messages":[
-        {
-            "type":"text",
-            "text":"Hello, world1"
-        },
-        {
-            "type":"text",
-            "text":"Hello, world2"
-        }
-    ]
-}
+    messages: [{
+      type: 'text',
+      text: msg + " --> " + user
+    }]
   })
 
   request.post({
@@ -154,7 +145,9 @@ function handleText(message, replyToken, source) {
     case 'profile':
       return replyText(replyToken, 'Bot can\'t use profile API without user ID');
 
-       
+       case 'Push':
+          return client.push('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!', 'สวัสดี ' + String.fromCharCode(0xD83D, 0xDE01)]);
+    
 
     case 'buttons':
       return client.replyMessage(
