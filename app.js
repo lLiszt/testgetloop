@@ -146,8 +146,7 @@ function handleText(message, replyToken, source) {
       return replyText(replyToken, 'Bot can\'t use profile API without user ID');
 
 
-      case 'Push':
-          return client.push('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!', 'สวัสดี ' + String.fromCharCode(0xD83D, 0xDE01)]);
+    
 
       //   replyToken,
       //   {
@@ -310,6 +309,9 @@ function handleText(message, replyToken, source) {
         // ImageMagick is needed here to run 'convert'
         // Please consider about security and performance by yourself
         cp.execSync(`convert -resize 240x jpeg:${downloadPath} jpeg:${previewPath}`);
+
+          case 'Push':
+          return client.push('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!', 'สวัสดี ' + String.fromCharCode(0xD83D, 0xDE01)]);
 
         return client.replyMessage(
           replyToken,
