@@ -47,28 +47,37 @@ app.post('/webhook', line.middleware(config), (req, res) => {
 
 });
 
-// function replyText(reply_token, msg, user) {
-//   let headers = {
-//     'Content-Type': 'application/json',
-//     'Authorization': 'Bearer {ffoSQHv7DNQl8fCqtoCR7aZlf+wHzJcNd7K9crw+nIcZcTepvAZ3933vuwEwSnUxg41iHupe5eZHvPkYDGxLJEcwZUlA/+kS6bWbL0OtbsYC1b6/NfVnXX09z4uUhzHvza4UrjWsRx8nAsA1vsLHPAdB04t89/1O/w1cDnyilFU=}'
-//   }
+function replyText(reply_token, msg, user) {
+  let headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {ffoSQHv7DNQl8fCqtoCR7aZlf+wHzJcNd7K9crw+nIcZcTepvAZ3933vuwEwSnUxg41iHupe5eZHvPkYDGxLJEcwZUlA/+kS6bWbL0OtbsYC1b6/NfVnXX09z4uUhzHvza4UrjWsRx8nAsA1vsLHPAdB04t89/1O/w1cDnyilFU=}'
+  }
 
-//   let body = JSON.stringify({
-//     replyToken: reply_token,
-//     messages: [{
-//       type: 'text',
-//       text: msg + " --> " + user
-//     }]
-//   })
+  let body = JSON.stringify({
+    replyToken: reply_token,
+   {
+    "to": "Ub8cad621e155de8753e6ebddc9db3d68",
+    "messages":[
+        {
+            "type":"text",
+            "text":"Hello, world1"
+        },
+        {
+            "type":"text",
+            "text":"Hello, world2"
+        }
+    ]
+})
 
-//   request.post({
-//     url: 'https://api.line.me/v2/bot/message/reply',
-//     headers: headers,
-//     body: body
-//   }, (err, res, body) => {
-//     console.log('status = ' + res.statusCode);
-//   });
-// }
+  request.post({
+    url: 'https://api.line.me/v2/bot/message/reply',
+    url:'https://api.line.me/v2/bot/message/push',
+     headers: headers,
+    body: body
+  }, (err, res, body) => {
+    console.log('status = ' + res.statusCode);
+  });
+}
 
 const replyText = (token, texts) => {
   texts = Array.isArray(texts) ? texts : [texts];
@@ -145,8 +154,6 @@ function handleText(message, replyToken, source) {
     case 'profile':
       return replyText(replyToken, 'Bot can\'t use profile API without user ID');
 
-       case 'Push':
-          return client.replyText('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!', 'สวัสดี ' + String.fromCharCode(0xD83D, 0xDE01)]);
     
 
     case 'buttons':
