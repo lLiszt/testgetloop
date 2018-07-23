@@ -55,11 +55,19 @@ function replyText(reply_token, msg, user) {
 
   let body = JSON.stringify({
     replyToken: reply_token,
-    messages: [{
-      type: 'text',
-      text: msg + " --> " + user
-    }]
-  })
+    to: "Ub8cad621e155de8753e6ebddc9db3d68",
+    messages:[
+        {
+            "type":"text",
+            "text":"Hello, world1"
+        },
+        {
+            "type":"text",
+            "text":"Hello, world2"
+        }
+    ]
+}
+  }
 
   request.post({
     url: 'https://api.line.me/v2/bot/message/reply',
@@ -68,7 +76,7 @@ function replyText(reply_token, msg, user) {
   }, (err, res, body) => {
     console.log('status = ' + res.statusCode);
   });
-}
+
 
 const replyText = (token, texts) => {
   texts = Array.isArray(texts) ? texts : [texts];
