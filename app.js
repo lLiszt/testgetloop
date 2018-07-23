@@ -26,6 +26,7 @@ const client = new line.Client(config);
 app.use('/static', express.static('static'));
 app.use('/downloaded', express.static('downloaded'));
  let user = req.body.events[0].source.userId
+ let msg = req.body.events[0].message.text
 
 app.post('/webhook', line.middleware(config), (req, res) => {
   // req.body.events should be an array of events
