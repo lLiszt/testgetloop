@@ -54,9 +54,9 @@ function replyText(reply_token, msg, user) {
   }
 
   let body = JSON.stringify({
-    pushMessage: reply_token,
+    replyToken: reply_token,
    {
-    "to": "Ub8cad621e155de8753e6ebddc9db3d68",
+    // "to": "Ub8cad621e155de8753e6ebddc9db3d68",
     "messages":[
         {
             "type":"text",
@@ -70,8 +70,8 @@ function replyText(reply_token, msg, user) {
 })
 
   request.post({
-    // url: 'https://api.line.me/v2/bot/message/reply',
-    url:'https://api.line.me/v2/bot/message/push',
+    url: 'https://api.line.me/v2/bot/message/reply',
+    // url:'https://api.line.me/v2/bot/message/push',
      headers: headers,
     body: body
   }, (err, res, body) => {
