@@ -70,8 +70,8 @@ function replyText(reply_token, msg, user) {
 })
 
   request.post({
-   
-    url:'https://api.line.me/v2/bot/message/push',
+    url: 'https://api.line.me/v2/bot/message/reply',
+    
      headers: headers,
     body: body
   }, (err, res, body) => {
