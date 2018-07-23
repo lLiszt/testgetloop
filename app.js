@@ -67,16 +67,16 @@ function replyText(reply_token, msg, user) {
         }
     ]
 }
-  }
+  
 
   request.post({
-    url: 'https://api.line.me/v2/bot/message/reply',
+    url: 'https://api.line.me/v2/bot/message/push',
     headers: headers,
     body: body
   }, (err, res, body) => {
     console.log('status = ' + res.statusCode);
   });
-
+}
 
 const replyText = (token, texts) => {
   texts = Array.isArray(texts) ? texts : [texts];
