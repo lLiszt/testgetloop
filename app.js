@@ -11,7 +11,6 @@ require('dotenv').config();
 
 const app = express()
 
-
 const config = {
   channelAccessToken: (process.env.CHANNEL_ACCESS_TOKEN || 'ffoSQHv7DNQl8fCqtoCR7aZlf+wHzJcNd7K9crw+nIcZcTepvAZ3933vuwEwSnUxg41iHupe5eZHvPkYDGxLJEcwZUlA/+kS6bWbL0OtbsYC1b6/NfVnXX09z4uUhzHvza4UrjWsRx8nAsA1vsLHPAdB04t89/1O/w1cDnyilFU='),
   channelSecret: (process.env.CHANNEL_SECRET || 'c9865f7627be2bdc7a37a411b99e0d16'),
@@ -25,8 +24,6 @@ const client = new line.Client(config);
 
 app.use('/static', express.static('static'));
 app.use('/downloaded', express.static('downloaded'));
- let user = req.body.events[0].source.userId
-
 
 app.post('/webhook', line.middleware(config), (req, res) => {
   // req.body.events should be an array of events
@@ -46,29 +43,28 @@ app.post('/webhook', line.middleware(config), (req, res) => {
 
 });
 
-function reply(reply_token , user) {
-    let headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer {ffoSQHv7DNQl8fCqtoCR7aZlf+wHzJcNd7K9crw+nIcZcTepvAZ3933vuwEwSnUxg41iHupe5eZHvPkYDGxLJEcwZUlA/+kS6bWbL0OtbsYC1b6/NfVnXX09z4uUhzHvza4UrjWsRx8nAsA1vsLHPAdB04t89/1O/w1cDnyilFU=}'
-    }
+// function replyText(reply_token, msg, user) {
+//   let headers = {
+//     'Content-Type': 'application/json',
+//     'Authorization': 'Bearer {ffoSQHv7DNQl8fCqtoCR7aZlf+wHzJcNd7K9crw+nIcZcTepvAZ3933vuwEwSnUxg41iHupe5eZHvPkYDGxLJEcwZUlA/+kS6bWbL0OtbsYC1b6/NfVnXX09z4uUhzHvza4UrjWsRx8nAsA1vsLHPAdB04t89/1O/w1cDnyilFU=}'
+//   }
 
-    let body = JSON.stringify({
-        replyToken: reply_token,
-        to:'Ub8cad621e155de8753e6ebddc9db3d68',
-        messages: [{
-            type: 'text',
-            text: "hey!!!"
-        }]
-    })
+//   let body = JSON.stringify({
+//     replyToken: reply_token,
+//     messages: [{
+//       type: 'text',
+//       text: msg + " --> " + user
+//     }]
+//   })
 
-    request.post({
-        url: 'https://api.line.me/v2/bot/message/push',
-        headers: headers,
-        body: body
-    }, (err, res, body) => {
-        console.log('status = ' + res.statusCode);
-    });
-}
+//   request.post({
+//     url: 'https://api.line.me/v2/bot/message/reply',
+//     headers: headers,
+//     body: body
+//   }, (err, res, body) => {
+//     console.log('status = ' + res.statusCode);
+//   });
+// }
 
 const replyText = (token, texts) => {
   texts = Array.isArray(texts) ? texts : [texts];
