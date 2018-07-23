@@ -147,7 +147,7 @@ function handleText(message, replyToken, source) {
 
 
       case 'Push':
-          return client.push('U17448c796a01b715d293c34810985a4c', ['Hey!', 'สวัสดี ' + String.fromCharCode(0xD83D, 0xDE01)]);
+          return client.push('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!', 'สวัสดี ' + String.fromCharCode(0xD83D, 0xDE01)]);
 
       //   replyToken,
       //   {
