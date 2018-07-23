@@ -146,7 +146,7 @@ function handleText(message, replyToken, source) {
       return replyText(replyToken, 'Bot can\'t use profile API without user ID');
 
        case 'Push':
-          return client.push('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!', 'สวัสดี ' + String.fromCharCode(0xD83D, 0xDE01)]);
+          return client.replyText('Ub8cad621e155de8753e6ebddc9db3d68', ['Hey!', 'สวัสดี ' + String.fromCharCode(0xD83D, 0xDE01)]);
     
 
     case 'buttons':
