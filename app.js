@@ -80,7 +80,13 @@ const replyText = (token, texts) => {
 };
 
 
-
+// client.pushMessage('Ub8cad621e155de8753e6ebddc9db3d68', message)
+//   .then(() => {
+//     ...
+//   })
+//   .catch((err) => {
+//     // error handling
+//   });
 
   
 
@@ -139,26 +145,28 @@ function handleText(message, replyToken, source) {
     case 'profile':
       return replyText(replyToken, 'Bot can\'t use profile API without user ID');
 
-    case 'buttons':
-      return client.replyMessage(
-        replyToken,
-        {
-          type: 'template',
-          altText: 'Buttons alt text',
-          template: {
-            type: 'buttons',
-            thumbnailImageUrl: buttonsImageURL,
-            title: 'My button sample',
-            text: 'Hello, my button',
-            actions: [
-              { label: 'Go to line.me', type: 'uri', uri: 'https://line.me' },
-              { label: 'Say hello1', type: 'postback', data: 'hello こんにちは' },
-              { label: '言 hello2', type: 'postback', data: 'hello こんにちは', text: 'hello こんにちは' },
-              { label: 'Say message', type: 'message', text: 'Rice=米' },
-            ],
-          },
-        }
-      );
+
+      case 'Push':
+          return client.push('U17448c796a01b715d293c34810985a4c', ['Hey!', 'สวัสดี ' + String.fromCharCode(0xD83D, 0xDE01)]);
+
+      //   replyToken,
+      //   {
+      //     type: 'template',
+      //     altText: 'Buttons alt text',
+      //     template: {
+      //       type: 'buttons',
+      //       thumbnailImageUrl: buttonsImageURL,
+      //       title: 'My button sample',
+      //       text: 'Hello, my button',
+      //       actions: [
+      //         { label: 'Go to line.me', type: 'uri', uri: 'https://line.me' },
+      //         { label: 'Say hello1', type: 'postback', data: 'hello こんにちは' },
+      //         { label: '言 hello2', type: 'postback', data: 'hello こんにちは', text: 'hello こんにちは' },
+      //         { label: 'Say message', type: 'message', text: 'Rice=米' },
+      //       ],
+      //     },
+      //   }
+      // );
     case 'confirm':
       return client.replyMessage(
         replyToken,
@@ -257,9 +265,7 @@ function handleText(message, replyToken, source) {
           },
         }
       );
-      case 'Push':
-      
-      return client.push('Ub8cad621e155de8753e6ebddc9db3d68', ['ข้อความ']);
+     
         
           
     case 'imagemap':
