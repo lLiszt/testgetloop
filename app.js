@@ -130,31 +130,48 @@ function handleEvent(event) {
 
 function handleText(message, replyToken, source) {
   const buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
-  if (text = 'ขอไฟล์')     
-          
-            if (user = 'Ub8cad621e155de8753e6ebddc9db3d68') 
-            {
-             {
-                    client.pushMessage( {
+    switch (message.text) {
+      case 'ขอไฟล์':
+          if (user = 'Ub8cad621e155de8753e6ebddc9db3d68') 
+          {
+             client.pushMessage( {
+                                to: 'Ub8cad621e155de8753e6ebddc9db3d68',
+                                messages:[
+                                            {
+                                               "type":"text",
+                                               "text":"ไฟล์ๆๆๆๆๆ"
+                                            }
+                                          ]
+                                                   })
+          }
+                   
+
+     case 'ขอเบอร์':
+          if (user = 'Ub8cad621e155de8753e6ebddc9db3d68') 
+          {
+            client.pushMessage( {
                     to: 'Ub8cad621e155de8753e6ebddc9db3d68',
                     messages:[
                                 {
                                    "type":"text",
-                                   "text":"Hello, world1"
-                                },
-                                {
-                                   "type":"text",
-                                    "text":"Hello, world2"
+                                   "text":"080-00000000"
                                 }
+                              
                               ]
                                        })
+          }
+                   
+
                      .catch(err => console.log(err))
-                          }
-            }
+
+  }
+
+     
+
+  
              
     
       
-
 
 
   }
