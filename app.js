@@ -128,11 +128,11 @@ function handleEvent(event) {
   }
 }
 
-function handleText(message, replyToken, source) {
+function handleText(message, replyToken, source, user) {
   const buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
     switch (message.text) {
       case 'ขอไฟล์':
-          
+
                     client.pushMessage( {
                     to: 'Ub8cad621e155de8753e6ebddc9db3d68',
                     messages:[
