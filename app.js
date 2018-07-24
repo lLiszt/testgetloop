@@ -128,38 +128,22 @@ function handleEvent(event) {
   }
 }
 
-function handleText(message, replyToken, source, user) {
-  const buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
-           
-       if ('ขอไฟล์') 
-            {
-              return.client .pushMessage({
-    to: 'Ub8cad621e155de8753e6ebddc9db3d68',
-    messages:[
-              {
-                  "type":"text",
-                  "text":"ไฟล์ๆๆๆๆๆ"
-              }
-              ]
-            })
-            } 
-       
-             
 
-  
-             
-    
-      
-
-
-  }
 
 function handleText(message, replyToken, source) {
   const buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
 
   switch (message.text) {
+    let mind = 'Ub8cad621e155de8753e6ebddc9db3d68'
+    let yok ='U764500f94537bf8fea32888c9dfbc739'
+    case 'File':
+      let txt = '...'
+      if (source.userId == mind) {
+        return client.pushMessage(userTest, { type: 'text', text:  txt});
+      }
     case 'profile':
-      return replyText(replyToken, 'Bot can\'t use profile API without user ID');
+      let prof = await client.getProfile(source.userId);
+      return replyText(replyToken, JSON.stringify(prof))
     case 'buttons':
       return client.replyMessage(
         replyToken,
