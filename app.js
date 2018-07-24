@@ -7,7 +7,6 @@ const path = require('path');
 const cp = require('child_process');
 const line = require('@line/bot-sdk');
 
-
 require('dotenv').config();
 
 const app = express()
@@ -30,8 +29,6 @@ app.post('/webhook', line.middleware(config), (req, res) => {
   // req.body.events should be an array of events
   res.sendStatus(200)
 
-let user = req.body.events[0].source.userId
-
   if (!Array.isArray(req.body.events)) {
     return res.status(500).end();
   }
@@ -46,32 +43,8 @@ let user = req.body.events[0].source.userId
 
 });
 
-// function replyText(reply_token, msg, user) {
-//   let headers = {
-//     'Content-Type': 'application/json',
-//     'Authorization': 'Bearer {ffoSQHv7DNQl8fCqtoCR7aZlf+wHzJcNd7K9crw+nIcZcTepvAZ3933vuwEwSnUxg41iHupe5eZHvPkYDGxLJEcwZUlA/+kS6bWbL0OtbsYC1b6/NfVnXX09z4uUhzHvza4UrjWsRx8nAsA1vsLHPAdB04t89/1O/w1cDnyilFU=}'
-//   }
-
-//   let body = JSON.stringify({
-//     replyToken: reply_token,
-//     messages: [{
-//       type: 'text',
-//       text: msg + " --> " + user
-//     }]
-//   })
-
-//   request.post({
-//     url: 'https://api.line.me/v2/bot/message/reply',
-//     headers: headers,
-//     body: body
-//   }, (err, res, body) => {
-//     console.log('status = ' + res.statusCode);
-//   });
-// }
-
 const replyText = (token, texts) => {
   texts = Array.isArray(texts) ? texts : [texts];
-  
   return client.replyMessage(
     token,
     texts.map((text) => ({ type: 'text', text }))
@@ -126,18 +99,17 @@ function handleEvent(event) {
   }
 }
 
-
-
-function handleText(message, replyToken, source) {
+async function handleText(message, replyToken, source) {
   const buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
 
+  let mind = 'Ub8cad621e155de8753e6ebddc9db3d68'
+  let yok = 'U764500f94537bf8fea32888c9dfbc739'
+
   switch (message.text) {
-    let mind = 'Ub8cad621e155de8753e6ebddc9db3d68'
-    let yok ='U764500f94537bf8fea32888c9dfbc739'
     case 'File':
       let txt = '...'
       if (source.userId == mind) {
-        return client.pushMessage(userTest, { type: 'text', text:  txt});
+        return client.pushMessage(mind, { type: 'text', text:  txt});
       }
     case 'profile':
       let prof = await client.getProfile(source.userId);
@@ -178,7 +150,7 @@ function handleText(message, replyToken, source) {
           },
         }
       )
-    case 'A':
+    case 'carousel':
       return client.replyMessage(
         replyToken,
         {
@@ -291,73 +263,109 @@ function handleText(message, replyToken, source) {
       console.log(`Echo message to ${replyToken}: ${message.text}`);
       return replyText(replyToken, message.text);
   }
-
-
-  function handleImage(message, replyToken) {
-    const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.jpg`);
-    const previewPath = path.join(__dirname, 'downloaded', `${message.id}-preview.jpg`);
-
-    return downloadContent(message.id, downloadPath)
-      .then((downloadPath) => {
-        // ImageMagick is needed here to run 'convert'
-        // Please consider about security and performance by yourself
-        cp.execSync(`convert -resize 240x jpeg:${downloadPath} jpeg:${previewPath}`);
-
-        return client.replyMessage(
-          replyToken,
-          {
-            type: 'image',
-            originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
-            previewImageUrl: baseURL + '/downloaded/' + path.basename(previewPath),
-          }
-        );
-      });
-  }
-
-  function handleVideo(message, replyToken) {
-    const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.mp4`);
-    const previewPath = path.join(__dirname, 'downloaded', `${message.id}-preview.jpg`);
-
-    return downloadContent(message.id, downloadPath)
-      .then((downloadPath) => {
-        // FFmpeg and ImageMagick is needed here to run 'convert'
-        // Please consider about security and performance by yourself
-        cp.execSync(`convert mp4:${downloadPath}[0] jpeg:${previewPath}`);
-
-        return client.replyMessage(
-          replyToken,
-          {
-            type: 'video',
-            originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
-            previewImageUrl: baseURL + '/downloaded/' + path.basename(previewPath),
-          }
-        );
-      });
-  }
-
-  function handleAudio(message, replyToken) {
-    const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.m4a`);
-
-    return downloadContent(message.id, downloadPath)
-      .then((downloadPath) => {
-        var getDuration = require('get-audio-duration');
-        var audioDuration;
-        getDuration(downloadPath)
-          .then((duration) => { audioDuration = duration; })
-          .catch((error) => { audioDuration = 1; })
-          .finally(() => {
-            return client.replyMessage(
-              replyToken,
-              {
-                type: 'audio',
-                originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
-                duration: audioDuration * 1000,
-              }
-            );
-          });
-      });
-  }
 }
+
+
+function handleImage(message, replyToken) {
+  const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.jpg`);
+  const previewPath = path.join(__dirname, 'downloaded', `${message.id}-preview.jpg`);
+
+  return downloadContent(message.id, downloadPath)
+    .then((downloadPath) => {
+      // ImageMagick is needed here to run 'convert'
+      // Please consider about security and performance by yourself
+      cp.execSync(`convert -resize 240x jpeg:${downloadPath} jpeg:${previewPath}`);
+
+      return client.replyMessage(
+        replyToken,
+        {
+          type: 'image',
+          originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
+          previewImageUrl: baseURL + '/downloaded/' + path.basename(previewPath),
+        }
+      );
+    });
+}
+
+function handleVideo(message, replyToken) {
+  const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.mp4`);
+  const previewPath = path.join(__dirname, 'downloaded', `${message.id}-preview.jpg`);
+
+  return downloadContent(message.id, downloadPath)
+    .then((downloadPath) => {
+      // FFmpeg and ImageMagick is needed here to run 'convert'
+      // Please consider about security and performance by yourself
+      cp.execSync(`convert mp4:${downloadPath}[0] jpeg:${previewPath}`);
+
+      return client.replyMessage(
+        replyToken,
+        {
+          type: 'video',
+          originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
+          previewImageUrl: baseURL + '/downloaded/' + path.basename(previewPath),
+        }
+      );
+    });
+}
+
+function handleAudio(message, replyToken) {
+  const downloadPath = path.join(__dirname, 'downloaded', `${message.id}.m4a`);
+
+  return downloadContent(message.id, downloadPath)
+    .then((downloadPath) => {
+      var getDuration = require('get-audio-duration');
+      var audioDuration;
+      getDuration(downloadPath)
+        .then((duration) => { audioDuration = duration; })
+        .catch((error) => { audioDuration = 1; })
+        .finally(() => {
+          return client.replyMessage(
+            replyToken,
+            {
+              type: 'audio',
+              originalContentUrl: baseURL + '/downloaded/' + path.basename(downloadPath),
+              duration: audioDuration * 1000,
+            }
+          );
+        });
+    });
+}
+
+function downloadContent(messageId, downloadPath) {
+  return client.getMessageContent(messageId)
+    .then((stream) => new Promise((resolve, reject) => {
+      const writable = fs.createWriteStream(downloadPath);
+      stream.pipe(writable);
+      stream.on('end', () => resolve(downloadPath));
+      stream.on('error', reject);
+    }));
+}
+
+function handleLocation(message, replyToken) {
+  return client.replyMessage(
+    replyToken,
+    {
+      type: 'location',
+      title: message.title,
+      address: message.address,
+      latitude: message.latitude,
+      longitude: message.longitude,
+    }
+  );
+}
+
+function handleSticker(message, replyToken) {
+  return client.replyMessage(
+    replyToken,
+    {
+      type: 'sticker',
+      packageId: message.packageId,
+      stickerId: message.stickerId,
+    }
+  );
+}
+
+
 
 app.set('port', (process.env.PORT || 4000));
 app.listen(app.get('port'), function () {
