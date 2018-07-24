@@ -130,7 +130,7 @@ function handleEvent(event) {
 
 function handleText(message, replyToken, source) {
   const buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
-  if (ขอไฟล์)     
+  if (text = 'ขอไฟล์')     
           
             if (user = 'Ub8cad621e155de8753e6ebddc9db3d68') 
             {
