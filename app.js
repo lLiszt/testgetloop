@@ -7,6 +7,7 @@ const path = require('path');
 const cp = require('child_process');
 const line = require('@line/bot-sdk');
 
+
 require('dotenv').config();
 
 const app = express()
@@ -28,6 +29,8 @@ app.use('/downloaded', express.static('downloaded'));
 app.post('/webhook', line.middleware(config), (req, res) => {
   // req.body.events should be an array of events
   res.sendStatus(200)
+
+let user = req.body.events[0].source.userId
 
   if (!Array.isArray(req.body.events)) {
     return res.status(500).end();
@@ -65,6 +68,8 @@ app.post('/webhook', line.middleware(config), (req, res) => {
 //     console.log('status = ' + res.statusCode);
 //   });
 // }
+var mind = 'Ub8cad621e155de8753e6ebddc9db3d68';
+var yok = 'U764500f94537bf8fea32888c9dfbc739';
 
 const replyText = (token, texts) => {
   texts = Array.isArray(texts) ? texts : [texts];
@@ -122,6 +127,37 @@ function handleEvent(event) {
       throw new Error(`Unknown event: ${JSON.stringify(event)}`);
   }
 }
+
+function handleText(message, replyToken, source) {
+  const buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
+  if (ขอไฟล์)     
+          
+            if (user = 'Ub8cad621e155de8753e6ebddc9db3d68') 
+            {
+             {
+                    client.pushMessage( {
+                    to: 'Ub8cad621e155de8753e6ebddc9db3d68',
+                    messages:[
+                                {
+                                   "type":"text",
+                                   "text":"Hello, world1"
+                                },
+                                {
+                                   "type":"text",
+                                    "text":"Hello, world2"
+                                }
+                              ]
+                                       })
+                     .catch(err => console.log(err))
+                          }
+            }
+             
+    
+      
+
+
+
+  }
 
 function handleText(message, replyToken, source) {
   const buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
