@@ -68,8 +68,6 @@ let user = req.body.events[0].source.userId
 //     console.log('status = ' + res.statusCode);
 //   });
 // }
-var mind = 'Ub8cad621e155de8753e6ebddc9db3d68';
-var yok = 'U764500f94537bf8fea32888c9dfbc739';
 
 const replyText = (token, texts) => {
   texts = Array.isArray(texts) ? texts : [texts];
