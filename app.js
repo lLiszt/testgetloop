@@ -106,7 +106,7 @@ async function handleText(message, replyToken, source) {
   let yok = 'U764500f94537bf8fea32888c9dfbc739'
 
   switch (message.text) {
-    case 'File':
+    case 'A':
       let txt = '...'
       if (source.userId == mind) {
         return client.pushMessage(mind, { type: 'text', text:  txt});
