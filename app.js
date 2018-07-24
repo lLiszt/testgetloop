@@ -134,7 +134,8 @@ function handleText(message, replyToken, source) {
       case 'ขอไฟล์':
           if (user = 'Ub8cad621e155de8753e6ebddc9db3d68') 
           {
-             client.pushMessage( {
+
+            return  client.pushMessage( {
                                 to: 'Ub8cad621e155de8753e6ebddc9db3d68',
                                 messages:[
                                             {
@@ -144,12 +145,28 @@ function handleText(message, replyToken, source) {
                                           ]
                                                    })
           }
+          else 
+          {
+              return client.replyMessage(
+                  replyToken,
+                  {
+                    type: 'text',
+                    messages: messages:
+                    [
+                             {
+                                   "type":"text",
+                                   "text":"คุณไม่มีสิทธ์ใช้คำสั่ง"
+                             }
+                     ]
+                  }
+                )
+            }
                    
 
      case 'ขอเบอร์':
           if (user = 'Ub8cad621e155de8753e6ebddc9db3d68') 
           {
-            client.pushMessage( {
+           return client.pushMessage( {
                     to: 'Ub8cad621e155de8753e6ebddc9db3d68',
                     messages:[
                                 {
@@ -160,6 +177,22 @@ function handleText(message, replyToken, source) {
                               ]
                                        })
           }
+           else 
+          {
+              return client.replyMessage(
+                  replyToken,
+                  {
+                    type: 'text',
+                    messages: messages:
+                    [
+                             {
+                                   "type":"text",
+                                   "text":"คุณไม่มีสิทธ์ใช้คำสั่ง"
+                             }
+                     ]
+                  }
+                )
+            }
                    
 
                      .catch(err => console.log(err))
