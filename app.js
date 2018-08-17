@@ -9,7 +9,7 @@ const line = require('@line/bot-sdk');
 
 require('dotenv').config();
 
-url.load([])
+
 
 const app = express()
 
@@ -46,11 +46,11 @@ app.post('/webhook', line.middleware(config), (req, res) => {
     });
 
 });
-//url
-// var url = require('url');
-// var adr = 'http://20.188.101.72:8080/api/data/po_list/2003-11-04';
-// //Parse the address:
-// var q = url.parse(adr, true);
+url
+var url = require('url');
+var adr = 'http://20.188.101.72:8080/api/data/po_list/2003-11-04';
+//Parse the address:
+var q = url.parse(adr, true);
 
 const replyText = (token, texts) => {
   texts = Array.isArray(texts) ? texts : [texts];
