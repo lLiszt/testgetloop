@@ -9,6 +9,8 @@ const line = require('@line/bot-sdk');
 
 require('dotenv').config();
 
+url.load([])
+
 const app = express()
 
 const config = {
@@ -18,6 +20,8 @@ const config = {
 
 // base URL for webhook server
 const baseURL = 'https://git.heroku.com/botbotbot213.git';
+
+
 
 // create LINE SDK client
 const client = new line.Client(config);
@@ -42,6 +46,11 @@ app.post('/webhook', line.middleware(config), (req, res) => {
     });
 
 });
+//url
+var url = require('url');
+var adr = 'http://20.188.101.72:8080/api/data/po_list/2003-11-04';
+//Parse the address:
+var q = url.parse(adr, true);
 
 const replyText = (token, texts) => {
   texts = Array.isArray(texts) ? texts : [texts];
@@ -112,9 +121,9 @@ async function handleText(message, replyToken, source) {
       if (source.userId == mind) {
         return client.pushMessage(mind, { type: 'text', text:  link});
       }
-       if (source.userId == yok) {
-        return client.pushMessage(yok, { type: 'text', text:  link2});
-      }
+      //  if (source.userId == yok) {
+      //   return client.pushMessage(yok, { type: 'text', text:  link2});
+      // }
     case 'profile':
       let prof = await client.getProfile(source.userId);
       return replyText(replyToken, JSON.stringify(prof))
