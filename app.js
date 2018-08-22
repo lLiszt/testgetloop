@@ -178,6 +178,7 @@ async function handleText(message, replyToken, source) {
                 ]
 
             })
+                //loop
           loop=>a
                 {
           return client.replyMessage(
@@ -189,19 +190,19 @@ async function handleText(message, replyToken, source) {
                 type: 'carousel',
                 columns: [
 
-                //loop
                 
 
                 //card
                  "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: a.PONumber },{ label: 'CreateDate', type: 'text', data: a.CreateDate },{ label: 'Name', type: 'text', data: a.Name },{ label: 'Vendor', type: 'text', data: a.Vendor }, ], }"
                 //end card 
                            
-                
-                 //end loop   
+               
                 ],
               },
             }
-          );}
+          );
+        };  
+                 //end loop  
      // end test 
 
 
