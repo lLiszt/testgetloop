@@ -1,15 +1,15 @@
 // Echo reply
 "use strict";
 
-const express = require('express')
-const request = require('request')
+const express = require('express');
+const request = require('request');
 const path = require('path');
 const cp = require('child_process');
 const line = require('@line/bot-sdk');
-const getJSON = require('get-json')
+const getJSON = require('get-json');
 
 
-var getJSON = require('get-json')
+
 require('dotenv').config();
 
 
