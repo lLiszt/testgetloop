@@ -168,17 +168,18 @@ async function handleText(message, replyToken, source) {
         }
       )
       //test
-      getJSON('http://20.188.101.72:8080/api/data/po_list/2003-11-04', function(error, response){
-            console.log(response);
-            [
-             "PONumber","CreateDate","Name","Vendor" 
-            ]
-
-        })
+    
            
          case 'J':
-           
+                 getJSON('http://20.188.101.72:8080/api/data/po_list/2003-11-04', function(error, response){
+                console.log(response);
+                [
+                 "PONumber","CreateDate","Name","Vendor" 
+                ]
 
+            })
+          loop=>a
+                {
           return client.replyMessage(
             replyToken,
             {
@@ -189,19 +190,18 @@ async function handleText(message, replyToken, source) {
                 columns: [
 
                 //loop
-                loop=>a
-                {
+                
 
                 //card
                  "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: a.PONumber },{ label: 'CreateDate', type: 'text', data: a.CreateDate },{ label: 'Name', type: 'text', data: a.Name },{ label: 'Vendor', type: 'text', data: a.Vendor }, ], }"
                 //end card 
                            
-                }
+                
                  //end loop   
                 ],
               },
             }
-          );
+          );}
      // end test 
 
 
