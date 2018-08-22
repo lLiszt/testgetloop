@@ -170,12 +170,8 @@ async function handleText(message, replyToken, source) {
       //test
      
             case 'J':
-            getJSON('http://20.188.101.72:8080/api/data/po_list/2003-11-04', function(error, response){
-            console.log(response);
-        })
-
-
-          return client.replyMessage(
+            getJSON('http://20.188.101.72:8080/api/data/po_list/2003-11-04', function(error, response){ 
+              return client.replyMessage(
             replyToken,
             {
               type: 'template',
@@ -198,6 +194,11 @@ async function handleText(message, replyToken, source) {
               },
             }
           );
+            console.log(response);
+        });
+
+
+         
      // end test 
 
 
