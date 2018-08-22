@@ -119,7 +119,7 @@ async function handleText(message, replyToken, source) {
       let link = 'https://www.facebook.com/mind.thanamphorn'
       let link2 = 'https://www.facebook.com/Kotchakornss'
       if (source.userId == mind) {
-        return client.pushMessage(mind, { type: 'text', text:  link});
+        return client.pushMessage(mind, { type: 'text', url:  link});
       }
       //  if (source.userId == yok) {
       //   return client.pushMessage(yok, { type: 'text', text:  link2});
@@ -165,7 +165,7 @@ async function handleText(message, replyToken, source) {
         }
       )
      
-    case 'c':
+    case 'Carousel':
       return client.replyMessage(
         replyToken,
         {
