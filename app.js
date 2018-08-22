@@ -7,10 +7,29 @@ const path = require('path');
 const cp = require('child_process');
 const line = require('@line/bot-sdk');
 const AIMLParser = require('aimlparser')
+ var eyes = require('eyes');
+ var https = require('https');
+ var fs = require('fs');
+ var xml2js = require('xml2js');
+ var parser = new xml2js.Parser();
+
+ parser.on('error', function(err) { console.log('Parser error', err); });
 
 require('dotenv').config();
 
-aimlParser.load(['http://20.188.101.72:8080/api/data/po_list/2003-11-04'])
+var data = '';
+ https.get('http://20.188.101.72:8080/api/data/po_list/2003-11-04', function(res) {
+     if (res.statusCode >= 200 && res.statusCode < 400) {
+       res.on('data', function(data_) { data += data_.toString(); });
+       res.on('end', function() {
+         console.log('data', data);
+         parser.parseString(data, function(err, result) {
+           console.log('FINISHED', err, result);
+         });
+       });
+     }
+   });
+ 
 
 const app = express()
 
