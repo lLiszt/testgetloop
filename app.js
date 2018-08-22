@@ -193,7 +193,7 @@ async function handleText(message, replyToken, source) {
                 
 
                 //card
-                 "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: a.PONumber },{ label: 'CreateDate', type: 'text', data: a.CreateDate },{ label: 'Name', type: 'text', data: a.Name },{ label: 'Vendor', type: 'text', data: a.Vendor }, ], }"
+                 {  "thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: a.PONumber },{ label: 'CreateDate', type: 'text', data: a.CreateDate },{ label: 'Name', type: 'text', data: a.Name },{ label: 'Vendor', type: 'text', data: a.Vendor }", ], }
                 //end card 
                            
                
