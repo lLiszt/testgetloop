@@ -118,15 +118,15 @@ async function handleText(message, replyToken, source) {
   let yok = 'U764500f94537bf8fea32888c9dfbc739'
 
   switch (message.text) {
-    case 'A':
-      let link = 'https://www.facebook.com/mind.thanamphorn'
-      let link2 = 'https://www.facebook.com/Kotchakornss'
-      if (source.userId == mind) {
-        return client.pushMessage(mind, { type: 'text', url:  link});
-      }
-      //  if (source.userId == yok) {
-      //   return client.pushMessage(yok, { type: 'text', text:  link2});
-      // }
+    // case 'A':
+    //   let link = 'https://www.facebook.com/mind.thanamphorn'
+    //   let link2 = 'https://www.facebook.com/Kotchakornss'
+    //   if (source.userId == mind) {
+    //     return client.pushMessage(mind, { type: 'text', url:  link});
+    //   }
+    //   //  if (source.userId == yok) {
+    //   //   return client.pushMessage(yok, { type: 'text', text:  link2});
+    //   // }
       
     case 'profile':
       let prof = await client.getProfile(source.userId);
