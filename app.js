@@ -179,10 +179,10 @@ async function handleText(message, replyToken, source) {
 
             })
                 //loop
-          console.log('For loop');
-            for(var i = 0; i &lt; 5; i++) {
-             console.log(i);
-  return client.replyMessage(
+          
+          loop=>a
+                {
+          return client.replyMessage(
             replyToken,
             {
               type: 'template',
@@ -202,11 +202,7 @@ async function handleText(message, replyToken, source) {
               },
             }
           );
-         
-
-            };
-          
-        
+        };  
                  //end loop  
      // end test 
 
