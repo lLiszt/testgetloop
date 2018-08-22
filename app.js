@@ -168,16 +168,16 @@ async function handleText(message, replyToken, source) {
         }
       )
       //test
-     
-            case 'J':
-            getJSON('http://20.188.101.72:8080/api/data/po_list/2003-11-04', function(error, response){
+      getJSON('http://20.188.101.72:8080/api/data/po_list/2003-11-04', function(error, response){
             console.log(response);
             [
              "PONumber","CreateDate","Name","Vendor" 
             ]
 
         })
-
+           
+         case 'J':
+           
 
           return client.replyMessage(
             replyToken,
