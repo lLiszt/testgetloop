@@ -168,10 +168,10 @@ async function handleText(message, replyToken, source) {
         }
       )
       //test
-    
-           
+           var url = 'http://20.188.101.72:8080/api/data/po_list/2003-11-04' ;
+           var a = JSON.parse(url);
          case 'J':
-                 getJSON('http://20.188.101.72:8080/api/data/po_list/2003-11-04', function(error, response){
+                 getJSON(url, function(error, response){
                 console.log(response);
                 [
                  "PONumber","CreateDate","Name","Vendor" 
