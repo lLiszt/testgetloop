@@ -179,9 +179,10 @@ async function handleText(message, replyToken, source) {
 
             })
                 //loop
-          loop=>a
-                {
-          return client.replyMessage(
+          console.log('For loop');
+            for(var i = 0; i &lt; 5; i++) {
+             console.log(i);
+  return client.replyMessage(
             replyToken,
             {
               type: 'template',
@@ -193,7 +194,7 @@ async function handleText(message, replyToken, source) {
                 
 
                 //card
-                 {  "thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: a.PONumber },{ label: 'CreateDate', type: 'text', data: a.CreateDate },{ label: 'Name', type: 'text', data: a.Name },{ label: 'Vendor', type: 'text', data: a.Vendor }", ], }
+                 "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: a.PONumber },{ label: 'CreateDate', type: 'text', data: a.CreateDate },{ label: 'Name', type: 'text', data: a.Name },{ label: 'Vendor', type: 'text', data: a.Vendor }, ], }"
                 //end card 
                            
                
@@ -201,7 +202,11 @@ async function handleText(message, replyToken, source) {
               },
             }
           );
-        };  
+         
+
+            };
+          
+        
                  //end loop  
      // end test 
 
