@@ -6,30 +6,14 @@ const request = require('request')
 const path = require('path');
 const cp = require('child_process');
 const line = require('@line/bot-sdk');
-const AIMLParser = require('aimlparser')
- var eyes = require('eyes');
- var https = require('https');
- var fs = require('fs');
- var xml2js = require('xml2js');
- var parser = new xml2js.Parser();
+const getJSON = require('get-json')
 
- parser.on('error', function(err) { console.log('Parser error', err); });
 
+var getJSON = require('get-json')
 require('dotenv').config();
 
-var data = '';
- https.get('http://20.188.101.72:8080/api/data/po_list/2003-11-04', function(res) {
-     if (res.statusCode >= 200 && res.statusCode < 400) {
-       res.on('data', function(data_) { data += data_.toString(); });
-       res.on('end', function() {
-         console.log('data', data);
-         parser.parseString(data, function(err, result) {
-           console.log('FINISHED', err, result);
-         });
-       });
-     }
-   });
- 
+
+
 
 const app = express()
 
@@ -183,45 +167,40 @@ async function handleText(message, replyToken, source) {
           },
         }
       )
+      //test
      
-    case 'Carousel':
-      return client.replyMessage(
-        replyToken,
-        {
-          type: 'template',
-          altText: 'Carousel alt text',
-          template: {
-            type: 'carousel',
-            columns: [
-            //test
-              {
-                thumbnailImageUrl: buttonsImageURL,
-                title: 'hoge',
-                text: 'fuga',
-                actions: [
-                  { label: 'PONumber', type: 'text', data: 'PONumber' },
-                  { label: 'CreateDate', type: 'text', data: 'CreateDate' },
-                  { label: 'Name', type: 'text', data: 'Name' },
-                  { label: 'Vendor', type: 'text', data: 'Vendor' },
+            case 'J':
+            getJSON('http://20.188.101.72:8080/api/data/po_list/2003-11-04', function(error, response){
+            console.log(response);
+        })
+
+
+          return client.replyMessage(
+            replyToken,
+            {
+              type: 'template',
+              altText: 'Carousel alt text',
+              template: {
+                type: 'carousel',
+                columns: [
+
+                //loop
+                loop=>a
+                {
+
+                //card
+                 "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: a.PONumber },{ label: 'CreateDate', type: 'text', data: a.CreateDate },{ label: 'Name', type: 'text', data: a.Name },{ label: 'Vendor', type: 'text', data: a.Vendor }, ], }"
+                //end card 
+                           
+                }
+                 //end loop   
                 ],
-              }
-            // end test
-              ,
-              {
-                thumbnailImageUrl: buttonsImageURL,
-                title: 'hoge',
-                text: 'fuga',
-                actions: [
-                  { label: '言 hello2', type: 'postback', data: 'hello こんにちは', text: 'hello こんにちは' },
-                  { label: 'Say message', type: 'message', text: 'Rice=米' },
-                ],
-              }
-               
-             
-            ],
-          },
-        }
-      );
+              },
+            }
+          );
+     // end test 
+
+
     case 'image carousel':
       return client.replyMessage(
         replyToken,
