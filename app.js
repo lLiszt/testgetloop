@@ -9,7 +9,7 @@ const line = require('@line/bot-sdk');
 const getJSON = require('get-json');
 const loadJsonFile = require('load-json-file');
 const asyncLoop = require('node-async-loop');
-var asyncLoop = require('node-async-loop');
+
 
 
  
