@@ -8,6 +8,7 @@ const cp = require('child_process');
 const line = require('@line/bot-sdk');
 const getJSON = require('get-json');
 const loadJsonFile = require('load-json-file');
+const asyncLoop = require('node-async-loop');
  
 loadJsonFile('data.json').then(json => {
     console.log(json);
@@ -197,7 +198,8 @@ async function handleText(message, replyToken, source) {
                console.log(data);
             });
 
-              console.log('This is after the read call');  
+              console.log('This is after the read call'); 
+
                 //loop
            someArray.forEach(function(item, i) 
             {
