@@ -129,7 +129,6 @@ async function handleText(message, replyToken, source) {
   let rawdata = fs.readFileSync('data.json');
   let Ddata = JSON.parse(rawdata);
   console.log(Ddata);
-  var obj = require("data.json");
 
   switch (message.text) {
     // case 'A':
@@ -196,26 +195,22 @@ async function handleText(message, replyToken, source) {
             //     ]
 
             // })
-            fs.readFile(obj, (err, data) => {  
+            fs.readFile(Ddata, (err, data) => {  
               if (err) throw err;
-               console.log(obj);
-            }
-
-
-            );
+               console.log(Ddata);
+            });
 
               console.log('This is after the read call'); 
 
                 //loop
-           obj.forEach(function(item, i) 
+           someArray.forEach(function(item, i) 
             {
              asynchronousProcess(function(item)
             {
               console.log(i);
             });    
                // loop => a;{}
-            });  
-
+            });   
           return client.replyMessage(
             replyToken,
             {
@@ -225,7 +220,7 @@ async function handleText(message, replyToken, source) {
                 type: 'carousel',
                 columns: [
 
-                 "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: obj.PONumber },{ label: 'CreateDate', type: 'text', data: obj.CreateDate },{ label: 'Name', type: 'text', data: obj.Name },{ label: 'Vendor', type: 'text', data: obj.Vendor }, ], }"
+                 "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: Ddata.PONumber },{ label: 'CreateDate', type: 'text', data: Ddata.CreateDate },{ label: 'Name', type: 'text', data: Ddata.Name },{ label: 'Vendor', type: 'text', data: Ddata.Vendor }, ], }"
 
                 ],
               },
