@@ -196,9 +196,9 @@ async function handleText(message, replyToken, source) {
             //     ]
 
             // })
-            fs.readFile(Ddata, (err, data) => {  
+            fs.readFile(obj, (err, data) => {  
               if (err) throw err;
-               console.log(Ddata);
+               console.log(obj);
             }
 
 
@@ -207,7 +207,7 @@ async function handleText(message, replyToken, source) {
               console.log('This is after the read call'); 
 
                 //loop
-           Ddata.forEach(function(item, i) 
+           obj.forEach(function(item, i) 
             {
              asynchronousProcess(function(item)
             {
@@ -225,7 +225,7 @@ async function handleText(message, replyToken, source) {
                 type: 'carousel',
                 columns: [
 
-                 "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: Ddata.PONumber },{ label: 'CreateDate', type: 'text', data: Ddata.CreateDate },{ label: 'Name', type: 'text', data: Ddata.Name },{ label: 'Vendor', type: 'text', data: Ddata.Vendor }, ], }"
+                 "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: obj.PONumber },{ label: 'CreateDate', type: 'text', data: obj.CreateDate },{ label: 'Name', type: 'text', data: obj.Name },{ label: 'Vendor', type: 'text', data: obj.Vendor }, ], }"
 
                 ],
               },
