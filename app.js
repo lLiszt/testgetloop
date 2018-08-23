@@ -198,17 +198,20 @@ async function handleText(message, replyToken, source) {
             fs.readFile(Ddata, (err, data) => {  
               if (err) throw err;
                console.log(Ddata);
-     
+            });
+
+              console.log('This is after the read call'); 
 
                 //loop
            someArray.forEach(function(item, i) 
             {
-             asynchronousProcess(function()
+             asynchronousProcess(function(item)
             {
               console.log(i);
             });    
                // loop => a;{}
-                
+            });  
+             
           return client.replyMessage(
             replyToken,
             {
@@ -225,10 +228,8 @@ async function handleText(message, replyToken, source) {
             }
           );
           
-            });
-                 });
-
-              console.log('This is after the read call'); 
+          
+          
 
 
          
