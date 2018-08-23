@@ -129,6 +129,7 @@ async function handleText(message, replyToken, source) {
   let rawdata = fs.readFileSync('data.json');
   let Ddata = JSON.parse(rawdata);
   console.log(Ddata);
+  var obj = require("data.json");
 
   switch (message.text) {
     // case 'A':
