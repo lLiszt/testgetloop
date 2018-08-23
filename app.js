@@ -205,13 +205,8 @@ async function handleText(message, replyToken, source) {
                 //loop
            someArray.forEach(function(item, i) 
             {
-             asynchronousProcess(function(item)
-            {
-              console.log(i);
-               
-               // loop => a;{}
-                
-          return client.replyMessage(
+             asynchronousProcess(function(
+             return client.replyMessage(
             replyToken,
             {
               type: 'template',
@@ -220,15 +215,22 @@ async function handleText(message, replyToken, source) {
                 type: 'carousel',
                 columns: [
 
-                 "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: i.PONumber },{ label: 'CreateDate', type: 'text', data: i.CreateDate },{ label: 'Name', type: 'text', data: i.Name },{ label: 'Vendor', type: 'text', data: i.Vendor }, ], }"
+                 "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: Ddata.PONumber },{ label: 'CreateDate', type: 'text', data: Ddata.CreateDate },{ label: 'Name', type: 'text', data: Ddata.Name },{ label: 'Vendor', type: 'text', data: Ddata.Vendor }, ], }"
 
                 ],
               },
             }
           );
+            {
+              console.log(i);
+            };    
+               // loop => a;{}
+                
+        
           
-            });
-            });
+            };
+
+          
 
 
          
