@@ -7,6 +7,12 @@ const path = require('path');
 const cp = require('child_process');
 const line = require('@line/bot-sdk');
 const getJSON = require('get-json');
+const loadJsonFile = require('load-json-file');
+ 
+loadJsonFile('data.json').then(json => {
+    console.log(json);
+    //=> {foo: true}
+});
 
 
 
@@ -178,7 +184,7 @@ async function handleText(message, replyToken, source) {
                 console.log(Vendor);
                 [
                  
-                 
+
                 ]
 
             })
