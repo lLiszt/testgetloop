@@ -200,20 +200,14 @@ async function handleText(message, replyToken, source) {
                console.log(Ddata);
             });
 
-              console.log('This is after the read call'); 
-
-                //loop
+              console.log(       //loop
            someArray.forEach(function(item, i) 
             {
              asynchronousProcess(function(item)
             {
               console.log(i);
             });    
-               // loop => a;{}
-            });   
-         
-
-          return client.replyMessage(
+                return client.replyMessage(
             replyToken,
             {
               type: 'template',
@@ -228,7 +222,13 @@ async function handleText(message, replyToken, source) {
               },
             }
           );
-          
+            // loop => a;{}
+            });    
+
+         
+         
+
+       
           
           
 
