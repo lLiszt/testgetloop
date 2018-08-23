@@ -128,7 +128,7 @@ async function handleText(message, replyToken, source) {
   let yok = 'U764500f94537bf8fea32888c9dfbc739'
   let rawdata = fs.readFileSync('data.json');
   let Ddata = JSON.parse(rawdata);
-  console.log(data);
+  console.log(Ddata);
 
   switch (message.text) {
     // case 'A':
