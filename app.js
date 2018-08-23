@@ -211,6 +211,8 @@ async function handleText(message, replyToken, source) {
             });    
                // loop => a;{}
             });   
+         
+
           return client.replyMessage(
             replyToken,
             {
