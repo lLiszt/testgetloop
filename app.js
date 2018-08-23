@@ -122,6 +122,9 @@ async function handleText(message, replyToken, source) {
 
   let mind = 'Ub8cad621e155de8753e6ebddc9db3d68'
   let yok = 'U764500f94537bf8fea32888c9dfbc739'
+  let rawdata = fs.readFileSync('data.json');
+  let data = JSON.parse(rawdata);
+  console.log(data);
 
   switch (message.text) {
     // case 'A':
@@ -174,10 +177,10 @@ async function handleText(message, replyToken, source) {
         }
       )
       //test
-           var url = 'data.json' ;
-           var a = JSON.parse(url);
+           // var url = 'data.json' ;
+           // var a = JSON.parse(url);
          case 'A':
-                 getJSON(url, function(error, response){
+                loadJsonFile(data, function(error, response){
                 console.log(PONumber);
                 console.log(CreateDate);
                 console.log(Name);
