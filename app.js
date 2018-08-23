@@ -180,17 +180,24 @@ async function handleText(message, replyToken, source) {
            // var url = 'data.json' ;
            // var a = JSON.parse(url);
          case 'A':
-                loadJsonFile(data, function(error, response){
-                console.log(PONumber);
-                console.log(CreateDate);
-                console.log(Name);
-                console.log(Vendor);
-                [
+            //     loadJsonFile(data, function(error, response){
+            //     console.log(PONumber);
+            //     console.log(CreateDate);
+            //     console.log(Name);
+            //     console.log(Vendor);
+            //     [
                  
 
-                ]
+            //     ]
 
-            })
+            // })
+            fs.readFile('data.json', (err, data) => {  
+              if (err) throw err;
+               let data = JSON.parse(data);
+               console.log(data);
+            });
+
+              console.log('This is after the read call');  
                 //loop
            someArray.forEach(function(item, i) 
             {
