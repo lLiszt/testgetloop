@@ -36,7 +36,7 @@ const config = {
 const baseURL = 'https://git.heroku.com/botbotbot213.git';
 
 // const aimlParser = new AIMLParser({ name:'T.CBot' })
-// aimlParser.load(['http://20.188.101.72:8080/api/data/po_list/2003-11-04'])
+
 
 
 // create LINE SDK client
