@@ -172,44 +172,49 @@ async function handleText(message, replyToken, source) {
            var a = JSON.parse(url);
          case 'A':
                  getJSON(url, function(error, response){
-                console.log(response);
+                console.log(PONumber);
+                console.log(CreateDate);
+                console.log(Name);
+                console.log(Vendor);
                 [
-                 "PONumber","CreateDate","Name","Vendor" 
-                ]
+                              //loop
+                       someArray.forEach(function(item, i) 
+                        {
+                         asynchronousProcess(function(item)
+                        {
+                          console.log(i);
+                           loop=>a
+                            {
+                      return client.replyMessage(
+                        replyToken,
+                        {
+                          type: 'template',
+                          altText: 'Carousel alt text',
+                          template: {
+                            type: 'carousel',
+                            columns: [
 
-            })
-                //loop
-           someArray.forEach(function(item, i) 
-            {
-             asynchronousProcess(function(item)
-            {
-              console.log(i);
-               loop=>a
-                {
-          return client.replyMessage(
-            replyToken,
-            {
-              type: 'template',
-              altText: 'Carousel alt text',
-              template: {
-                type: 'carousel',
-                columns: [
+                             "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: a.PONumber },{ label: 'CreateDate', type: 'text', data: a.CreateDate },{ label: 'Name', type: 'text', data: a.Name },{ label: 'Vendor', type: 'text', data: a.Vendor }, ], }"
 
-                 "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: a.PONumber },{ label: 'CreateDate', type: 'text', data: a.CreateDate },{ label: 'Name', type: 'text', data: a.Name },{ label: 'Vendor', type: 'text', data: a.Vendor }, ], }"
-
-                ],
-              },
-            }
-          );
-        };  
-            });
-            });
+                            ],
+                          },
+                        }
+                      );
+                    };  
+                        });
+                        });
 
 
          
                  //end loop  
      // end test 
 
+
+               
+                 ]
+                 
+            });
+               
 
     case 'image carousel':
       return client.replyMessage(
