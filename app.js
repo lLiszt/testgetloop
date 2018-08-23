@@ -203,7 +203,7 @@ async function handleText(message, replyToken, source) {
               console.log('This is after the read call'); 
 
                 //loop
-           someArray.forEach(function(item, i) 
+           Ddata.forEach(function(item, i) 
             {
              asynchronousProcess(function(item)
             {
@@ -211,7 +211,7 @@ async function handleText(message, replyToken, source) {
             });    
                // loop => a;{}
             });  
-             
+
           return client.replyMessage(
             replyToken,
             {
