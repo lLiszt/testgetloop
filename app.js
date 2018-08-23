@@ -208,8 +208,8 @@ async function handleText(message, replyToken, source) {
              asynchronousProcess(function(item)
             {
               console.log(i);
-               loop=>a
-                {
+               
+                
           return client.replyMessage(
             replyToken,
             {
@@ -219,13 +219,13 @@ async function handleText(message, replyToken, source) {
                 type: 'carousel',
                 columns: [
 
-                 "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: a.PONumber },{ label: 'CreateDate', type: 'text', data: a.CreateDate },{ label: 'Name', type: 'text', data: a.Name },{ label: 'Vendor', type: 'text', data: a.Vendor }, ], }"
+                 "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: Ddata.PONumber },{ label: 'CreateDate', type: 'text', data: Ddata.CreateDate },{ label: 'Name', type: 'text', data: Ddata.Name },{ label: 'Vendor', type: 'text', data: Ddata.Vendor }, ], }"
 
                 ],
               },
             }
           );
-        };  
+          
             });
             });
 
