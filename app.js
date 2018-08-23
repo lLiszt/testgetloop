@@ -200,14 +200,20 @@ async function handleText(message, replyToken, source) {
                console.log(Ddata);
             });
 
-              console.log(       //loop
+              console.log(); 
+
+                //loop
            someArray.forEach(function(item, i) 
             {
              asynchronousProcess(function(item)
             {
               console.log(i);
             });    
-                return client.replyMessage(
+               // loop => a;{}
+            });   
+         
+
+          return client.replyMessage(
             replyToken,
             {
               type: 'template',
@@ -222,13 +228,7 @@ async function handleText(message, replyToken, source) {
               },
             }
           );
-            // loop => a;{}
-            });    
-
-         
-         
-
-       
+          
           
           
 
