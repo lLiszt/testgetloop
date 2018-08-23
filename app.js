@@ -127,7 +127,7 @@ async function handleText(message, replyToken, source) {
   let mind = 'Ub8cad621e155de8753e6ebddc9db3d68'
   let yok = 'U764500f94537bf8fea32888c9dfbc739'
   let rawdata = fs.readFileSync('data.json');
-  let data = JSON.parse(rawdata);
+  let Ddata = JSON.parse(rawdata);
   console.log(data);
 
   switch (message.text) {
@@ -195,10 +195,9 @@ async function handleText(message, replyToken, source) {
             //     ]
 
             // })
-            fs.readFile('data.json', (err, data) => {  
+            fs.readFile(Ddata, (err, data) => {  
               if (err) throw err;
-               let data = JSON.parse(data);
-               console.log(data);
+               console.log(Ddata);
             });
 
               console.log('This is after the read call'); 
