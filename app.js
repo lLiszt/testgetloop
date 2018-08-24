@@ -224,7 +224,7 @@ async function handleText(message, replyToken, source) {
          
            //loopasync
            loop=> a;
-          array.forEach(item => {
+         
 
           return client.replyMessage(
             replyToken,
@@ -235,17 +235,17 @@ async function handleText(message, replyToken, source) {
                 type: 'carousel',
                 columns: 
 
-                [ 
+                [  array.forEach(item => {
 
-                 {  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: a.PONumber },{ label: 'CreateDate', type: 'text', data: a.CreateDate },{ label: 'Name', type: 'text', data: a.Name },{ label: 'Vendor', type: 'text', data: a.Vendor }, ], }
-
+                 "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: a.PONumber },{ label: 'CreateDate', type: 'text', data: a.CreateDate },{ label: 'Name', type: 'text', data: a.Name },{ label: 'Vendor', type: 'text', data: a.Vendor }, ], }"
+ });
                 ]
 
                 ,
               },
             }
           );
-          });
+         
           
                    response.ok
                    
