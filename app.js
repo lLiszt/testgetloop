@@ -257,8 +257,6 @@ function handleEvent(event) {
          
                 
      // end test 
-
-
     case 'image carousel':
       return client.replyMessage(
         replyToken,
