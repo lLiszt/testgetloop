@@ -206,10 +206,10 @@ async function handleText(message, replyToken, source) {
 
             
 
-            getJSON('http://api.listenparadise.org', function(error, response){              
+            getJSON('http://20.188.101.72:8080/api/data/po_list/2003-11-04', function(error, response){              
                     error
                     response.result
-                     // ["PONumber":"4500015605","CreateDate":"2003-11-04T00:00:00+07:00","Name":"MAASSBERG","Vendor":"0000001025"]
+             
                  
            
           // loop => a;{}  
