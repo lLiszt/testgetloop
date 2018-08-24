@@ -198,19 +198,9 @@ async function handleText(message, replyToken, source) {
             fs.readFile(Ddata, (err, data) => {  
               if (err) throw err;
                console.log(Ddata);
-            });
-
-              console.log(); 
-
+           
                 //loop
-           someArray.forEach(function(item, i) 
-            {
-             asynchronousProcess(function(item)
-            {
-              console.log(i);
-            });    
-               // loop => a;{}
-            });   
+          
          
 
           return client.replyMessage(
@@ -220,16 +210,30 @@ async function handleText(message, replyToken, source) {
               altText: 'Carousel alt text',
               template: {
                 type: 'carousel',
-                columns: [
+                columns:  someArray.forEach(function(item, i) 
+            {
+             asynchronousProcess(function(item)
+            {
+              console.log(
+                [
 
                  "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: Ddata.PONumber },{ label: 'CreateDate', type: 'text', data: Ddata.CreateDate },{ label: 'Name', type: 'text', data: Ddata.Name },{ label: 'Vendor', type: 'text', data: Ddata.Vendor }, ], }"
 
-                ],
+                ]);
+            });    
+               // loop => a;{}
+            });   
+
+
+                ,
               },
             }
           );
           
-          
+           });
+
+              console.log(); 
+
           
 
 
