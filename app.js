@@ -184,8 +184,18 @@ async function handleText(message, replyToken, source) {
                  
                 });
 //loop
+         let loopa = asyncLoop(geturl, function (item, next)
+          {
+              console.log(item);
+              // Get object key with: item.key
+              // Get associated value with: item.value
+              next();
+          }, function ()
+          {
+              console.log();
+          });
 
-
+//text
       return client.replyMessage(
         replyToken,
         {
@@ -194,19 +204,9 @@ async function handleText(message, replyToken, source) {
           template: {
             type: 'carousel',
             columns: 
-          asyncLoop(geturl, function (item, next)
-          {
-              console.log(item);
-               [
-               "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: PONumber },{ label: 'CreateDate', type: 'text', data: CreateDate },{ label: 'Name', type: 'text', data: Name },{ label: 'Vendor', type: 'text', data: Vendor }, ], }"
-            ],// Get object key with: item.key
-              // Get associated value with: item.value
-              next();
-          }, function ()
-          {
-              console.log();
-          });
-           
+            [
+               "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: loopa.PONumber },{ label: 'CreateDate', type: 'text', data: loopa.CreateDate },{ label: 'Name', type: 'text', data: loopa.Name },{ label: 'Vendor', type: 'text', data: loopa.Vendor }, ], }"
+            ],
           },
         }
       );
