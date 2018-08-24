@@ -1,28 +1,13 @@
 // Echo reply
 "use strict";
 
-const express = require('express');
-const request = require('request');
+const express = require('express')
+const request = require('request')
 const path = require('path');
 const cp = require('child_process');
 const line = require('@line/bot-sdk');
-const getJSON = require('get-json');
-const loadJsonFile = require('load-json-file');
-const asyncLoop = require('node-async-loop');
-
-
-
- 
-loadJsonFile('data.json').then(json => {
-    console.log(json);
-    //=> {foo: true}
-});
-
-
 
 require('dotenv').config();
-
-
 
 
 const app = express()
@@ -35,8 +20,6 @@ const config = {
 // base URL for webhook server
 const baseURL = 'https://git.heroku.com/botbotbot213.git';
 
-// const aimlParser = new AIMLParser({ name:'T.CBot' })
-// aimlParser.load(['http://20.188.101.72:8080/api/data/po_list/2003-11-04'])
 
 
 // create LINE SDK client
@@ -62,8 +45,11 @@ app.post('/webhook', line.middleware(config), (req, res) => {
     });
 
 });
-
-
+//url
+var url = require('url');
+var adr = 'http://20.188.101.72:8080/api/data/po_list/2003-11-04';
+//Parse the address:
+var q = url.parse(adr, true);
 
 const replyText = (token, texts) => {
   texts = Array.isArray(texts) ? texts : [texts];
@@ -121,26 +107,23 @@ function handleEvent(event) {
   }
 }
 
- async function handleText(message, replyToken, source) {
-  consasynct buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
+async function handleText(message, replyToken, source) {
+  const buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
 
   let mind = 'Ub8cad621e155de8753e6ebddc9db3d68'
   let yok = 'U764500f94537bf8fea32888c9dfbc739'
-  let rawdata = fs.readFileSync('data.json');
-  let Ddata = JSON.parse(rawdata);
-  console.log(Ddata);
 
   switch (message.text) {
-    // case 'A':
-    //   let link = 'https://www.facebook.com/mind.thanamphorn'
-    //   let link2 = 'https://www.facebook.com/Kotchakornss'
-    //   if (source.userId == mind) {
-    //     return client.pushMessage(mind, { type: 'text', url:  link});
-    //   }
-    //   //  if (source.userId == yok) {
-    //   //   return client.pushMessage(yok, { type: 'text', text:  link2});
-    //   // }
-      
+    case 'B':
+      let link = 'https://www.facebook.com/mind.thanamphorn'
+      let link2 = 'https://www.facebook.com/Kotchakornss'
+      if (source.userId == mind) {
+        return client.pushMessage(mind, { type: 'text', text:  link});
+      }
+      //  if (source.userId == yok) {
+      //   return client.pushMessage(yok, { type: 'text', text:  link2});
+      // }
+    }
     case 'profile':
       let prof = await client.getProfile(source.userId);
       return replyText(replyToken, JSON.stringify(prof))
@@ -180,95 +163,37 @@ function handleEvent(event) {
           },
         }
       )
-      //test
-           // var url = 'data.json' ;
-           // var a = JSON.parse(url);
-         case 'A':
-            //     loadJsonFile(data, function(error, response){
-            //     console.log(PONumber);
-            //     console.log(CreateDate);
-            //     console.log(Name);
-            //     console.log(Vendor);
-            //     [
-                 
-
-            //     ]
-
-            // })
-
-
-            // fs.readFile(Ddata, (err, data) => {  
-            //   if (err) throw err;
-            //    console.log(Ddata);
-            // });
-
-            //   console.log(); 
-
-            
-
-            getJSON('http://20.188.101.72:8080/api/data/po_list/2003-11-04', function(error, response){              
-                    error
-                    response.result
-                     // ["PONumber":"4500015605","CreateDate":"2003-11-04T00:00:00+07:00","Name":"MAASSBERG","Vendor":"0000001025"]
-                 
-                response.ok
-                   
-                 
-                });
-          // loop => a;{}  
-           // someArray.forEach(function(item, i) 
-           //  {
-           //   asynchronousProcess(function(item)
-           //  {
-           //    console.log(i);
-           //  });    
-               
-           //  });   
-           
-           //loopasync
-      
-          array.forEach(item => {
-
-
-
-        
-
-        });
-
-
-
-
-        
-        
-            
-
-          return client.replyMessage(
-            replyToken,
-            {
-              type: 'template',
-              altText: 'Carousel alt text',
-              template: {
-                type: 'carousel',
-                columns: 
-
-                [ 
-
-                 "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: PONumber },{ label: 'CreateDate', type: 'text', data: CreateDate },{ label: 'Name', type: 'text', data: Name },{ label: 'Vendor', type: 'text', data: Vendor }, ], }"
-
-                ]
-
-                ,
+    case 'carousel':
+      return client.replyMessage(
+        replyToken,
+        {
+          type: 'template',
+          altText: 'Carousel alt text',
+          template: {
+            type: 'carousel',
+            columns: [
+              {
+                thumbnailImageUrl: buttonsImageURL,
+                title: 'hoge',
+                text: 'fuga',
+                actions: [
+                  { label: 'Go to line.me', type: 'uri', uri: 'https://line.me' },
+                  { label: 'Say hello1', type: 'postback', data: 'hello こんにちは' },
+                ],
               },
-            }
-          );
-         
-
-
-         
-                
-     // end test 
-
-
+              {
+                thumbnailImageUrl: buttonsImageURL,
+                title: 'hoge',
+                text: 'fuga',
+                actions: [
+                  { label: '言 hello2', type: 'postback', data: 'hello こんにちは', text: 'hello こんにちは' },
+                  { label: 'Say message', type: 'message', text: 'Rice=米' },
+                ],
+              },
+            ],
+          },
+        }
+      );
     case 'image carousel':
       return client.replyMessage(
         replyToken,
