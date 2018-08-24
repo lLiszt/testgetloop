@@ -223,7 +223,7 @@ async function handleText(message, replyToken, source) {
            //  });   
          
            //loopasync
-           loop=> a;
+           forEach=> a;
           array.forEach(item => {
 
           return client.replyMessage(
