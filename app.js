@@ -209,12 +209,13 @@ async function handleText(message, replyToken, source) {
             getJSON('http://api.listenparadise.org', function(error, response){              
                     error
                     response.result
-                     ["PONumber":"4500015605","CreateDate":"2003-11-04T00:00:00+07:00","Name":"MAASSBERG","Vendor":"0000001025"]
+                     // ["PONumber":"4500015605","CreateDate":"2003-11-04T00:00:00+07:00","Name":"MAASSBERG","Vendor":"0000001025"]
                  
                     response.ok
                    
                  
                 })
+            
            someArray.forEach(function(item, i) 
             {
              asynchronousProcess(function(item)
