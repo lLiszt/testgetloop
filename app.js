@@ -192,7 +192,7 @@ async function handleText(message, replyToken, source) {
               next();
           }, function ()
           {
-              console.log('Finished!');
+              console.log();
           });
 
 
