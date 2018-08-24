@@ -118,15 +118,15 @@ async function handleText(message, replyToken, source) {
   let yok = 'U764500f94537bf8fea32888c9dfbc739'
 
   switch (message.text) {
-    case 'A':
-      let link = 'https://www.facebook.com/mind.thanamphorn'
-      let link2 = 'https://www.facebook.com/Kotchakornss'
-      if (source.userId == mind) {
-        return client.pushMessage(mind, { type: 'text', text:  link});
-      }
-      //  if (source.userId == yok) {
-      //   return client.pushMessage(yok, { type: 'text', text:  link2});
-      // }
+    // case 'A':
+    //   let link = 'https://www.facebook.com/mind.thanamphorn'
+    //   let link2 = 'https://www.facebook.com/Kotchakornss'
+    //   if (source.userId == mind) {
+    //     return client.pushMessage(mind, { type: 'text', text:  link});
+    //   }
+    //   //  if (source.userId == yok) {
+    //   //   return client.pushMessage(yok, { type: 'text', text:  link2});
+    //   // }
     
     case 'profile':
       let prof = await client.getProfile(source.userId);
@@ -167,7 +167,7 @@ async function handleText(message, replyToken, source) {
           },
         }
       )
-    case 'carousel':
+    case 'A':
       return client.replyMessage(
         replyToken,
         {
@@ -175,25 +175,9 @@ async function handleText(message, replyToken, source) {
           altText: 'Carousel alt text',
           template: {
             type: 'carousel',
-            columns: [
-              {
-                thumbnailImageUrl: buttonsImageURL,
-                title: 'hoge',
-                text: 'fuga',
-                actions: [
-                  { label: 'Go to line.me', type: 'uri', uri: 'https://line.me' },
-                  { label: 'Say hello1', type: 'postback', data: 'hello こんにちは' },
-                ],
-              },
-              {
-                thumbnailImageUrl: buttonsImageURL,
-                title: 'hoge',
-                text: 'fuga',
-                actions: [
-                  { label: '言 hello2', type: 'postback', data: 'hello こんにちは', text: 'hello こんにちは' },
-                  { label: 'Say message', type: 'message', text: 'Rice=米' },
-                ],
-              },
+            columns: 
+            [
+               "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: PONumber },{ label: 'CreateDate', type: 'text', data: CreateDate },{ label: 'Name', type: 'text', data: Name },{ label: 'Vendor', type: 'text', data: Vendor }, ], }"
             ],
           },
         }
