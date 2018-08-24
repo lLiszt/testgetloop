@@ -215,9 +215,18 @@ async function handleText(message, replyToken, source) {
                    
                  
                 })
-
-        
+          // loop => a;{}  
+           // someArray.forEach(function(item, i) 
+           //  {
+           //   asynchronousProcess(function(item)
+           //  {
+           //    console.log(i);
+           //  });    
+               
+           //  });   
          
+           //loopasync
+
 
           return client.replyMessage(
             replyToken,
@@ -226,19 +235,10 @@ async function handleText(message, replyToken, source) {
               altText: 'Carousel alt text',
               template: {
                 type: 'carousel',
-                columns:  
+                columns: 
 
-                [  someArray.forEach(function(item, i) 
-            {
-             asynchronousProcess(function(item)
-            {
-              console.log( "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: Ddata.PONumber },{ label: 'CreateDate', type: 'text', data: Ddata.CreateDate },{ label: 'Name', type: 'text', data: Ddata.Name },{ label: 'Vendor', type: 'text', data: Ddata.Vendor }, ], }");
-            });    
-               // loop => a;{}
-            });   
-
-                
-
+                [ 
+                array.forEach(item => { "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: Ddata.PONumber },{ label: 'CreateDate', type: 'text', data: Ddata.CreateDate },{ label: 'Name', type: 'text', data: Ddata.Name },{ label: 'Vendor', type: 'text', data: Ddata.Vendor }, ], }"});
                 ]
 
                 ,
