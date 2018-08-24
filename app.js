@@ -226,9 +226,19 @@ function handleEvent(event) {
            //  });   
            
            //loopasync
-           forEach=> a;
-            
-          array.forEach(item => { });
+        async function processArray(array){
+          array.forEach(item => {
+
+
+
+          await func(item);
+
+        });
+
+
+
+
+        }
           
             
 
