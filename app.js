@@ -179,7 +179,7 @@ function handleEvent(event) {
             ],
           },
         }
-      )
+      );
       //test
            // var url = 'data.json' ;
            // var a = JSON.parse(url);
