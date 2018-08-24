@@ -10,6 +10,10 @@ const getJSON = require('get-json');
 const loadJsonFile = require('load-json-file');
 const asyncLoop = require('node-async-loop');
 
+loadJsonFile('data.json').then(json => {
+    console.log(json);
+    //=> {foo: true}
+});
 
 require('dotenv').config();
 
@@ -167,7 +171,12 @@ async function handleText(message, replyToken, source) {
           },
         }
       )
+
     case 'A':
+
+
+
+
       return client.replyMessage(
         replyToken,
         {
@@ -182,6 +191,8 @@ async function handleText(message, replyToken, source) {
           },
         }
       );
+
+
     case 'image carousel':
       return client.replyMessage(
         replyToken,
