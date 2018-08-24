@@ -226,20 +226,20 @@ function handleEvent(event) {
            //  });   
            
            //loopasync
-        async function processArray(array){
+      
           array.forEach(item => {
 
 
 
-          await func(item);
+        
 
         });
 
 
 
 
-        }
-          
+        
+        
             
 
           return client.replyMessage(
