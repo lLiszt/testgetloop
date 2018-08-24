@@ -184,16 +184,6 @@ async function handleText(message, replyToken, source) {
                  
                 });
 //loop
-          asyncLoop(geturl, function (item, next)
-          {
-              console.log(item);
-              // Get object key with: item.key
-              // Get associated value with: item.value
-              next();
-          }, function ()
-          {
-              console.log();
-          });
 
 
       return client.replyMessage(
@@ -204,9 +194,19 @@ async function handleText(message, replyToken, source) {
           template: {
             type: 'carousel',
             columns: 
-            [
+          asyncLoop(geturl, function (item, next)
+          {
+              console.log(item);
+               [
                "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: PONumber },{ label: 'CreateDate', type: 'text', data: CreateDate },{ label: 'Name', type: 'text', data: Name },{ label: 'Vendor', type: 'text', data: Vendor }, ], }"
-            ],
+            ],// Get object key with: item.key
+              // Get associated value with: item.value
+              next();
+          }, function ()
+          {
+              console.log();
+          });
+           
           },
         }
       );
