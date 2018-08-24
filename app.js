@@ -121,8 +121,8 @@ function handleEvent(event) {
   }
 }
 
-async function handleText(message, replyToken, source) {
-  const buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
+ function handleText(message, replyToken, source) {
+  consasynct buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
 
   let mind = 'Ub8cad621e155de8753e6ebddc9db3d68'
   let yok = 'U764500f94537bf8fea32888c9dfbc739'
