@@ -211,7 +211,10 @@ async function handleText(message, replyToken, source) {
                     response.result
                      // ["PONumber":"4500015605","CreateDate":"2003-11-04T00:00:00+07:00","Name":"MAASSBERG","Vendor":"0000001025"]
                  
-           
+                response.ok
+                   
+                 
+                });
           // loop => a;{}  
            // someArray.forEach(function(item, i) 
            //  {
@@ -221,11 +224,13 @@ async function handleText(message, replyToken, source) {
            //  });    
                
            //  });   
-         
+           
            //loopasync
            forEach=> a;
             var i = a;
-          array.forEach(item => {
+          array.forEach(item => { });
+          
+            
 
           return client.replyMessage(
             replyToken,
@@ -238,7 +243,7 @@ async function handleText(message, replyToken, source) {
 
                 [ 
 
-                 "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: a.PONumber },{ label: 'CreateDate', type: 'text', data: a.CreateDate },{ label: 'Name', type: 'text', data: a.Name },{ label: 'Vendor', type: 'text', data: a.Vendor }, ], }"
+                 "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: PONumber },{ label: 'CreateDate', type: 'text', data: CreateDate },{ label: 'Name', type: 'text', data: Name },{ label: 'Vendor', type: 'text', data: Vendor }, ], }"
 
                 ]
 
@@ -246,12 +251,7 @@ async function handleText(message, replyToken, source) {
               },
             }
           );
-          });
-          
-                   response.ok
-                   
-                 
-                });
+         
 
 
          
