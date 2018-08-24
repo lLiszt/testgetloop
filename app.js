@@ -195,12 +195,34 @@ async function handleText(message, replyToken, source) {
             //     ]
 
             // })
-            fs.readFile(Ddata, (err, data) => {  
-              if (err) throw err;
-               console.log(Ddata);
-           
+
+
+            // fs.readFile(Ddata, (err, data) => {  
+            //   if (err) throw err;
+            //    console.log(Ddata);
+            // });
+
+            //   console.log(); 
+
                 //loop
-          
+
+            getJSON('http://api.listenparadise.org', function(error, response){              
+                    error
+                    response.result
+                     ["PONumber":"4500015605","CreateDate":"2003-11-04T00:00:00+07:00","Name":"MAASSBERG","Vendor":"0000001025"]
+                 
+                    response.ok
+                   
+                 
+                })
+           someArray.forEach(function(item, i) 
+            {
+             asynchronousProcess(function(item)
+            {
+              console.log(i);
+            });    
+               // loop => a;{}
+            });   
          
 
           return client.replyMessage(
@@ -210,30 +232,20 @@ async function handleText(message, replyToken, source) {
               altText: 'Carousel alt text',
               template: {
                 type: 'carousel',
-                columns:  someArray.forEach(function(item, i) 
-            {
-             asynchronousProcess(function(item)
-            {
-              console.log(
+                columns: 
+
                 [
 
                  "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: Ddata.PONumber },{ label: 'CreateDate', type: 'text', data: Ddata.CreateDate },{ label: 'Name', type: 'text', data: Ddata.Name },{ label: 'Vendor', type: 'text', data: Ddata.Vendor }, ], }"
 
-                ]);
-            });    
-               // loop => a;{}
-            });   
-
+                ]
 
                 ,
               },
             }
           );
           
-           });
-
-              console.log(); 
-
+          
           
 
 
