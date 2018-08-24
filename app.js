@@ -121,7 +121,7 @@ function handleEvent(event) {
   }
 }
 
- function handleText(message, replyToken, source) {
+ async function handleText(message, replyToken, source) {
   consasynct buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
 
   let mind = 'Ub8cad621e155de8753e6ebddc9db3d68'
@@ -179,7 +179,7 @@ function handleEvent(event) {
             ],
           },
         }
-      );
+      )
       //test
            // var url = 'data.json' ;
            // var a = JSON.parse(url);
@@ -257,6 +257,8 @@ function handleEvent(event) {
          
                 
      // end test 
+
+
     case 'image carousel':
       return client.replyMessage(
         replyToken,
