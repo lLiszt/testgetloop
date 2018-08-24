@@ -1,11 +1,15 @@
 // Echo reply
 "use strict";
 
-const express = require('express')
-const request = require('request')
+const express = require('express');
+const request = require('request');
 const path = require('path');
 const cp = require('child_process');
 const line = require('@line/bot-sdk');
+const getJSON = require('get-json');
+const loadJsonFile = require('load-json-file');
+const asyncLoop = require('node-async-loop');
+
 
 require('dotenv').config();
 
@@ -114,7 +118,7 @@ async function handleText(message, replyToken, source) {
   let yok = 'U764500f94537bf8fea32888c9dfbc739'
 
   switch (message.text) {
-    case 'B':
+    case 'A':
       let link = 'https://www.facebook.com/mind.thanamphorn'
       let link2 = 'https://www.facebook.com/Kotchakornss'
       if (source.userId == mind) {
@@ -123,7 +127,7 @@ async function handleText(message, replyToken, source) {
       //  if (source.userId == yok) {
       //   return client.pushMessage(yok, { type: 'text', text:  link2});
       // }
-    }
+    
     case 'profile':
       let prof = await client.getProfile(source.userId);
       return replyText(replyToken, JSON.stringify(prof))
