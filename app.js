@@ -227,7 +227,7 @@ function handleEvent(event) {
            
            //loopasync
            forEach=> a;
-            var i = a;
+            
           array.forEach(item => { });
           
             
