@@ -204,17 +204,14 @@ async function handleText(message, replyToken, source) {
 
             //   console.log(); 
 
-                //loop
+            
 
             getJSON('http://api.listenparadise.org', function(error, response){              
                     error
                     response.result
                      // ["PONumber":"4500015605","CreateDate":"2003-11-04T00:00:00+07:00","Name":"MAASSBERG","Vendor":"0000001025"]
                  
-                    response.ok
-                   
-                 
-                })
+           
           // loop => a;{}  
            // someArray.forEach(function(item, i) 
            //  {
@@ -249,11 +246,14 @@ async function handleText(message, replyToken, source) {
           );
           });
           
-          
+                   response.ok
+                   
+                 
+                });
 
 
          
-                 //end loop  
+                
      // end test 
 
 
