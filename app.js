@@ -121,17 +121,7 @@ async function handleText(message, replyToken, source) {
   let mind = 'Ub8cad621e155de8753e6ebddc9db3d68'
   let yok = 'U764500f94537bf8fea32888c9dfbc739'
 
-  switch (message.text) {
-    // case 'A':
-    //   let link = 'https://www.facebook.com/mind.thanamphorn'
-    //   let link2 = 'https://www.facebook.com/Kotchakornss'
-    //   if (source.userId == mind) {
-    //     return client.pushMessage(mind, { type: 'text', text:  link});
-    //   }
-    //   //  if (source.userId == yok) {
-    //   //   return client.pushMessage(yok, { type: 'text', text:  link2});
-    //   // }
-    
+  switch (message.text) { 
     case 'profile':
       let prof = await client.getProfile(source.userId);
       return replyText(replyToken, JSON.stringify(prof))
