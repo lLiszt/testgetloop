@@ -209,7 +209,7 @@ async function handleText(message, replyToken, source) {
             getJSON('http://20.188.101.72:8080/api/data/po_list/2003-11-04', function(error, response){              
                     error
                     response.result
-             
+                     // ["PONumber":"4500015605","CreateDate":"2003-11-04T00:00:00+07:00","Name":"MAASSBERG","Vendor":"0000001025"]
                  
            
           // loop => a;{}  
@@ -224,7 +224,7 @@ async function handleText(message, replyToken, source) {
          
            //loopasync
            loop=> a;
-         
+          array.forEach(item => {
 
           return client.replyMessage(
             replyToken,
@@ -235,17 +235,17 @@ async function handleText(message, replyToken, source) {
                 type: 'carousel',
                 columns: 
 
-                [  array.forEach(item => {
+                [ 
 
                  "{  thumbnailImageUrl: buttonsImageURL, title: 'hoge', text: 'fuga',actions: [ { label: 'PONumber', type: 'text', data: a.PONumber },{ label: 'CreateDate', type: 'text', data: a.CreateDate },{ label: 'Name', type: 'text', data: a.Name },{ label: 'Vendor', type: 'text', data: a.Vendor }, ], }"
- });
+
                 ]
 
                 ,
               },
             }
           );
-         
+          });
           
                    response.ok
                    
