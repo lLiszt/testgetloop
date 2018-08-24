@@ -224,6 +224,7 @@ async function handleText(message, replyToken, source) {
          
            //loopasync
            forEach=> a;
+            var i = a;
           array.forEach(item => {
 
           return client.replyMessage(
